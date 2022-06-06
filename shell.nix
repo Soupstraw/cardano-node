@@ -103,7 +103,7 @@ let
 
     shellHook = ''
       ${with customConfig.localCluster;
-        (import ./nix/workbench/shell.nix { inherit lib workbenchDevMode profileName useCabalRun profiled; }).shellHook}
+        (import ./nix/workbench/shell.nix { inherit lib workbenchDevMode profileName useCabalRun profiled; inherit (cluster) profile;}).shellHook}
 
       function workbench_atexit() {
           if wb backend is-running
