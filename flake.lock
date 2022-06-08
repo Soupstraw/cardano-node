@@ -4582,11 +4582,11 @@
         "stackage": "stackage_2"
       },
       "locked": {
-        "lastModified": 1654580214,
-        "narHash": "sha256-1RxPP2p2+97q5TGtxBi3C6z7bKlbc6lrGOgvOCPXozE=",
+        "lastModified": 1654657572,
+        "narHash": "sha256-a8VtNeoRD8NZ+tGYxi8XD1ErbMvDkNxQqyt0EK18Alk=",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "d71e854deab4a5661f55d5a1675e34bd8d418061",
+        "rev": "28071bc161c3ec4acf600429a4277a0b6bef1ffb",
         "type": "github"
       },
       "original": {
