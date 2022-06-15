@@ -1333,16 +1333,16 @@ instance (ToJSON addr, Show addr)
   forHuman = pack . show
   asMetrics (TrInboundGovernorCounters InboundGovernorCounters {..}) =
             [ IntM
-                "Network.Inbound-governor.idle"
+                "Network.Inbound-governor.Idle"
                 (fromIntegral idlePeersRemote)
             , IntM
-                "Network.Inbound-governor.cold"
+                "Network.Inbound-governor.Cold"
                 (fromIntegral coldPeersRemote)
             , IntM
-                "Network.Inbound-governor.warm"
+                "Network.Inbound-governor.Warm"
                 (fromIntegral warmPeersRemote)
             , IntM
-                "Network.Inbound-governor.hot"
+                "Network.Inbound-governor.Hot"
                 (fromIntegral hotPeersRemote)
               ]
   asMetrics _ = []
@@ -1416,10 +1416,10 @@ docInboundGovernor = Documented
       ""
   ,  DocMsg
       ["InboundGovernorCounters"]
-      [("Network.Inbound-governor.idle","")
-      ,("Network.Inbound-governor.cold","")
-      ,("Network.Inbound-governor.warm","")
-      ,("Network.Inbound-governor.hot","")
+      [("Network.Inbound-governor.Idle","")
+      ,("Network.Inbound-governor.Cold","")
+      ,("Network.Inbound-governor.Warm","")
+      ,("Network.Inbound-governor.Hot","")
       ]
       ""
   ,  DocMsg
