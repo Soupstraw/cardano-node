@@ -225,18 +225,12 @@
 			1. [RollForward](#chainsyncserialisednodetonodesendrollforward)
 1. __ChainSyncServerBlock__
 	1. __ChainSyncServerEvent__
-		1. __ServerRead__
-			1. [RollBackward](#chainsyncserverblockchainsyncservereventserverreadrollbackward)
-			1. [RollForward](#chainsyncserverblockchainsyncservereventserverreadrollforward)
-			1. [ServerRead](#chainsyncserverblockchainsyncservereventserverreadserverread)
-			1. [ServerReadBlocked](#chainsyncserverblockchainsyncservereventserverreadserverreadblocked)
+		1. __Update__
+			1. [Update](#chainsyncserverblockchainsyncservereventupdateupdate)
 1. __ChainSyncServerHeader__
 	1. __ChainSyncServerEvent__
-		1. __ServerRead__
-			1. [RollBackward](#chainsyncserverheaderchainsyncservereventserverreadrollbackward)
-			1. [RollForward](#chainsyncserverheaderchainsyncservereventserverreadrollforward)
-			1. [ServerRead](#chainsyncserverheaderchainsyncservereventserverreadserverread)
-			1. [ServerReadBlocked](#chainsyncserverheaderchainsyncservereventserverreadserverreadblocked)
+		1. __Update__
+			1. [Update](#chainsyncserverheaderchainsyncservereventupdateupdate)
 1. __ConnectionManager__
 	1. [Connect](#connectionmanagerconnect)
 	1. [ConnectError](#connectionmanagerconnecterror)
@@ -603,7 +597,7 @@
 1. __Shutdown__
 	1. [AbnormalShutdown](#shutdownabnormalshutdown)
 	1. [RequestingShutdown](#shutdownrequestingshutdown)
-	1. [ShutdownArmedAtSlot](#shutdownshutdownarmedatslot)
+	1. [ShutdownArmedAt](#shutdownshutdownarmedat)
 	1. [ShutdownRequested](#shutdownshutdownrequested)
 	1. [ShutdownUnexpectedInput](#shutdownshutdownunexpectedinput)
 1. __Startup__
@@ -700,103 +694,90 @@
 		1. [SubmitTx](#txsubmissionclientsendsubmittx)
 
 ## [Metrics](#metrics)
-1. [Block replay progress (%)](#block replay progress (%))
-1. [blocksForgedNum](#blocksforgednum)
-1. __cardano__
-	1. __node__
-		1. [aboutToLeadSlotLast](#cardanonodeabouttoleadslotlast)
-		1. [aboutToLeadSlotLast](#cardanonodeabouttoleadslotlast)
-		1. [adoptedSlotLast](#cardanonodeadoptedslotlast)
-		1. [blockContext](#cardanonodeblockcontext)
-		1. [blockFromFuture](#cardanonodeblockfromfuture)
-		1. [blocks](#cardanonodeblocks)
-		1. [blocks](#cardanonodeblocks)
-		1. [connectedPeers](#cardanonodeconnectedpeers)
-		1. __connectionManager__
-			1. [duplexConns](#cardanonodeconnectionmanagerduplexconns)
-			1. [duplexConns](#cardanonodeconnectionmanagerduplexconns)
-			1. [fullDuplexConns](#cardanonodeconnectionmanagerfullduplexconns)
-			1. [fullDuplexConns](#cardanonodeconnectionmanagerfullduplexconns)
-			1. [inboundConns](#cardanonodeconnectionmanagerinboundconns)
-			1. [inboundConns](#cardanonodeconnectionmanagerinboundconns)
-			1. [outboundConns](#cardanonodeconnectionmanageroutboundconns)
-			1. [outboundConns](#cardanonodeconnectionmanageroutboundconns)
-			1. [unidirectionalConns](#cardanonodeconnectionmanagerunidirectionalconns)
-			1. [unidirectionalConns](#cardanonodeconnectionmanagerunidirectionalconns)
-		1. [couldNotForgeSlotLast](#cardanonodecouldnotforgeslotlast)
-		1. [couldNotForgeSlotLast](#cardanonodecouldnotforgeslotlast)
-		1. [currentKESPeriod](#cardanonodecurrentkesperiod)
-		1. [delegMapSize](#cardanonodedelegmapsize)
-		1. [density](#cardanonodedensity)
-		1. [density](#cardanonodedensity)
-		1. [epoch](#cardanonodeepoch)
-		1. [epoch](#cardanonodeepoch)
-		1. [forgedInvalidSlotLast](#cardanonodeforgedinvalidslotlast)
-		1. [forgedSlotLast](#cardanonodeforgedslotlast)
-		1. __inbound-governor__
-			1. [cold](#cardanonodeinbound-governorcold)
-			1. [cold](#cardanonodeinbound-governorcold)
-			1. [hot](#cardanonodeinbound-governorhot)
-			1. [hot](#cardanonodeinbound-governorhot)
-			1. [idle](#cardanonodeinbound-governoridle)
-			1. [idle](#cardanonodeinbound-governoridle)
-			1. [warm](#cardanonodeinbound-governorwarm)
-			1. [warm](#cardanonodeinbound-governorwarm)
-		1. [ledgerState](#cardanonodeledgerstate)
-		1. [ledgerView](#cardanonodeledgerview)
-		1. [mempoolBytes](#cardanonodemempoolbytes)
-		1. [mempoolBytes](#cardanonodemempoolbytes)
-		1. [mempoolBytes](#cardanonodemempoolbytes)
-		1. [mempoolBytes](#cardanonodemempoolbytes)
-		1. __metrics__
-			1. __served__
-				1. [header](#cardanonodemetricsservedheader)
-				1. [header](#cardanonodemetricsservedheader)
-				1. [header](#cardanonodemetricsservedheader)
-				1. [header](#cardanonodemetricsservedheader)
-		1. [nodeCannotForge](#cardanonodenodecannotforge)
-		1. [nodeIsLeader](#cardanonodenodeisleader)
-		1. [nodeNotLeader](#cardanonodenodenotleader)
-		1. [notAdoptedSlotLast](#cardanonodenotadoptedslotlast)
-		1. [operationalCertificateExpiryKESPeriod](#cardanonodeoperationalcertificateexpirykesperiod)
-		1. [operationalCertificateStartKESPeriod](#cardanonodeoperationalcertificatestartkesperiod)
-		1. __peerSelection__
-			1. [cold](#cardanonodepeerselectioncold)
-			1. [hot](#cardanonodepeerselectionhot)
-			1. [warm](#cardanonodepeerselectionwarm)
-		1. [remainingKESPeriods](#cardanonoderemainingkesperiods)
-		1. __served__
-			1. [block](#cardanonodeservedblock)
-		1. [slotInEpoch](#cardanonodeslotinepoch)
-		1. [slotInEpoch](#cardanonodeslotinepoch)
-		1. [slotIsImmutable](#cardanonodeslotisimmutable)
-		1. [slots](#cardanonodeslots)
-		1. [slots](#cardanonodeslots)
-		1. __submissions__
-			1. [accepted](#cardanonodesubmissionsaccepted)
-			1. [rejected](#cardanonodesubmissionsrejected)
-			1. [submitted](#cardanonodesubmissionssubmitted)
-		1. [txsInMempool](#cardanonodetxsinmempool)
-		1. [txsInMempool](#cardanonodetxsinmempool)
-		1. [txsInMempool](#cardanonodetxsinmempool)
-		1. [txsInMempool](#cardanonodetxsinmempool)
-		1. [txsProcessedNum](#cardanonodetxsprocessednum)
-		1. [utxoSize](#cardanonodeutxosize)
-1. __mem__
-	1. [resident](#memresident)
-1. [nodeCannotForgeNum](#nodecannotforgenum)
-1. [nodeIsLeaderNum](#nodeisleadernum)
-1. [peersFromNodeKernel](#peersfromnodekernel)
-1. __rts__
-	1. [gcLiveBytes](#rtsgclivebytes)
-	1. [gcMajorNum](#rtsgcmajornum)
-	1. [gcMinorNum](#rtsgcminornum)
-	1. [gcticks](#rtsgcticks)
-	1. [mutticks](#rtsmutticks)
-	1. [threads](#rtsthreads)
-1. [slotsMissed](#slotsmissed)
-1. __stat__
-	1. [cputicks](#statcputicks)
+1. __BlockFetch__
+	1. [BlocksServed](#blockfetchblocksserved)
+	1. [ConnectedPeers](#blockfetchconnectedpeers)
+1. __ChainDB__
+	1. [BlockReplayProgress](#chaindbblockreplayprogress)
+	1. [Blocks](#chaindbblocks)
+	1. [Density](#chaindbdensity)
+	1. [Epoch](#chaindbepoch)
+	1. [SlotInEpoch](#chaindbslotinepoch)
+	1. [Slots](#chaindbslots)
+1. __ChainSync__
+	1. [HeadersServed](#chainsyncheadersserved)
+1. __ConnectionManager__
+	1. [DuplexConns](#connectionmanagerduplexconns)
+	1. [DuplexConns](#connectionmanagerduplexconns)
+	1. [FullDuplexConns](#connectionmanagerfullduplexconns)
+	1. [FullDuplexConns](#connectionmanagerfullduplexconns)
+	1. [InboundConns](#connectionmanagerinboundconns)
+	1. [InboundConns](#connectionmanagerinboundconns)
+	1. [OutboundConns](#connectionmanageroutboundconns)
+	1. [OutboundConns](#connectionmanageroutboundconns)
+	1. [UnidirectionalConns](#connectionmanagerunidirectionalconns)
+	1. [UnidirectionalConns](#connectionmanagerunidirectionalconns)
+1. __Forge__
+	1. [AboutToLeadSlotLast](#forgeabouttoleadslotlast)
+	1. [AdoptedOwnBlockSlotLast](#forgeadoptedownblockslotlast)
+	1. [BlockContext](#forgeblockcontext)
+	1. [BlockFromFuture](#forgeblockfromfuture)
+	1. [BlocksForgedNum](#forgeblocksforgednum)
+	1. [CouldNotForgeSlotLast](#forgecouldnotforgeslotlast)
+	1. [CurrentKESPeriod](#forgecurrentkesperiod)
+	1. [DelegMapSize](#forgedelegmapsize)
+	1. [ForgedInvalidSlotLast](#forgeforgedinvalidslotlast)
+	1. [ForgedSlotLast](#forgeforgedslotlast)
+	1. [LastSlot](#forgelastslot)
+	1. [LedgerState](#forgeledgerstate)
+	1. [LedgerView](#forgeledgerview)
+	1. [NodeCannotForge](#forgenodecannotforge)
+	1. [NodeCannotForgeNum](#forgenodecannotforgenum)
+	1. [NodeIsLeader](#forgenodeisleader)
+	1. [NodeIsLeaderNum](#forgenodeisleadernum)
+	1. [NodeNotLeader](#forgenodenotleader)
+	1. [NotAdoptedSlotLast](#forgenotadoptedslotlast)
+	1. [OperationalCertificateExpiryKESPeriod](#forgeoperationalcertificateexpirykesperiod)
+	1. [OperationalCertificateStartKESPeriod](#forgeoperationalcertificatestartkesperiod)
+	1. [RemainingKESPeriods](#forgeremainingkesperiods)
+	1. [SlotIsImmutable](#forgeslotisimmutable)
+	1. [SlotsMissed](#forgeslotsmissed)
+	1. [UtxoSize](#forgeutxosize)
+1. __Mempool__
+	1. [MempoolBytes](#mempoolmempoolbytes)
+	1. [TxsInMempool](#mempooltxsinmempool)
+	1. [TxsProcessedNum](#mempooltxsprocessednum)
+1. __Network__
+	1. __Inbound-governor__
+		1. [Cold](#networkinbound-governorcold)
+		1. [Cold](#networkinbound-governorcold)
+		1. [Hot](#networkinbound-governorhot)
+		1. [Hot](#networkinbound-governorhot)
+		1. [Idle](#networkinbound-governoridle)
+		1. [Idle](#networkinbound-governoridle)
+		1. [Warm](#networkinbound-governorwarm)
+		1. [Warm](#networkinbound-governorwarm)
+	1. __PeerSelection__
+		1. [Cold](#networkpeerselectioncold)
+		1. [Hot](#networkpeerselectionhot)
+		1. [Warm](#networkpeerselectionwarm)
+	1. [PeersFromNodeKernel](#networkpeersfromnodekernel)
+1. __Resources__
+	1. __Mem__
+		1. [Resident](#resourcesmemresident)
+	1. __Rts__
+		1. [GcLiveBytes](#resourcesrtsgclivebytes)
+		1. [GcMajorNum](#resourcesrtsgcmajornum)
+		1. [GcMinorNum](#resourcesrtsgcminornum)
+		1. [Gcticks](#resourcesrtsgcticks)
+		1. [Mutticks](#resourcesrtsmutticks)
+		1. [Threads](#resourcesrtsthreads)
+	1. __Stat__
+		1. [Cputicks](#resourcesstatcputicks)
+1. __TxSubmission__
+	1. [Accepted](#txsubmissionaccepted)
+	1. [Rejected](#txsubmissionrejected)
+	1. [Submitted](#txsubmissionsubmitted)
 
 ## [Datapoints](#datapoints)
 1. [NodeInfo](#nodeinfo)
@@ -805,9 +786,7 @@
 ### AcceptPolicy.ConnectionHardLimit
 
 
-***
-Hard rate limit reached, waiting until the number of connections drops below n.
-***
+> Hard rate limit reached, waiting until the number of connections drops below n.
 
 
 From current configuration:
@@ -821,9 +800,6 @@ Filtered  by config value: `Info`
 ### AcceptPolicy.ConnectionLimitResume
 
 
-***
-
-***
 
 
 From current configuration:
@@ -837,9 +813,7 @@ Filtered  by config value: `Info`
 ### AcceptPolicy.ConnectionRateLimiting
 
 
-***
-Rate limiting accepting connections, delaying next accept for given time, currently serving n connections.
-***
+> Rate limiting accepting connections, delaying next accept for given time, currently serving n connections.
 
 
 From current configuration:
@@ -853,9 +827,7 @@ Filtered  by config value: `Info`
 ### BlockFetch.NodeToNode.Recieve.BatchDone
 
 
-***
-End of block streaming.
-***
+> End of block streaming.
 
 
 From current configuration:
@@ -869,9 +841,7 @@ Filtered  by config value: `Notice`
 ### BlockFetch.NodeToNode.Recieve.Block
 
 
-***
-Stream a single block.
-***
+> Stream a single block.
 
 
 From current configuration:
@@ -885,9 +855,7 @@ Filtered  by config value: `Notice`
 ### BlockFetch.NodeToNode.Recieve.ClientDone
 
 
-***
-Client termination message.
-***
+> Client termination message.
 
 
 From current configuration:
@@ -901,9 +869,7 @@ Filtered  by config value: `Notice`
 ### BlockFetch.NodeToNode.Recieve.NoBlocks
 
 
-***
-Respond that there are no blocks.
-***
+> Respond that there are no blocks.
 
 
 From current configuration:
@@ -917,9 +883,7 @@ Filtered  by config value: `Notice`
 ### BlockFetch.NodeToNode.Recieve.RequestRange
 
 
-***
-Request range of blocks.
-***
+> Request range of blocks.
 
 
 From current configuration:
@@ -933,9 +897,7 @@ Filtered  by config value: `Notice`
 ### BlockFetch.NodeToNode.Recieve.StartBatch
 
 
-***
-Start block streaming.
-***
+> Start block streaming.
 
 
 From current configuration:
@@ -949,9 +911,7 @@ Filtered  by config value: `Notice`
 ### BlockFetch.NodeToNode.Send.BatchDone
 
 
-***
-End of block streaming.
-***
+> End of block streaming.
 
 
 From current configuration:
@@ -965,9 +925,7 @@ Filtered  by config value: `Notice`
 ### BlockFetch.NodeToNode.Send.Block
 
 
-***
-Stream a single block.
-***
+> Stream a single block.
 
 
 From current configuration:
@@ -981,9 +939,7 @@ Filtered  by config value: `Notice`
 ### BlockFetch.NodeToNode.Send.ClientDone
 
 
-***
-Client termination message.
-***
+> Client termination message.
 
 
 From current configuration:
@@ -997,9 +953,7 @@ Filtered  by config value: `Notice`
 ### BlockFetch.NodeToNode.Send.NoBlocks
 
 
-***
-Respond that there are no blocks.
-***
+> Respond that there are no blocks.
 
 
 From current configuration:
@@ -1013,9 +967,7 @@ Filtered  by config value: `Notice`
 ### BlockFetch.NodeToNode.Send.RequestRange
 
 
-***
-Request range of blocks.
-***
+> Request range of blocks.
 
 
 From current configuration:
@@ -1029,9 +981,7 @@ Filtered  by config value: `Notice`
 ### BlockFetch.NodeToNode.Send.StartBatch
 
 
-***
-Start block streaming.
-***
+> Start block streaming.
 
 
 From current configuration:
@@ -1045,9 +995,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchClient.AcknowledgedFetchRequest
 
 
-***
-Mark the point when the fetch client picks up the request added by the block fetch decision thread. Note that this event can happen fewer times than the 'AddedFetchRequest' due to fetch request merging.
-***
+> Mark the point when the fetch client picks up the request added by the block fetch decision thread. Note that this event can happen fewer times than the 'AddedFetchRequest' due to fetch request merging.
 
 
 From current configuration:
@@ -1061,9 +1009,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchClient.AddedFetchRequest
 
 
-***
-The block fetch decision thread has added a new fetch instruction consisting of one or more individual request ranges.
-***
+> The block fetch decision thread has added a new fetch instruction consisting of one or more individual request ranges.
 
 
 From current configuration:
@@ -1077,9 +1023,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchClient.ClientTerminating
 
 
-***
-The client is terminating.  Log the number of outstanding requests.
-***
+> The client is terminating.  Log the number of outstanding requests.
 
 
 From current configuration:
@@ -1093,9 +1037,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchClient.CompletedBlockFetch
 
 
-***
-Mark the successful end of receiving a streaming batch of blocks.
-***
+> Mark the successful end of receiving a streaming batch of blocks.
 
 
 From current configuration:
@@ -1110,9 +1052,7 @@ Limiters: Limiter `BlockFetchClient.CompletedBlockFetch` with frequency `2.0`
 ### BlockFetchClient.CompletedFetchBatch
 
 
-***
-Mark the successful end of receiving a streaming batch of blocks
-***
+> Mark the successful end of receiving a streaming batch of blocks
 
 
 From current configuration:
@@ -1126,9 +1066,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchClient.RejectedFetchBatch
 
 
-***
-If the other peer rejects our request then we have this event instead of 'StartedFetchBatch' and 'CompletedFetchBatch'.
-***
+> If the other peer rejects our request then we have this event instead of 'StartedFetchBatch' and 'CompletedFetchBatch'.
 
 
 From current configuration:
@@ -1142,9 +1080,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchClient.SendFetchRequest
 
 
-***
-Mark the point when fetch request for a fragment is actually sent over the wire.
-***
+> Mark the point when fetch request for a fragment is actually sent over the wire.
 
 
 From current configuration:
@@ -1158,9 +1094,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchClient.StartedFetchBatch
 
 
-***
-Mark the start of receiving a streaming batch of blocks. This will be followed by one or more 'CompletedBlockFetch' and a final 'CompletedFetchBatch'
-***
+> Mark the start of receiving a streaming batch of blocks. This will be followed by one or more 'CompletedBlockFetch' and a final 'CompletedFetchBatch'
 
 
 From current configuration:
@@ -1174,9 +1108,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchDecision
 
 
-***
-Throughout the decision making process we accumulate reasons to decline to fetch any blocks. This message carries the intermediate and final results.
-***
+> Throughout the decision making process we accumulate reasons to decline to fetch any blocks. This message carries the intermediate and final results.
 
 
 From current configuration:
@@ -1190,9 +1122,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchSerialised.NodeToNode.Recieve.BatchDone
 
 
-***
-End of block streaming.
-***
+> End of block streaming.
 
 
 From current configuration:
@@ -1206,9 +1136,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchSerialised.NodeToNode.Recieve.Block
 
 
-***
-Stream a single block.
-***
+> Stream a single block.
 
 
 From current configuration:
@@ -1222,9 +1150,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchSerialised.NodeToNode.Recieve.ClientDone
 
 
-***
-Client termination message.
-***
+> Client termination message.
 
 
 From current configuration:
@@ -1238,9 +1164,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchSerialised.NodeToNode.Recieve.NoBlocks
 
 
-***
-Respond that there are no blocks.
-***
+> Respond that there are no blocks.
 
 
 From current configuration:
@@ -1254,9 +1178,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchSerialised.NodeToNode.Recieve.RequestRange
 
 
-***
-Request range of blocks.
-***
+> Request range of blocks.
 
 
 From current configuration:
@@ -1270,9 +1192,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchSerialised.NodeToNode.Recieve.StartBatch
 
 
-***
-Start block streaming.
-***
+> Start block streaming.
 
 
 From current configuration:
@@ -1286,9 +1206,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchSerialised.NodeToNode.Send.BatchDone
 
 
-***
-End of block streaming.
-***
+> End of block streaming.
 
 
 From current configuration:
@@ -1302,9 +1220,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchSerialised.NodeToNode.Send.Block
 
 
-***
-Stream a single block.
-***
+> Stream a single block.
 
 
 From current configuration:
@@ -1318,9 +1234,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchSerialised.NodeToNode.Send.ClientDone
 
 
-***
-Client termination message.
-***
+> Client termination message.
 
 
 From current configuration:
@@ -1334,9 +1248,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchSerialised.NodeToNode.Send.NoBlocks
 
 
-***
-Respond that there are no blocks.
-***
+> Respond that there are no blocks.
 
 
 From current configuration:
@@ -1350,9 +1262,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchSerialised.NodeToNode.Send.RequestRange
 
 
-***
-Request range of blocks.
-***
+> Request range of blocks.
 
 
 From current configuration:
@@ -1366,9 +1276,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchSerialised.NodeToNode.Send.StartBatch
 
 
-***
-Start block streaming.
-***
+> Start block streaming.
 
 
 From current configuration:
@@ -1382,9 +1290,7 @@ Filtered  by config value: `Notice`
 ### BlockFetchServer.SendBlock
 
 
-***
-The server sent a block to the peer.
-***
+> The server sent a block to the peer.
 
 
 From current configuration:
@@ -1398,11 +1304,9 @@ Filtered  by config value: `Notice`
 ### BlockchainTime.CurrentSlotUnknown
 
 
-***
-Current slot is not yet known
- This happens when the tip of our current chain is so far in the past that we cannot translate the current wallclock to a slot number, typically during syncing. Until the current slot number is known, we cannot produce blocks. Seeing this message during syncing therefore is normal and to be expected.
- We record the current time (the time we tried to translate to a 'SlotNo') as well as the 'PastHorizonException', which provides detail on the bounds between which we /can/ do conversions. The distance between the current time and the upper bound should rapidly decrease with consecutive 'CurrentSlotUnknown' messages during syncing.
-***
+> Current slot is not yet known
+>  This happens when the tip of our current chain is so far in the past that we cannot translate the current wallclock to a slot number, typically during syncing. Until the current slot number is known, we cannot produce blocks. Seeing this message during syncing therefore is normal and to be expected.
+>  We record the current time (the time we tried to translate to a 'SlotNo') as well as the 'PastHorizonException', which provides detail on the bounds between which we /can/ do conversions. The distance between the current time and the upper bound should rapidly decrease with consecutive 'CurrentSlotUnknown' messages during syncing.
 
 
 From current configuration:
@@ -1416,10 +1320,8 @@ Filtered  by config value: `Notice`
 ### BlockchainTime.StartTimeInTheFuture
 
 
-***
-The start time of the blockchain time is in the future
- We have to block (for 'NominalDiffTime') until that time comes.
-***
+> The start time of the blockchain time is in the future
+>  We have to block (for 'NominalDiffTime') until that time comes.
 
 
 From current configuration:
@@ -1433,11 +1335,9 @@ Filtered  by config value: `Notice`
 ### BlockchainTime.SystemClockMovedBack
 
 
-***
-The system clock moved back an acceptable time span, e.g., because of an NTP sync.
- The system clock moved back such that the new current slot would be smaller than the previous one. If this is within the configured limit, we trace this warning but *do not change the current slot*. The current slot never decreases, but the current slot may stay the same longer than expected.
- When the system clock moved back more than the configured limit, we shut down with a fatal exception.
-***
+> The system clock moved back an acceptable time span, e.g., because of an NTP sync.
+>  The system clock moved back such that the new current slot would be smaller than the previous one. If this is within the configured limit, we trace this warning but *do not change the current slot*. The current slot never decreases, but the current slot may stay the same longer than expected.
+>  When the system clock moved back more than the configured limit, we shut down with a fatal exception.
 
 
 From current configuration:
@@ -1451,9 +1351,7 @@ Filtered  by config value: `Notice`
 ### ChainDB.AddBlockEvent.AddBlockValidation.CandidateContainsFutureBlocks
 
 
-***
-An event traced during validating performed while adding a block. Candidate contains headers from the future which do no exceed the clock skew.
-***
+> An event traced during validating performed while adding a block. Candidate contains headers from the future which do no exceed the clock skew.
 
 
 From current configuration:
@@ -1467,9 +1365,7 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.AddBlockValidation.CandidateContainsFutureBlocksExceedingClockSkew
 
 
-***
-An event traced during validating performed while adding a block. Candidate contains headers from the future which exceed the clock skew.
-***
+> An event traced during validating performed while adding a block. Candidate contains headers from the future which exceed the clock skew.
 
 
 From current configuration:
@@ -1483,9 +1379,7 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.AddBlockValidation.InvalidBlock
 
 
-***
-An event traced during validating performed while adding a block. A point was found to be invalid.
-***
+> An event traced during validating performed while adding a block. A point was found to be invalid.
 
 
 From current configuration:
@@ -1499,9 +1393,6 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.AddBlockValidation.UpdateLedgerDb
 
 
-***
-
-***
 
 
 From current configuration:
@@ -1515,9 +1406,7 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.AddBlockValidation.ValidCandidate
 
 
-***
-An event traced during validating performed while adding a block. A candidate chain was valid.
-***
+> An event traced during validating performed while adding a block. A candidate chain was valid.
 
 
 From current configuration:
@@ -1532,9 +1421,7 @@ Limiters: Limiter `ChainDB.AddBlockEvent.AddBlockValidation.ValidCandidate` with
 ### ChainDB.AddBlockEvent.AddedBlockToQueue
 
 
-***
-The block was added to the queue and will be added to the ChainDB by the background thread. The size of the queue is included..
-***
+> The block was added to the queue and will be added to the ChainDB by the background thread. The size of the queue is included..
 
 
 From current configuration:
@@ -1549,9 +1436,7 @@ Limiters: Limiter `ChainDB.AddBlockEvent.AddedBlockToQueue` with frequency `2.0`
 ### ChainDB.AddBlockEvent.AddedBlockToVolatileDB
 
 
-***
-A block was added to the Volatile DB
-***
+> A block was added to the Volatile DB
 
 
 From current configuration:
@@ -1566,9 +1451,7 @@ Limiters: Limiter `ChainDB.AddBlockEvent.AddedBlockToVolatileDB` with frequency 
 ### ChainDB.AddBlockEvent.AddedToCurrentChain
 
 
-***
-The new block fits onto the current chain (first fragment) and we have successfully used it to extend our (new) current chain (second fragment).
-***
+> The new block fits onto the current chain (first fragment) and we have successfully used it to extend our (new) current chain (second fragment).
 
 
 From current configuration:
@@ -1582,9 +1465,7 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.BlockInTheFuture
 
 
-***
-The block is from the future, i.e., its slot number is greater than the current slot (the second argument).
-***
+> The block is from the future, i.e., its slot number is greater than the current slot (the second argument).
 
 
 From current configuration:
@@ -1598,9 +1479,7 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.ChainSelectionForFutureBlock
 
 
-***
-Run chain selection for a block that was previously from the future. This is done for all blocks from the future each time a new block is added.
-***
+> Run chain selection for a block that was previously from the future. This is done for all blocks from the future each time a new block is added.
 
 
 From current configuration:
@@ -1614,9 +1493,7 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.IgnoreBlockAlreadyInVolatileDB
 
 
-***
-A block that is already in the Volatile DB was ignored.
-***
+> A block that is already in the Volatile DB was ignored.
 
 
 From current configuration:
@@ -1630,9 +1507,7 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.IgnoreBlockOlderThanK
 
 
-***
-A block with a 'BlockNo' more than @k@ back than the current tip was ignored.
-***
+> A block with a 'BlockNo' more than @k@ back than the current tip was ignored.
 
 
 From current configuration:
@@ -1646,9 +1521,7 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.IgnoreInvalidBlock
 
 
-***
-A block that is already in the Volatile DB was ignored.
-***
+> A block that is already in the Volatile DB was ignored.
 
 
 From current configuration:
@@ -1662,9 +1535,7 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.PipeliningEvent.OutdatedTentativeHeader
 
 
-***
-An event traced during block selection when the tentative header got cleared on chain selection.
-***
+> An event traced during block selection when the tentative header got cleared on chain selection.
 
 
 From current configuration:
@@ -1678,9 +1549,7 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.PipeliningEvent.SetTentativeHeader
 
 
-***
-An event traced during block selection when the tentative header (in the context of diffusion pipelining) is set.
-***
+> An event traced during block selection when the tentative header (in the context of diffusion pipelining) is set.
 
 
 From current configuration:
@@ -1694,9 +1563,7 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.PipeliningEvent.TrapTentativeHeader
 
 
-***
-An event traced during block selection when the body of the tentative header turned out to be invalid.
-***
+> An event traced during block selection when the body of the tentative header turned out to be invalid.
 
 
 From current configuration:
@@ -1710,9 +1577,6 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.PoppedBlockFromQueue
 
 
-***
-
-***
 
 
 From current configuration:
@@ -1726,9 +1590,7 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.StoreButDontChange
 
 
-***
-The block fits onto some fork, we'll try to switch to that fork (if it is preferable to our chain).
-***
+> The block fits onto some fork, we'll try to switch to that fork (if it is preferable to our chain).
 
 
 From current configuration:
@@ -1742,9 +1604,7 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.SwitchedToAFork
 
 
-***
-The new block fits onto some fork and we have switched to that fork (second fragment), as it is preferable to our (previous) current chain (first fragment).
-***
+> The new block fits onto some fork and we have switched to that fork (second fragment), as it is preferable to our (previous) current chain (first fragment).
 
 
 From current configuration:
@@ -1758,9 +1618,7 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.TryAddToCurrentChain
 
 
-***
-The block fits onto the current chain, we'll try to use it to extend our chain.
-***
+> The block fits onto the current chain, we'll try to use it to extend our chain.
 
 
 From current configuration:
@@ -1774,9 +1632,7 @@ Filtered  by config value: `Info`
 ### ChainDB.AddBlockEvent.TrySwitchToAFork
 
 
-***
-The block fits onto some fork, we'll try to switch to that fork (if it is preferable to our chain)
-***
+> The block fits onto some fork, we'll try to switch to that fork (if it is preferable to our chain)
 
 
 From current configuration:
@@ -1790,9 +1646,7 @@ Filtered  by config value: `Info`
 ### ChainDB.CopyToImmutableDBEvent.CopiedBlockToImmutableDB
 
 
-***
-A block was successfully copied to the ImmDB.
-***
+> A block was successfully copied to the ImmDB.
 
 
 From current configuration:
@@ -1807,9 +1661,7 @@ Limiters: Limiter `ChainDB.CopyToImmutableDBEvent.CopiedBlockToImmutableDB` with
 ### ChainDB.CopyToImmutableDBEvent.NoBlocksToCopyToImmutableDB
 
 
-***
-There are no block to copy to the ImmDB.
-***
+> There are no block to copy to the ImmDB.
 
 
 From current configuration:
@@ -1823,9 +1675,7 @@ Filtered  by config value: `Info`
 ### ChainDB.FollowerEvent.FollowerNewImmIterator
 
 
-***
-The follower is in the 'FollowerInImmutableDB' state but the iterator is exhausted while the ImmDB has grown, so we open a new iterator to stream these blocks too.
-***
+> The follower is in the 'FollowerInImmutableDB' state but the iterator is exhausted while the ImmDB has grown, so we open a new iterator to stream these blocks too.
 
 
 From current configuration:
@@ -1839,9 +1689,7 @@ Filtered  by config value: `Info`
 ### ChainDB.FollowerEvent.FollowerNoLongerInMem
 
 
-***
-The follower was in the 'FollowerInImmutableDB' state and is switched to the 'FollowerInMem' state.
-***
+> The follower was in the 'FollowerInImmutableDB' state and is switched to the 'FollowerInMem' state.
 
 
 From current configuration:
@@ -1855,9 +1703,7 @@ Filtered  by config value: `Info`
 ### ChainDB.FollowerEvent.FollowerSwitchToMem
 
 
-***
-The follower was in the 'FollowerInImmutableDB' state and is switched to the 'FollowerInMem' state.
-***
+> The follower was in the 'FollowerInImmutableDB' state and is switched to the 'FollowerInMem' state.
 
 
 From current configuration:
@@ -1871,9 +1717,7 @@ Filtered  by config value: `Info`
 ### ChainDB.FollowerEvent.NewFollower
 
 
-***
-A new follower was created.
-***
+> A new follower was created.
 
 
 From current configuration:
@@ -1887,9 +1731,7 @@ Filtered  by config value: `Info`
 ### ChainDB.GCEvent.PerformedGC
 
 
-***
-There are no block to copy to the ImmDB.
-***
+> There are no block to copy to the ImmDB.
 
 
 From current configuration:
@@ -1903,9 +1745,7 @@ Filtered  by config value: `Info`
 ### ChainDB.GCEvent.ScheduledGC
 
 
-***
-There are no block to copy to the ImmDB.
-***
+> There are no block to copy to the ImmDB.
 
 
 From current configuration:
@@ -1919,9 +1759,7 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.CacheEvent.CurrentChunkHit
 
 
-***
-Current chunk found in the cache.
-***
+> Current chunk found in the cache.
 
 
 From current configuration:
@@ -1935,9 +1773,7 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.CacheEvent.PastChunkEvict
 
 
-***
-The least recently used past chunk was evicted because the cache was full.
-***
+> The least recently used past chunk was evicted because the cache was full.
 
 
 From current configuration:
@@ -1951,9 +1787,6 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.CacheEvent.PastChunkExpired
 
 
-***
-
-***
 
 
 From current configuration:
@@ -1967,9 +1800,7 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.CacheEvent.PastChunkHit
 
 
-***
-Past chunk found in the cache
-***
+> Past chunk found in the cache
 
 
 From current configuration:
@@ -1983,9 +1814,7 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.CacheEvent.PastChunkMiss
 
 
-***
-Past chunk was not found in the cache
-***
+> Past chunk was not found in the cache
 
 
 From current configuration:
@@ -1999,9 +1828,7 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.ChunkFileDoesntFit
 
 
-***
-The hash of the last block in the previous epoch doesn't match the previous hash of the first block in the current epoch
-***
+> The hash of the last block in the previous epoch doesn't match the previous hash of the first block in the current epoch
 
 
 From current configuration:
@@ -2015,9 +1842,7 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.ChunkValidation.InvalidChunkFile
 
 
-***
-Chunk file is invalid
-***
+> Chunk file is invalid
 
 
 From current configuration:
@@ -2031,9 +1856,7 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.ChunkValidation.InvalidPrimaryIndex
 
 
-***
-The primary index is invalid.
-***
+> The primary index is invalid.
 
 
 From current configuration:
@@ -2047,9 +1870,6 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.ChunkValidation.InvalidSecondaryIndex
 
 
-***
-
-***
 
 
 From current configuration:
@@ -2063,9 +1883,7 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.ChunkValidation.MissingChunkFile
 
 
-***
-Chunk file is missing
-***
+> Chunk file is missing
 
 
 From current configuration:
@@ -2079,9 +1897,7 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.ChunkValidation.MissingPrimaryIndex
 
 
-***
-The primary index is missing.
-***
+> The primary index is missing.
 
 
 From current configuration:
@@ -2095,9 +1911,7 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.ChunkValidation.MissingSecondaryIndex
 
 
-***
-The secondary index is missing.
-***
+> The secondary index is missing.
 
 
 From current configuration:
@@ -2111,9 +1925,6 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.ChunkValidation.RewritePrimaryIndex
 
 
-***
-
-***
 
 
 From current configuration:
@@ -2127,9 +1938,6 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.ChunkValidation.RewriteSecondaryIndex
 
 
-***
-
-***
 
 
 From current configuration:
@@ -2143,9 +1951,6 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.ChunkValidation.StartedValidatingChunk
 
 
-***
-
-***
 
 
 From current configuration:
@@ -2159,9 +1964,6 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.ChunkValidation.ValidatedChunk
 
 
-***
-
-***
 
 
 From current configuration:
@@ -2175,9 +1977,7 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.DBAlreadyClosed
 
 
-***
-The immutable DB is already closed
-***
+> The immutable DB is already closed
 
 
 From current configuration:
@@ -2191,9 +1991,7 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.DBClosed
 
 
-***
-Closing the immutable DB
-***
+> Closing the immutable DB
 
 
 From current configuration:
@@ -2207,9 +2005,7 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.DeletingAfter
 
 
-***
-Delete after
-***
+> Delete after
 
 
 From current configuration:
@@ -2223,9 +2019,7 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.Migrating
 
 
-***
-Performing a migration of the on-disk files.
-***
+> Performing a migration of the on-disk files.
 
 
 From current configuration:
@@ -2239,9 +2033,7 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.NoValidLastLocation
 
 
-***
-No valid last location was found
-***
+> No valid last location was found
 
 
 From current configuration:
@@ -2255,9 +2047,7 @@ Filtered  by config value: `Info`
 ### ChainDB.ImmutableDBEvent.ValidatedLastLocation
 
 
-***
-The last location was validatet
-***
+> The last location was validatet
 
 
 From current configuration:
@@ -2271,9 +2061,7 @@ Filtered  by config value: `Info`
 ### ChainDB.InitChainSelEvent.CandidateContainsFutureBlocks
 
 
-***
-Candidate contains headers from the future which do not exceed the clock skew.
-***
+> Candidate contains headers from the future which do not exceed the clock skew.
 
 
 From current configuration:
@@ -2287,9 +2075,7 @@ Filtered  by config value: `Info`
 ### ChainDB.InitChainSelEvent.CandidateContainsFutureBlocksExceedingClockSkew
 
 
-***
-Candidate contains headers from the future which exceed the clock skew, making them invalid.
-***
+> Candidate contains headers from the future which exceed the clock skew, making them invalid.
 
 
 From current configuration:
@@ -2303,9 +2089,7 @@ Filtered  by config value: `Info`
 ### ChainDB.InitChainSelEvent.InitalChainSelected
 
 
-***
-InitalChainSelected
-***
+> InitalChainSelected
 
 
 From current configuration:
@@ -2319,9 +2103,7 @@ Filtered  by config value: `Info`
 ### ChainDB.InitChainSelEvent.InvalidBlock
 
 
-***
-A point was found to be invalid.
-***
+> A point was found to be invalid.
 
 
 From current configuration:
@@ -2335,9 +2117,7 @@ Filtered  by config value: `Info`
 ### ChainDB.InitChainSelEvent.StartedInitChainSelection
 
 
-***
-StartedInitChainSelection
-***
+> StartedInitChainSelection
 
 
 From current configuration:
@@ -2351,9 +2131,7 @@ Filtered  by config value: `Info`
 ### ChainDB.InitChainSelEvent.UpdateLedgerDb
 
 
-***
-UpdateLedgerDb
-***
+> UpdateLedgerDb
 
 
 From current configuration:
@@ -2367,9 +2145,7 @@ Filtered  by config value: `Info`
 ### ChainDB.InitChainSelEvent.ValidCandidate
 
 
-***
-A candidate chain was valid.
-***
+> A candidate chain was valid.
 
 
 From current configuration:
@@ -2383,9 +2159,7 @@ Filtered  by config value: `Info`
 ### ChainDB.IteratorEvent.BlockGCedFromVolatileDB
 
 
-***
-A block is no longer in the VolatileDB and isn't in the ImmDB either; it wasn't part of the current chain.
-***
+> A block is no longer in the VolatileDB and isn't in the ImmDB either; it wasn't part of the current chain.
 
 
 From current configuration:
@@ -2399,9 +2173,7 @@ Filtered  by config value: `Info`
 ### ChainDB.IteratorEvent.BlockMissingFromVolatileDB
 
 
-***
-A block is no longer in the VolatileDB because it has been garbage collected. It might now be in the ImmDB if it was part of the current chain.
-***
+> A block is no longer in the VolatileDB because it has been garbage collected. It might now be in the ImmDB if it was part of the current chain.
 
 
 From current configuration:
@@ -2415,9 +2187,7 @@ Filtered  by config value: `Info`
 ### ChainDB.IteratorEvent.BlockWasCopiedToImmutableDB
 
 
-***
-A block that has been garbage collected from the VolatileDB is now found and streamed from the ImmDB.
-***
+> A block that has been garbage collected from the VolatileDB is now found and streamed from the ImmDB.
 
 
 From current configuration:
@@ -2431,9 +2201,7 @@ Filtered  by config value: `Info`
 ### ChainDB.IteratorEvent.StreamFromBoth
 
 
-***
-Stream from both the VolatileDB and the ImmDB.
-***
+> Stream from both the VolatileDB and the ImmDB.
 
 
 From current configuration:
@@ -2447,9 +2215,7 @@ Filtered  by config value: `Info`
 ### ChainDB.IteratorEvent.StreamFromImmutableDB
 
 
-***
-Stream only from the ImmDB.
-***
+> Stream only from the ImmDB.
 
 
 From current configuration:
@@ -2463,9 +2229,7 @@ Filtered  by config value: `Info`
 ### ChainDB.IteratorEvent.StreamFromVolatileDB
 
 
-***
-Stream only from the VolatileDB.
-***
+> Stream only from the VolatileDB.
 
 
 From current configuration:
@@ -2479,9 +2243,7 @@ Filtered  by config value: `Info`
 ### ChainDB.IteratorEvent.SwitchBackToVolatileDB
 
 
-***
-We have streamed one or more blocks from the ImmDB that were part of the VolatileDB when initialising the iterator. Now, we have to look back in the VolatileDB again because the ImmDB doesn't have the next block we're looking for.
-***
+> We have streamed one or more blocks from the ImmDB that were part of the VolatileDB when initialising the iterator. Now, we have to look back in the VolatileDB again because the ImmDB doesn't have the next block we're looking for.
 
 
 From current configuration:
@@ -2495,9 +2257,7 @@ Filtered  by config value: `Info`
 ### ChainDB.IteratorEvent.UnknownRangeRequested
 
 
-***
-An unknown range was requested, see 'UnknownRange'.
-***
+> An unknown range was requested, see 'UnknownRange'.
 
 
 From current configuration:
@@ -2511,9 +2271,7 @@ Filtered  by config value: `Info`
 ### ChainDB.LedgerEvent.DeletedSnapshot
 
 
-***
-An old or invalid on-disk snapshot was deleted.
-***
+> An old or invalid on-disk snapshot was deleted.
 
 
 From current configuration:
@@ -2527,9 +2285,7 @@ Filtered  by config value: `Info`
 ### ChainDB.LedgerEvent.InvalidSnapshot
 
 
-***
-An on disk snapshot was skipped because it was invalid.
-***
+> An on disk snapshot was skipped because it was invalid.
 
 
 From current configuration:
@@ -2543,9 +2299,7 @@ Filtered  by config value: `Info`
 ### ChainDB.LedgerEvent.TookSnapshot
 
 
-***
-A snapshot was written to disk.
-***
+> A snapshot was written to disk.
 
 
 From current configuration:
@@ -2559,9 +2313,7 @@ Filtered  by config value: `Info`
 ### ChainDB.LedgerReplayEvent.ReplayFromGenesis
 
 
-***
-There were no LedgerDB snapshots on disk, so we're replaying all blocks starting from Genesis against the initial ledger. The @replayTo@ parameter corresponds to the block at the tip of the ImmDB, i.e., the last block to replay.
-***
+> There were no LedgerDB snapshots on disk, so we're replaying all blocks starting from Genesis against the initial ledger. The @replayTo@ parameter corresponds to the block at the tip of the ImmDB, i.e., the last block to replay.
 
 
 From current configuration:
@@ -2575,9 +2327,7 @@ Filtered  by config value: `Info`
 ### ChainDB.LedgerReplayEvent.ReplayFromSnapshot
 
 
-***
-There was a LedgerDB snapshot on disk corresponding to the given tip. We're replaying more recent blocks against it. The @replayTo@ parameter corresponds to the block at the tip of the ImmDB, i.e., the last block to replay.
-***
+> There was a LedgerDB snapshot on disk corresponding to the given tip. We're replaying more recent blocks against it. The @replayTo@ parameter corresponds to the block at the tip of the ImmDB, i.e., the last block to replay.
 
 
 From current configuration:
@@ -2591,10 +2341,8 @@ Filtered  by config value: `Info`
 ### ChainDB.LedgerReplayEvent.ReplayedBlock
 
 
-***
-We replayed the given block (reference) on the genesis snapshot during the initialisation of the LedgerDB.
- The @blockInfo@ parameter corresponds replayed block and the @replayTo@ parameter corresponds to the block at the tip of the ImmDB, i.e., the last block to replay.
-***
+> We replayed the given block (reference) on the genesis snapshot during the initialisation of the LedgerDB.
+>  The @blockInfo@ parameter corresponds replayed block and the @replayTo@ parameter corresponds to the block at the tip of the ImmDB, i.e., the last block to replay.
 
 
 From current configuration:
@@ -2608,9 +2356,7 @@ Filtered  by config value: `Info`
 ### ChainDB.OpenEvent.ClosedDB
 
 
-***
-The ChainDB was closed.
-***
+> The ChainDB was closed.
 
 
 From current configuration:
@@ -2624,9 +2370,7 @@ Filtered  by config value: `Info`
 ### ChainDB.OpenEvent.OpenedDB
 
 
-***
-The ChainDB was opened.
-***
+> The ChainDB was opened.
 
 
 From current configuration:
@@ -2640,9 +2384,7 @@ Filtered  by config value: `Info`
 ### ChainDB.OpenEvent.OpenedImmutableDB
 
 
-***
-The ImmDB was opened.
-***
+> The ImmDB was opened.
 
 
 From current configuration:
@@ -2656,9 +2398,7 @@ Filtered  by config value: `Info`
 ### ChainDB.OpenEvent.OpenedLgrDB
 
 
-***
-The LedgerDB was opened.
-***
+> The LedgerDB was opened.
 
 
 From current configuration:
@@ -2672,9 +2412,7 @@ Filtered  by config value: `Info`
 ### ChainDB.OpenEvent.OpenedVolatileDB
 
 
-***
-The VolatileDB was opened.
-***
+> The VolatileDB was opened.
 
 
 From current configuration:
@@ -2688,9 +2426,6 @@ Filtered  by config value: `Info`
 ### ChainDB.OpenEvent.StartedOpeningDB
 
 
-***
-
-***
 
 
 From current configuration:
@@ -2704,9 +2439,6 @@ Filtered  by config value: `Info`
 ### ChainDB.OpenEvent.StartedOpeningImmutableDB
 
 
-***
-
-***
 
 
 From current configuration:
@@ -2720,9 +2452,7 @@ Filtered  by config value: `Info`
 ### ChainDB.OpenEvent.StartedOpeningLgrDB
 
 
-***
-The LedgerDB was opened.
-***
+> The LedgerDB was opened.
 
 
 From current configuration:
@@ -2736,9 +2466,6 @@ Filtered  by config value: `Info`
 ### ChainDB.OpenEvent.StartedOpeningVolatileDB
 
 
-***
-
-***
 
 
 From current configuration:
@@ -2752,9 +2479,7 @@ Filtered  by config value: `Info`
 ### ChainDB.VolatileDBEvent.BlockAlreadyHere
 
 
-***
-A block was found to be already in the DB.
-***
+> A block was found to be already in the DB.
 
 
 From current configuration:
@@ -2768,9 +2493,7 @@ Filtered  by config value: `Info`
 ### ChainDB.VolatileDBEvent.DBAlreadyClosed
 
 
-***
-When closing the DB it was found itis closed already.
-***
+> When closing the DB it was found itis closed already.
 
 
 From current configuration:
@@ -2784,9 +2507,7 @@ Filtered  by config value: `Info`
 ### ChainDB.VolatileDBEvent.InvalidFileNames
 
 
-***
-Reports a list of invalid file paths.
-***
+> Reports a list of invalid file paths.
 
 
 From current configuration:
@@ -2800,9 +2521,7 @@ Filtered  by config value: `Info`
 ### ChainDB.VolatileDBEvent.Truncate
 
 
-***
-Truncates a file up to offset because of the error.
-***
+> Truncates a file up to offset because of the error.
 
 
 From current configuration:
@@ -2816,9 +2535,7 @@ Filtered  by config value: `Info`
 ### ChainSync.NodeToClient.Recieve.AwaitReply
 
 
-***
-Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
-***
+> Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
 
 
 From current configuration:
@@ -2832,10 +2549,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Recieve.Done
 
 
-***
-We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
-Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
-***
+> We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
+> Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
 
 
 From current configuration:
@@ -2849,9 +2564,7 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Recieve.FindIntersect
 
 
-***
-Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
-***
+> Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
 
 
 From current configuration:
@@ -2865,10 +2578,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Recieve.IntersectFound
 
 
-***
-The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
-The message also tells the consumer about the head point of the producer.
-***
+> The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -2882,10 +2593,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Recieve.IntersectNotFound
 
 
-***
-The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
-The message also tells the consumer about the head point of the producer.
-***
+> The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -2899,9 +2608,7 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Recieve.RequestNext
 
 
-***
-Request the next update from the producer. The response can be a rollforward, a roll back or wait.
-***
+> Request the next update from the producer. The response can be a rollforward, a roll back or wait.
 
 
 From current configuration:
@@ -2915,10 +2622,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Recieve.RollBackward
 
 
-***
-Tell the consumer to roll back to a given point on their chain.
-The message also tells the consumer about the head point of the producer.
-***
+> Tell the consumer to roll back to a given point on their chain.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -2932,10 +2637,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Recieve.RollForward
 
 
-***
-Tell the consumer to extend their chain with the given header.
-The message also tells the consumer about the head point of the producer.
-***
+> Tell the consumer to extend their chain with the given header.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -2949,9 +2652,7 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Send.AwaitReply
 
 
-***
-Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
-***
+> Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
 
 
 From current configuration:
@@ -2965,10 +2666,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Send.Done
 
 
-***
-We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
-Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
-***
+> We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
+> Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
 
 
 From current configuration:
@@ -2982,9 +2681,7 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Send.FindIntersect
 
 
-***
-Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
-***
+> Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
 
 
 From current configuration:
@@ -2998,10 +2695,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Send.IntersectFound
 
 
-***
-The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
-The message also tells the consumer about the head point of the producer.
-***
+> The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3015,10 +2710,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Send.IntersectNotFound
 
 
-***
-The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
-The message also tells the consumer about the head point of the producer.
-***
+> The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3032,9 +2725,7 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Send.RequestNext
 
 
-***
-Request the next update from the producer. The response can be a rollforward, a roll back or wait.
-***
+> Request the next update from the producer. The response can be a rollforward, a roll back or wait.
 
 
 From current configuration:
@@ -3048,10 +2739,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Send.RollBackward
 
 
-***
-Tell the consumer to roll back to a given point on their chain.
-The message also tells the consumer about the head point of the producer.
-***
+> Tell the consumer to roll back to a given point on their chain.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3065,10 +2754,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Send.RollForward
 
 
-***
-Tell the consumer to extend their chain with the given header.
-The message also tells the consumer about the head point of the producer.
-***
+> Tell the consumer to extend their chain with the given header.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3082,9 +2769,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncClient.ChainSyncClientEvent.DownloadedHeader
 
 
-***
-While following a candidate chain, we rolled forward by downloading a header.
-***
+> While following a candidate chain, we rolled forward by downloading a header.
 
 
 From current configuration:
@@ -3098,9 +2783,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncClient.ChainSyncClientEvent.Exception
 
 
-***
-An exception was thrown by the Chain Sync Client.
-***
+> An exception was thrown by the Chain Sync Client.
 
 
 From current configuration:
@@ -3114,9 +2797,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncClient.ChainSyncClientEvent.FoundIntersection
 
 
-***
-We found an intersection between our chain fragment and the candidate's chain.
-***
+> We found an intersection between our chain fragment and the candidate's chain.
 
 
 From current configuration:
@@ -3130,9 +2811,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncClient.ChainSyncClientEvent.RolledBack
 
 
-***
-While following a candidate chain, we rolled back to the given point.
-***
+> While following a candidate chain, we rolled back to the given point.
 
 
 From current configuration:
@@ -3146,9 +2825,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncClient.ChainSyncClientEvent.Termination
 
 
-***
-The client has terminated.
-***
+> The client has terminated.
 
 
 From current configuration:
@@ -3162,9 +2839,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Recieve.AwaitReply
 
 
-***
-Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
-***
+> Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
 
 
 From current configuration:
@@ -3178,10 +2853,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Recieve.Done
 
 
-***
-We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
-Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
-***
+> We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
+> Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
 
 
 From current configuration:
@@ -3195,9 +2868,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Recieve.FindIntersect
 
 
-***
-Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
-***
+> Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
 
 
 From current configuration:
@@ -3211,10 +2882,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Recieve.IntersectFound
 
 
-***
-The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
-The message also tells the consumer about the head point of the producer.
-***
+> The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3228,10 +2897,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Recieve.IntersectNotFound
 
 
-***
-The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
-The message also tells the consumer about the head point of the producer.
-***
+> The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3245,9 +2912,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Recieve.RequestNext
 
 
-***
-Request the next update from the producer. The response can be a rollforward, a roll back or wait.
-***
+> Request the next update from the producer. The response can be a rollforward, a roll back or wait.
 
 
 From current configuration:
@@ -3261,10 +2926,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Recieve.RollBackward
 
 
-***
-Tell the consumer to roll back to a given point on their chain.
-The message also tells the consumer about the head point of the producer.
-***
+> Tell the consumer to roll back to a given point on their chain.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3278,10 +2941,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Recieve.RollForward
 
 
-***
-Tell the consumer to extend their chain with the given header.
-The message also tells the consumer about the head point of the producer.
-***
+> Tell the consumer to extend their chain with the given header.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3295,9 +2956,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Send.AwaitReply
 
 
-***
-Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
-***
+> Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
 
 
 From current configuration:
@@ -3311,10 +2970,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Send.Done
 
 
-***
-We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
-Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
-***
+> We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
+> Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
 
 
 From current configuration:
@@ -3328,9 +2985,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Send.FindIntersect
 
 
-***
-Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
-***
+> Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
 
 
 From current configuration:
@@ -3344,10 +2999,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Send.IntersectFound
 
 
-***
-The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
-The message also tells the consumer about the head point of the producer.
-***
+> The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3361,10 +3014,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Send.IntersectNotFound
 
 
-***
-The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
-The message also tells the consumer about the head point of the producer.
-***
+> The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3378,9 +3029,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Send.RequestNext
 
 
-***
-Request the next update from the producer. The response can be a rollforward, a roll back or wait.
-***
+> Request the next update from the producer. The response can be a rollforward, a roll back or wait.
 
 
 From current configuration:
@@ -3394,10 +3043,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Send.RollBackward
 
 
-***
-Tell the consumer to roll back to a given point on their chain.
-The message also tells the consumer about the head point of the producer.
-***
+> Tell the consumer to roll back to a given point on their chain.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3411,10 +3058,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Send.RollForward
 
 
-***
-Tell the consumer to extend their chain with the given header.
-The message also tells the consumer about the head point of the producer.
-***
+> Tell the consumer to extend their chain with the given header.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3428,9 +3073,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Recieve.AwaitReply
 
 
-***
-Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
-***
+> Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
 
 
 From current configuration:
@@ -3444,10 +3087,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Recieve.Done
 
 
-***
-We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
-Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
-***
+> We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
+> Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
 
 
 From current configuration:
@@ -3461,9 +3102,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Recieve.FindIntersect
 
 
-***
-Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
-***
+> Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
 
 
 From current configuration:
@@ -3477,10 +3116,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Recieve.IntersectFound
 
 
-***
-The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
-The message also tells the consumer about the head point of the producer.
-***
+> The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3494,10 +3131,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Recieve.IntersectNotFound
 
 
-***
-The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
-The message also tells the consumer about the head point of the producer.
-***
+> The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3511,9 +3146,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Recieve.RequestNext
 
 
-***
-Request the next update from the producer. The response can be a rollforward, a roll back or wait.
-***
+> Request the next update from the producer. The response can be a rollforward, a roll back or wait.
 
 
 From current configuration:
@@ -3527,10 +3160,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Recieve.RollBackward
 
 
-***
-Tell the consumer to roll back to a given point on their chain.
-The message also tells the consumer about the head point of the producer.
-***
+> Tell the consumer to roll back to a given point on their chain.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3544,10 +3175,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Recieve.RollForward
 
 
-***
-Tell the consumer to extend their chain with the given header.
-The message also tells the consumer about the head point of the producer.
-***
+> Tell the consumer to extend their chain with the given header.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3561,9 +3190,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Send.AwaitReply
 
 
-***
-Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
-***
+> Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
 
 
 From current configuration:
@@ -3577,10 +3204,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Send.Done
 
 
-***
-We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
-Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
-***
+> We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
+> Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
 
 
 From current configuration:
@@ -3594,9 +3219,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Send.FindIntersect
 
 
-***
-Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
-***
+> Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
 
 
 From current configuration:
@@ -3610,10 +3233,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Send.IntersectFound
 
 
-***
-The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
-The message also tells the consumer about the head point of the producer.
-***
+> The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3627,10 +3248,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Send.IntersectNotFound
 
 
-***
-The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
-The message also tells the consumer about the head point of the producer.
-***
+> The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3644,9 +3263,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Send.RequestNext
 
 
-***
-Request the next update from the producer. The response can be a rollforward, a roll back or wait.
-***
+> Request the next update from the producer. The response can be a rollforward, a roll back or wait.
 
 
 From current configuration:
@@ -3660,10 +3277,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Send.RollBackward
 
 
-***
-Tell the consumer to roll back to a given point on their chain.
-The message also tells the consumer about the head point of the producer.
-***
+> Tell the consumer to roll back to a given point on their chain.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3677,10 +3292,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Send.RollForward
 
 
-***
-Tell the consumer to extend their chain with the given header.
-The message also tells the consumer about the head point of the producer.
-***
+> Tell the consumer to extend their chain with the given header.
+> The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3691,28 +3304,10 @@ Backends:
 			`Forwarder`
 Filtered  by config value: `Notice`
 
-### ChainSyncServerBlock.ChainSyncServerEvent.ServerRead.RollBackward
+### ChainSyncServerBlock.ChainSyncServerEvent.Update.Update
 
 
-***
-
-***
-
-
-From current configuration:
-Details:   `DNormal`
-Backends:
-			`EKGBackend`,
-			`Stdout MachineFormat`,
-			`Forwarder`
-Filtered  by config value: `Notice`
-
-### ChainSyncServerBlock.ChainSyncServerEvent.ServerRead.RollForward
-
-
-***
-Roll forward to the given point.
-***
+> A server read has occurred, either for an add block or a rollback
 
 
 From current configuration:
@@ -3723,92 +3318,10 @@ Backends:
 			`Forwarder`
 Filtered  by config value: `Notice`
 
-### ChainSyncServerBlock.ChainSyncServerEvent.ServerRead.ServerRead
+### ChainSyncServerHeader.ChainSyncServerEvent.Update.Update
 
 
-***
-A server read has occurred, either for an add block or a rollback
-***
-
-
-From current configuration:
-Details:   `DNormal`
-Backends:
-			`EKGBackend`,
-			`Stdout MachineFormat`,
-			`Forwarder`
-Filtered  by config value: `Notice`
-
-### ChainSyncServerBlock.ChainSyncServerEvent.ServerRead.ServerReadBlocked
-
-
-***
-A server read has blocked, either for an add block or a rollback
-***
-
-
-From current configuration:
-Details:   `DNormal`
-Backends:
-			`EKGBackend`,
-			`Stdout MachineFormat`,
-			`Forwarder`
-Filtered  by config value: `Notice`
-
-### ChainSyncServerHeader.ChainSyncServerEvent.ServerRead.RollBackward
-
-
-***
-
-***
-
-
-From current configuration:
-Details:   `DNormal`
-Backends:
-			`EKGBackend`,
-			`Stdout MachineFormat`,
-			`Forwarder`
-Filtered  by config value: `Notice`
-
-### ChainSyncServerHeader.ChainSyncServerEvent.ServerRead.RollForward
-
-
-***
-Roll forward to the given point.
-***
-
-
-From current configuration:
-Details:   `DNormal`
-Backends:
-			`EKGBackend`,
-			`Stdout MachineFormat`,
-			`Forwarder`
-Filtered  by config value: `Notice`
-
-### ChainSyncServerHeader.ChainSyncServerEvent.ServerRead.ServerRead
-
-
-***
-A server read has occurred, either for an add block or a rollback
-***
-
-
-From current configuration:
-Details:   `DNormal`
-Backends:
-			`EKGBackend`,
-			`Stdout MachineFormat`,
-			`Forwarder`
-Filtered  by config value: `Notice`
-
-### ChainSyncServerHeader.ChainSyncServerEvent.ServerRead.ServerReadBlocked
-
-
-***
-A server read has blocked, either for an add block or a rollback
-***
+> A server read has occurred, either for an add block or a rollback
 
 
 From current configuration:
@@ -3822,9 +3335,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.Connect
 
 
-***
-
-***
 
 
 From current configuration:
@@ -3838,9 +3348,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.ConnectError
 
 
-***
-
-***
 
 
 From current configuration:
@@ -3854,9 +3361,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.ConnectionCleanup
 
 
-***
-
-***
 
 
 From current configuration:
@@ -3870,9 +3374,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.ConnectionExists
 
 
-***
-
-***
 
 
 From current configuration:
@@ -3886,9 +3387,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.ConnectionFailure
 
 
-***
-
-***
 
 
 From current configuration:
@@ -3902,9 +3400,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.ConnectionHandler
 
 
-***
-
-***
 
 
 From current configuration:
@@ -3918,9 +3413,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.ConnectionManagerCounters
 
 
-***
-
-***
 
 
 From current configuration:
@@ -3934,9 +3426,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.ConnectionNotFound
 
 
-***
-
-***
 
 
 From current configuration:
@@ -3950,9 +3439,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.ConnectionTimeWait
 
 
-***
-
-***
 
 
 From current configuration:
@@ -3966,9 +3452,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.ConnectionTimeWaitDone
 
 
-***
-
-***
 
 
 From current configuration:
@@ -3982,9 +3465,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.ForbiddenConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -3998,9 +3478,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.ForbiddenOperation
 
 
-***
-
-***
 
 
 From current configuration:
@@ -4014,9 +3491,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.ImpossibleConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -4030,9 +3504,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.IncludeConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -4046,9 +3517,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.PruneConnections
 
 
-***
-
-***
 
 
 From current configuration:
@@ -4062,9 +3530,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.Shutdown
 
 
-***
-
-***
 
 
 From current configuration:
@@ -4078,9 +3543,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.State
 
 
-***
-
-***
 
 
 From current configuration:
@@ -4094,9 +3556,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.TerminatedConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -4110,9 +3569,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.TerminatingConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -4126,9 +3582,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.UnexpectedlyFalseAssertion
 
 
-***
-
-***
 
 
 From current configuration:
@@ -4142,9 +3595,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.UnknownConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -4158,9 +3608,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManager.UnregisterConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -4174,9 +3621,6 @@ Filtered  by config value: `Notice`
 ### ConnectionManagerTransition.ConnectionManagerTransition
 
 
-***
-
-***
 
 
 From current configuration:
@@ -4190,9 +3634,7 @@ Filtered  by config value: `Notice`
 ### DNSResolver.LookupAAAAError
 
 
-***
-AAAA lookup failed with an error.
-***
+> AAAA lookup failed with an error.
 
 
 From current configuration:
@@ -4206,9 +3648,7 @@ Filtered  by config value: `Info`
 ### DNSResolver.LookupAAAAResult
 
 
-***
-Lookup AAAA result.
-***
+> Lookup AAAA result.
 
 
 From current configuration:
@@ -4222,9 +3662,7 @@ Filtered  by config value: `Info`
 ### DNSResolver.LookupAError
 
 
-***
-A lookup failed with an error.
-***
+> A lookup failed with an error.
 
 
 From current configuration:
@@ -4238,9 +3676,7 @@ Filtered  by config value: `Info`
 ### DNSResolver.LookupAResult
 
 
-***
-Lookup A result.
-***
+> Lookup A result.
 
 
 From current configuration:
@@ -4254,9 +3690,7 @@ Filtered  by config value: `Info`
 ### DNSResolver.LookupException
 
 
-***
-A DNS lookup exception occurred.
-***
+> A DNS lookup exception occurred.
 
 
 From current configuration:
@@ -4270,9 +3704,7 @@ Filtered  by config value: `Info`
 ### DNSResolver.LookupIPv4First
 
 
-***
-Returning IPv4 address first.
-***
+> Returning IPv4 address first.
 
 
 From current configuration:
@@ -4286,9 +3718,7 @@ Filtered  by config value: `Info`
 ### DNSResolver.LookupIPv6First
 
 
-***
-Returning IPv6 address first.
-***
+> Returning IPv6 address first.
 
 
 From current configuration:
@@ -4302,9 +3732,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.AllocateSocket
 
 
-***
-DNS Subscription: Allocate socket to address.
-***
+> DNS Subscription: Allocate socket to address.
 
 
 From current configuration:
@@ -4318,9 +3746,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.ApplicationException
 
 
-***
-DNS Subscription: Application Exception occurred.
-***
+> DNS Subscription: Application Exception occurred.
 
 
 From current configuration:
@@ -4334,9 +3760,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.CloseSocket
 
 
-***
-DNS Subscription: Closed socket to address.
-***
+> DNS Subscription: Closed socket to address.
 
 
 From current configuration:
@@ -4350,9 +3774,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.ConnectEnd
 
 
-***
-DNS Subscription: Connection Attempt end with destination and outcome.
-***
+> DNS Subscription: Connection Attempt end with destination and outcome.
 
 
 From current configuration:
@@ -4366,9 +3788,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.ConnectException
 
 
-***
-DNS Subscription: Socket Allocation Exception with destination and the exception.
-***
+> DNS Subscription: Socket Allocation Exception with destination and the exception.
 
 
 From current configuration:
@@ -4382,9 +3802,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.ConnectStart
 
 
-***
-DNS Subscription: Connection Attempt Start with destination.
-***
+> DNS Subscription: Connection Attempt Start with destination.
 
 
 From current configuration:
@@ -4398,9 +3816,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.ConnectionExist
 
 
-***
-DNS Subscription: Connection exists to destination.
-***
+> DNS Subscription: Connection exists to destination.
 
 
 From current configuration:
@@ -4414,9 +3830,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.MissingLocalAddress
 
 
-***
-DNS Subscription: Missing local address.
-***
+> DNS Subscription: Missing local address.
 
 
 From current configuration:
@@ -4430,9 +3844,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.Restart
 
 
-***
-DNS Subscription: Restarting Subscription after duration with desired valency and current valency.
-***
+> DNS Subscription: Restarting Subscription after duration with desired valency and current valency.
 
 
 From current configuration:
@@ -4446,9 +3858,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.SkippingPeer
 
 
-***
-DNS Subscription: Skipping peer with address.
-***
+> DNS Subscription: Skipping peer with address.
 
 
 From current configuration:
@@ -4462,9 +3872,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.SocketAllocationException
 
 
-***
-DNS Subscription: Connection Attempt Exception with destination and exception.
-***
+> DNS Subscription: Connection Attempt Exception with destination and exception.
 
 
 From current configuration:
@@ -4478,9 +3886,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.Start
 
 
-***
-DNS Subscription: Starting Subscription Worker with a valency.
-***
+> DNS Subscription: Starting Subscription Worker with a valency.
 
 
 From current configuration:
@@ -4494,9 +3900,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.SubscriptionFailed
 
 
-***
-DNS Subscription: Failed to start all required subscriptions.
-***
+> DNS Subscription: Failed to start all required subscriptions.
 
 
 From current configuration:
@@ -4510,9 +3914,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.SubscriptionRunning
 
 
-***
-DNS Subscription: Required subscriptions started.
-***
+> DNS Subscription: Required subscriptions started.
 
 
 From current configuration:
@@ -4526,9 +3928,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.SubscriptionWaiting
 
 
-***
-DNS Subscription: Waiting on address with active connections.
-***
+> DNS Subscription: Waiting on address with active connections.
 
 
 From current configuration:
@@ -4542,9 +3942,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.SubscriptionWaitingNewConnection
 
 
-***
-DNS Subscription: Waiting delay time before attempting a new connection.
-***
+> DNS Subscription: Waiting delay time before attempting a new connection.
 
 
 From current configuration:
@@ -4558,9 +3956,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.TryConnectToPeer
 
 
-***
-DNS Subscription: Trying to connect to peer with address.
-***
+> DNS Subscription: Trying to connect to peer with address.
 
 
 From current configuration:
@@ -4574,9 +3970,7 @@ Filtered  by config value: `Info`
 ### DNSSubscription.DNS.UnsupportedRemoteAddr
 
 
-***
-DNS Subscription: Unsupported remote target address.
-***
+> DNS Subscription: Unsupported remote target address.
 
 
 From current configuration:
@@ -4590,9 +3984,6 @@ Filtered  by config value: `Info`
 ### DebugPeerSelection.DebugPeerSelection.GovernorState
 
 
-***
-
-***
 
 
 From current configuration:
@@ -4606,9 +3997,6 @@ Filtered  by config value: `Notice`
 ### DebugPeerSelectionResponder.DebugPeerSelection.GovernorState
 
 
-***
-
-***
 
 
 From current configuration:
@@ -4622,9 +4010,7 @@ Filtered  by config value: `Notice`
 ### DiffusionInit.ConfiguringLocalSocket
 
 
-***
-ConfiguringLocalSocket 
-***
+> ConfiguringLocalSocket 
 
 
 From current configuration:
@@ -4638,9 +4024,7 @@ Filtered  by config value: `Info`
 ### DiffusionInit.ConfiguringServerSocket
 
 
-***
-ConfiguringServerSocket 
-***
+> ConfiguringServerSocket 
 
 
 From current configuration:
@@ -4654,9 +4038,7 @@ Filtered  by config value: `Info`
 ### DiffusionInit.CreateSystemdSocketForSnocketPath
 
 
-***
-CreateSystemdSocketForSnocketPath 
-***
+> CreateSystemdSocketForSnocketPath 
 
 
 From current configuration:
@@ -4670,9 +4052,7 @@ Filtered  by config value: `Info`
 ### DiffusionInit.CreatedLocalSocket
 
 
-***
-CreatedLocalSocket 
-***
+> CreatedLocalSocket 
 
 
 From current configuration:
@@ -4686,9 +4066,7 @@ Filtered  by config value: `Info`
 ### DiffusionInit.CreatingServerSocket
 
 
-***
-CreatingServerSocket 
-***
+> CreatingServerSocket 
 
 
 From current configuration:
@@ -4702,9 +4080,7 @@ Filtered  by config value: `Info`
 ### DiffusionInit.DiffusionErrored
 
 
-***
-DiffusionErrored 
-***
+> DiffusionErrored 
 
 
 From current configuration:
@@ -4718,9 +4094,7 @@ Filtered  by config value: `Info`
 ### DiffusionInit.ListeningLocalSocket
 
 
-***
-ListeningLocalSocket 
-***
+> ListeningLocalSocket 
 
 
 From current configuration:
@@ -4734,9 +4108,7 @@ Filtered  by config value: `Info`
 ### DiffusionInit.ListeningServerSocket
 
 
-***
-ListeningServerSocket 
-***
+> ListeningServerSocket 
 
 
 From current configuration:
@@ -4750,9 +4122,7 @@ Filtered  by config value: `Info`
 ### DiffusionInit.LocalSocketUp
 
 
-***
-LocalSocketUp 
-***
+> LocalSocketUp 
 
 
 From current configuration:
@@ -4766,9 +4136,7 @@ Filtered  by config value: `Info`
 ### DiffusionInit.RunLocalServer
 
 
-***
-RunLocalServer 
-***
+> RunLocalServer 
 
 
 From current configuration:
@@ -4782,9 +4150,7 @@ Filtered  by config value: `Info`
 ### DiffusionInit.RunServer
 
 
-***
-RunServer 
-***
+> RunServer 
 
 
 From current configuration:
@@ -4798,9 +4164,7 @@ Filtered  by config value: `Info`
 ### DiffusionInit.ServerSocketUp
 
 
-***
-ServerSocketUp 
-***
+> ServerSocketUp 
 
 
 From current configuration:
@@ -4814,9 +4178,7 @@ Filtered  by config value: `Info`
 ### DiffusionInit.UnsupportedLocalSystemdSocket
 
 
-***
-UnsupportedLocalSystemdSocket 
-***
+> UnsupportedLocalSystemdSocket 
 
 
 From current configuration:
@@ -4830,9 +4192,7 @@ Filtered  by config value: `Info`
 ### DiffusionInit.UnsupportedReadySocketCase
 
 
-***
-UnsupportedReadySocketCase 
-***
+> UnsupportedReadySocketCase 
 
 
 From current configuration:
@@ -4846,9 +4206,7 @@ Filtered  by config value: `Info`
 ### DiffusionInit.UsingSystemdSocket
 
 
-***
-UsingSystemdSocket 
-***
+> UsingSystemdSocket 
 
 
 From current configuration:
@@ -4862,9 +4220,7 @@ Filtered  by config value: `Info`
 ### ErrorPolicy.AcceptException
 
 
-***
-'accept' threw an exception.
-***
+> 'accept' threw an exception.
 
 
 From current configuration:
@@ -4878,9 +4234,7 @@ Filtered  by config value: `Info`
 ### ErrorPolicy.KeepSuspended
 
 
-***
-Consumer was suspended until producer will resume.
-***
+> Consumer was suspended until producer will resume.
 
 
 From current configuration:
@@ -4894,9 +4248,7 @@ Filtered  by config value: `Info`
 ### ErrorPolicy.LocalNodeError
 
 
-***
-caught a local exception.
-***
+> caught a local exception.
 
 
 From current configuration:
@@ -4910,9 +4262,7 @@ Filtered  by config value: `Info`
 ### ErrorPolicy.ResumeConsumer
 
 
-***
-Resume consumer.
-***
+> Resume consumer.
 
 
 From current configuration:
@@ -4926,9 +4276,7 @@ Filtered  by config value: `Info`
 ### ErrorPolicy.ResumePeer
 
 
-***
-Resume a peer (both consumer and producer).
-***
+> Resume a peer (both consumer and producer).
 
 
 From current configuration:
@@ -4942,9 +4290,7 @@ Filtered  by config value: `Info`
 ### ErrorPolicy.ResumeProducer
 
 
-***
-Resume producer.
-***
+> Resume producer.
 
 
 From current configuration:
@@ -4958,9 +4304,7 @@ Filtered  by config value: `Info`
 ### ErrorPolicy.SuspendConsumer
 
 
-***
-Suspending consumer.
-***
+> Suspending consumer.
 
 
 From current configuration:
@@ -4974,9 +4318,7 @@ Filtered  by config value: `Info`
 ### ErrorPolicy.SuspendPeer
 
 
-***
-Suspending peer with a given exception.
-***
+> Suspending peer with a given exception.
 
 
 From current configuration:
@@ -4990,9 +4332,7 @@ Filtered  by config value: `Info`
 ### ErrorPolicy.UnhandledApplicationException
 
 
-***
-An application threw an exception, which was not handled.
-***
+> An application threw an exception, which was not handled.
 
 
 From current configuration:
@@ -5006,9 +4346,7 @@ Filtered  by config value: `Info`
 ### ErrorPolicy.UnhandledConnectionException
 
 
-***
-'connect' threw an exception, which was not handled by any 'ErrorPolicy'.
-***
+> 'connect' threw an exception, which was not handled by any 'ErrorPolicy'.
 
 
 From current configuration:
@@ -5022,9 +4360,7 @@ Filtered  by config value: `Info`
 ### Forge.AdoptedBlock
 
 
-***
-We adopted the block we produced, we also trace the transactions  that were adopted.
-***
+> We adopted the block we produced, we also trace the transactions  that were adopted.
 
 
 From current configuration:
@@ -5038,9 +4374,7 @@ Filtered  by config value: `Info`
 ### Forge.BlockContext
 
 
-***
-We found out to which block we are going to connect the block we are about  to forge.   We record the current slot number, the block number of the block to  connect to and its point.   Note that block number of the block we will try to forge is one more than  the recorded block number.
-***
+> We found out to which block we are going to connect the block we are about  to forge.   We record the current slot number, the block number of the block to  connect to and its point.   Note that block number of the block we will try to forge is one more than  the recorded block number.
 
 
 From current configuration:
@@ -5054,9 +4388,7 @@ Filtered  by config value: `Info`
 ### Forge.BlockFromFuture
 
 
-***
-Leadership check failed: the current chain contains a block from a slot  /after/ the current slot   This can only happen if the system is under heavy load.   We record both the current slot number as well as the slot number of the  block at the tip of the chain.   See also <https://github.com/input-output-hk/ouroboros-network/issues/1462>
-***
+> Leadership check failed: the current chain contains a block from a slot  /after/ the current slot   This can only happen if the system is under heavy load.   We record both the current slot number as well as the slot number of the  block at the tip of the chain.   See also <https://github.com/input-output-hk/ouroboros-network/issues/1462>
 
 
 From current configuration:
@@ -5070,9 +4402,7 @@ Filtered  by config value: `Info`
 ### Forge.DidntAdoptBlock
 
 
-***
-We did not adopt the block we produced, but the block was valid. We  must have adopted a block that another leader of the same slot produced  before we got the chance of adopting our own block. This is very rare,  this warrants a warning.
-***
+> We did not adopt the block we produced, but the block was valid. We  must have adopted a block that another leader of the same slot produced  before we got the chance of adopting our own block. This is very rare,  this warrants a warning.
 
 
 From current configuration:
@@ -5086,9 +4416,7 @@ Filtered  by config value: `Info`
 ### Forge.ForgeStateUpdateError
 
 
-***
-Updating the forge state failed.   For example, the KES key could not be evolved anymore.   We record the error returned by 'updateForgeState'.
-***
+> Updating the forge state failed.   For example, the KES key could not be evolved anymore.   We record the error returned by 'updateForgeState'.
 
 
 From current configuration:
@@ -5102,14 +4430,12 @@ Filtered  by config value: `Info`
 ### Forge.ForgedBlock
 
 
-***
-We forged a block.
-  We record the current slot number, the point of the predecessor, the block  itself, and the total size of the mempool snapshot at the time we produced  the block (which may be significantly larger than the block, due to  maximum block size)
-  This will be followed by one of three messages:
-  * AdoptedBlock (normally)
-  * DidntAdoptBlock (rarely)
-  * ForgedInvalidBlock (hopefully never -- this would indicate a bug)
-***
+> We forged a block.
+>   We record the current slot number, the point of the predecessor, the block  itself, and the total size of the mempool snapshot at the time we produced  the block (which may be significantly larger than the block, due to  maximum block size)
+>   This will be followed by one of three messages:
+>   * AdoptedBlock (normally)
+>   * DidntAdoptBlock (rarely)
+>   * ForgedInvalidBlock (hopefully never -- this would indicate a bug)
 
 
 From current configuration:
@@ -5123,9 +4449,7 @@ Filtered  by config value: `Info`
 ### Forge.ForgedInvalidBlock
 
 
-***
-We forged a block that is invalid according to the ledger in the  ChainDB. This means there is an inconsistency between the mempool  validation and the ledger validation. This is a serious error!
-***
+> We forged a block that is invalid according to the ledger in the  ChainDB. This means there is an inconsistency between the mempool  validation and the ledger validation. This is a serious error!
 
 
 From current configuration:
@@ -5139,9 +4463,7 @@ Filtered  by config value: `Info`
 ### Forge.LedgerState
 
 
-***
-We obtained a ledger state for the point of the block we want to  connect to   We record both the current slot number as well as the point of the block  we attempt to connect the new block to (that we requested the ledger  state for).
-***
+> We obtained a ledger state for the point of the block we want to  connect to   We record both the current slot number as well as the point of the block  we attempt to connect the new block to (that we requested the ledger  state for).
 
 
 From current configuration:
@@ -5155,9 +4477,7 @@ Filtered  by config value: `Info`
 ### Forge.LedgerView
 
 
-***
-We obtained a ledger view for the current slot number   We record the current slot number.
-***
+> We obtained a ledger view for the current slot number   We record the current slot number.
 
 
 From current configuration:
@@ -5171,9 +4491,7 @@ Filtered  by config value: `Info`
 ### Forge.NoLedgerState
 
 
-***
-Leadership check failed: we were unable to get the ledger state for the  point of the block we want to connect to   This can happen if after choosing which block to connect to the node  switched to a different fork. We expect this to happen only rather  rarely, so this certainly merits a warning; if it happens a lot, that  merits an investigation.   We record both the current slot number as well as the point of the block  we attempt to connect the new block to (that we requested the ledger  state for).
-***
+> Leadership check failed: we were unable to get the ledger state for the  point of the block we want to connect to   This can happen if after choosing which block to connect to the node  switched to a different fork. We expect this to happen only rather  rarely, so this certainly merits a warning; if it happens a lot, that  merits an investigation.   We record both the current slot number as well as the point of the block  we attempt to connect the new block to (that we requested the ledger  state for).
 
 
 From current configuration:
@@ -5187,9 +4505,7 @@ Filtered  by config value: `Info`
 ### Forge.NoLedgerView
 
 
-***
-Leadership check failed: we were unable to get the ledger view for the  current slot number   This will only happen if there are many missing blocks between the tip of  our chain and the current slot.   We record also the failure returned by 'forecastFor'.
-***
+> Leadership check failed: we were unable to get the ledger view for the  current slot number   This will only happen if there are many missing blocks between the tip of  our chain and the current slot.   We record also the failure returned by 'forecastFor'.
 
 
 From current configuration:
@@ -5203,9 +4519,7 @@ Filtered  by config value: `Info`
 ### Forge.NodeCannotForge
 
 
-***
-We did the leadership check and concluded that we should lead and forge  a block, but cannot.   This should only happen rarely and should be logged with warning severity.   Records why we cannot forge a block.
-***
+> We did the leadership check and concluded that we should lead and forge  a block, but cannot.   This should only happen rarely and should be logged with warning severity.   Records why we cannot forge a block.
 
 
 From current configuration:
@@ -5219,10 +4533,8 @@ Filtered  by config value: `Info`
 ### Forge.NodeIsLeader
 
 
-***
-We did the leadership check and concluded we /are/ the leader
-  The node will soon forge; it is about to read its transactions from the  Mempool. This will be followed by ForgedBlock.
-***
+> We did the leadership check and concluded we /are/ the leader
+>   The node will soon forge; it is about to read its transactions from the  Mempool. This will be followed by ForgedBlock.
 
 
 From current configuration:
@@ -5236,9 +4548,7 @@ Filtered  by config value: `Info`
 ### Forge.NodeNotLeader
 
 
-***
-We did the leadership check and concluded we are not the leader   We record the current slot number
-***
+> We did the leadership check and concluded we are not the leader   We record the current slot number
 
 
 From current configuration:
@@ -5252,9 +4562,7 @@ Filtered  by config value: `Info`
 ### Forge.SlotIsImmutable
 
 
-***
-Leadership check failed: the tip of the ImmutableDB inhabits the  current slot   This might happen in two cases.    1. the clock moved backwards, on restart we ignored everything from the      VolatileDB since it's all in the future, and now the tip of the      ImmutableDB points to a block produced in the same slot we're trying      to produce a block in    2. k = 0 and we already adopted a block from another leader of the same      slot.   We record both the current slot number as well as the tip of the  ImmutableDB.  See also <https://github.com/input-output-hk/ouroboros-network/issues/1462>
-***
+> Leadership check failed: the tip of the ImmutableDB inhabits the  current slot   This might happen in two cases.    1. the clock moved backwards, on restart we ignored everything from the      VolatileDB since it's all in the future, and now the tip of the      ImmutableDB points to a block produced in the same slot we're trying      to produce a block in    2. k = 0 and we already adopted a block from another leader of the same      slot.   We record both the current slot number as well as the tip of the  ImmutableDB.  See also <https://github.com/input-output-hk/ouroboros-network/issues/1462>
 
 
 From current configuration:
@@ -5268,9 +4576,7 @@ Filtered  by config value: `Info`
 ### Forge.StartLeadershipCheck
 
 
-***
-Start of the leadership check.
-***
+> Start of the leadership check.
 
 
 From current configuration:
@@ -5284,9 +4590,7 @@ Filtered  by config value: `Info`
 ### Forge.StartLeadershipCheckPlus
 
 
-***
-We adopted the block we produced, we also trace the transactions  that were adopted.
-***
+> We adopted the block we produced, we also trace the transactions  that were adopted.
 
 
 From current configuration:
@@ -5300,11 +4604,9 @@ Filtered  by config value: `Info`
 ### ForgeStateInfo
 
 
-***
-kesStartPeriod 
-kesEndPeriod is kesStartPeriod + tpraosMaxKESEvo
-kesEvolution is the current evolution or /relative period/.
-***
+> kesStartPeriod 
+> kesEndPeriod is kesStartPeriod + tpraosMaxKESEvo
+> kesEvolution is the current evolution or /relative period/.
 
 
 From current configuration:
@@ -5318,12 +4620,10 @@ Filtered  by config value: `Notice`
 ### ForgeStats
 
 
-***
-nodeCannotForgeNum shows how many times this node could not forge.
-nodeIsLeaderNum shows how many times this node was leader.
-blocksForgedNum shows how many blocks did forge in this node.
-slotsMissed shows how many slots were missed in this node.
-***
+> nodeCannotForgeNum shows how many times this node could not forge.
+> nodeIsLeaderNum shows how many times this node was leader.
+> blocksForgedNum shows how many blocks did forge in this node.
+> slotsMissed shows how many slots were missed in this node.
 
 
 From current configuration:
@@ -5337,9 +4637,7 @@ Filtered  by config value: `Notice`
 ### Handshake.Receive.AcceptVersion
 
 
-***
-The remote end decides which version to use and sends chosen version.The server is allowed to modify version parameters.
-***
+> The remote end decides which version to use and sends chosen version.The server is allowed to modify version parameters.
 
 
 From current configuration:
@@ -5353,9 +4651,7 @@ Filtered  by config value: `Notice`
 ### Handshake.Receive.ProposeVersions
 
 
-***
-Propose versions together with version parameters.  It must be encoded to a sorted list..
-***
+> Propose versions together with version parameters.  It must be encoded to a sorted list..
 
 
 From current configuration:
@@ -5369,9 +4665,7 @@ Filtered  by config value: `Notice`
 ### Handshake.Receive.Refuse
 
 
-***
-It refuses to run any version.
-***
+> It refuses to run any version.
 
 
 From current configuration:
@@ -5385,9 +4679,7 @@ Filtered  by config value: `Notice`
 ### Handshake.Receive.ReplyVersions
 
 
-***
-`MsgReplyVersions` received as a response to 'MsgProposeVersions'.  It is not supported to explicitly send this message. It can only be received as a copy of 'MsgProposeVersions' in a simultaneous open scenario.
-***
+> `MsgReplyVersions` received as a response to 'MsgProposeVersions'.  It is not supported to explicitly send this message. It can only be received as a copy of 'MsgProposeVersions' in a simultaneous open scenario.
 
 
 From current configuration:
@@ -5401,9 +4693,7 @@ Filtered  by config value: `Notice`
 ### Handshake.Send.AcceptVersion
 
 
-***
-The remote end decides which version to use and sends chosen version.The server is allowed to modify version parameters.
-***
+> The remote end decides which version to use and sends chosen version.The server is allowed to modify version parameters.
 
 
 From current configuration:
@@ -5417,9 +4707,7 @@ Filtered  by config value: `Notice`
 ### Handshake.Send.ProposeVersions
 
 
-***
-Propose versions together with version parameters.  It must be encoded to a sorted list..
-***
+> Propose versions together with version parameters.  It must be encoded to a sorted list..
 
 
 From current configuration:
@@ -5433,9 +4721,7 @@ Filtered  by config value: `Notice`
 ### Handshake.Send.Refuse
 
 
-***
-It refuses to run any version.
-***
+> It refuses to run any version.
 
 
 From current configuration:
@@ -5449,9 +4735,7 @@ Filtered  by config value: `Notice`
 ### Handshake.Send.ReplyVersions
 
 
-***
-`MsgReplyVersions` received as a response to 'MsgProposeVersions'.  It is not supported to explicitly send this message. It can only be received as a copy of 'MsgProposeVersions' in a simultaneous open scenario.
-***
+> `MsgReplyVersions` received as a response to 'MsgProposeVersions'.  It is not supported to explicitly send this message. It can only be received as a copy of 'MsgProposeVersions' in a simultaneous open scenario.
 
 
 From current configuration:
@@ -5465,9 +4749,7 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.DemotedToColdRemote
 
 
-***
-All mini-protocols terminated.  The boolean is true if this connection was not used by p2p-governor, and thus the connection will be terminated.
-***
+> All mini-protocols terminated.  The boolean is true if this connection was not used by p2p-governor, and thus the connection will be terminated.
 
 
 From current configuration:
@@ -5481,9 +4763,7 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.DemotedToWarmRemote
 
 
-***
-All mini-protocols terminated.  The boolean is true if this connection was not used by p2p-governor, and thus the connection will be terminated.
-***
+> All mini-protocols terminated.  The boolean is true if this connection was not used by p2p-governor, and thus the connection will be terminated.
 
 
 From current configuration:
@@ -5497,9 +4777,6 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.InboundGovernorCounters
 
 
-***
-
-***
 
 
 From current configuration:
@@ -5513,9 +4790,6 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.InboundGovernorError
 
 
-***
-
-***
 
 
 From current configuration:
@@ -5529,9 +4803,6 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.MuxCleanExit
 
 
-***
-
-***
 
 
 From current configuration:
@@ -5545,9 +4816,6 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.MuxErrored
 
 
-***
-
-***
 
 
 From current configuration:
@@ -5561,9 +4829,6 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.NewConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -5577,9 +4842,6 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.PromotedToHotRemote
 
 
-***
-
-***
 
 
 From current configuration:
@@ -5593,9 +4855,6 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.PromotedToWarmRemote
 
 
-***
-
-***
 
 
 From current configuration:
@@ -5609,9 +4868,6 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.RemoteState
 
 
-***
-
-***
 
 
 From current configuration:
@@ -5625,9 +4881,6 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.ResponderErrored
 
 
-***
-
-***
 
 
 From current configuration:
@@ -5641,9 +4894,6 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.ResponderRestarted
 
 
-***
-
-***
 
 
 From current configuration:
@@ -5657,9 +4907,6 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.ResponderStartFailure
 
 
-***
-
-***
 
 
 From current configuration:
@@ -5673,9 +4920,6 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.ResponderStarted
 
 
-***
-
-***
 
 
 From current configuration:
@@ -5689,9 +4933,6 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.ResponderTerminated
 
 
-***
-
-***
 
 
 From current configuration:
@@ -5705,9 +4946,6 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.UnexpectedlyFalseAssertion
 
 
-***
-
-***
 
 
 From current configuration:
@@ -5721,9 +4959,6 @@ Filtered  by config value: `Notice`
 ### InboundGovernor.WaitIdleRemote
 
 
-***
-
-***
 
 
 From current configuration:
@@ -5737,9 +4972,6 @@ Filtered  by config value: `Notice`
 ### InboundGovernorTransition.InboundGovernorTransition
 
 
-***
-
-***
 
 
 From current configuration:
@@ -5753,9 +4985,7 @@ Filtered  by config value: `Notice`
 ### IpSubscription.IP.AllocateSocket
 
 
-***
-IP Subscription: Allocate socket to address.
-***
+> IP Subscription: Allocate socket to address.
 
 
 From current configuration:
@@ -5769,9 +4999,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.ApplicationException
 
 
-***
-IP Subscription: Application Exception occurred.
-***
+> IP Subscription: Application Exception occurred.
 
 
 From current configuration:
@@ -5785,9 +5013,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.CloseSocket
 
 
-***
-IP Subscription: Closed socket to address.
-***
+> IP Subscription: Closed socket to address.
 
 
 From current configuration:
@@ -5801,9 +5027,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.ConnectEnd
 
 
-***
-IP Subscription: Connection Attempt end with destination and outcome.
-***
+> IP Subscription: Connection Attempt end with destination and outcome.
 
 
 From current configuration:
@@ -5817,9 +5041,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.ConnectException
 
 
-***
-IP Subscription: Socket Allocation Exception with destination and the exception.
-***
+> IP Subscription: Socket Allocation Exception with destination and the exception.
 
 
 From current configuration:
@@ -5833,9 +5055,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.ConnectStart
 
 
-***
-IP Subscription: Connection Attempt Start with destination.
-***
+> IP Subscription: Connection Attempt Start with destination.
 
 
 From current configuration:
@@ -5849,9 +5069,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.ConnectionExist
 
 
-***
-IP Subscription: Connection exists to destination.
-***
+> IP Subscription: Connection exists to destination.
 
 
 From current configuration:
@@ -5865,9 +5083,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.MissingLocalAddress
 
 
-***
-IP Subscription: Missing local address.
-***
+> IP Subscription: Missing local address.
 
 
 From current configuration:
@@ -5881,9 +5097,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.Restart
 
 
-***
-IP Subscription: Restarting Subscription after duration with desired valency and current valency.
-***
+> IP Subscription: Restarting Subscription after duration with desired valency and current valency.
 
 
 From current configuration:
@@ -5897,9 +5111,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.SkippingPeer
 
 
-***
-IP Subscription: Skipping peer with address.
-***
+> IP Subscription: Skipping peer with address.
 
 
 From current configuration:
@@ -5913,9 +5125,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.SocketAllocationException
 
 
-***
-IP Subscription: Connection Attempt Exception with destination and exception.
-***
+> IP Subscription: Connection Attempt Exception with destination and exception.
 
 
 From current configuration:
@@ -5929,9 +5139,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.Start
 
 
-***
-IP Subscription: Starting Subscription Worker with a valency.
-***
+> IP Subscription: Starting Subscription Worker with a valency.
 
 
 From current configuration:
@@ -5945,9 +5153,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.SubscriptionFailed
 
 
-***
-IP Subscription: Failed to start all required subscriptions.
-***
+> IP Subscription: Failed to start all required subscriptions.
 
 
 From current configuration:
@@ -5961,9 +5167,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.SubscriptionRunning
 
 
-***
-IP Subscription: Required subscriptions started.
-***
+> IP Subscription: Required subscriptions started.
 
 
 From current configuration:
@@ -5977,9 +5181,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.SubscriptionWaiting
 
 
-***
-IP Subscription: Waiting on address with active connections.
-***
+> IP Subscription: Waiting on address with active connections.
 
 
 From current configuration:
@@ -5993,9 +5195,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.SubscriptionWaitingNewConnection
 
 
-***
-IP Subscription: Waiting delay time before attempting a new connection.
-***
+> IP Subscription: Waiting delay time before attempting a new connection.
 
 
 From current configuration:
@@ -6009,9 +5209,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.TryConnectToPeer
 
 
-***
-IP Subscription: Trying to connect to peer with address.
-***
+> IP Subscription: Trying to connect to peer with address.
 
 
 From current configuration:
@@ -6025,9 +5223,7 @@ Filtered  by config value: `Info`
 ### IpSubscription.IP.UnsupportedRemoteAddr
 
 
-***
-IP Subscription: Unsupported remote target address.
-***
+> IP Subscription: Unsupported remote target address.
 
 
 From current configuration:
@@ -6041,9 +5237,6 @@ Filtered  by config value: `Info`
 ### KeepAliveClient
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6057,9 +5250,7 @@ Filtered  by config value: `Notice`
 ### LedgerPeers.DisabledLedgerPeers
 
 
-***
-Trace for when getting peers from the ledger is disabled, that is DontUseLedger.
-***
+> Trace for when getting peers from the ledger is disabled, that is DontUseLedger.
 
 
 From current configuration:
@@ -6073,9 +5264,6 @@ Filtered  by config value: `Notice`
 ### LedgerPeers.FallingBackToBootstrapPeers
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6089,9 +5277,7 @@ Filtered  by config value: `Notice`
 ### LedgerPeers.FetchingNewLedgerState
 
 
-***
-Trace for fetching a new list of peers from the ledger. Int is the number of peers returned.
-***
+> Trace for fetching a new list of peers from the ledger. Int is the number of peers returned.
 
 
 From current configuration:
@@ -6105,9 +5291,7 @@ Filtered  by config value: `Notice`
 ### LedgerPeers.PickedPeer
 
 
-***
-Trace for a peer picked with accumulated and relative stake of its pool.
-***
+> Trace for a peer picked with accumulated and relative stake of its pool.
 
 
 From current configuration:
@@ -6121,9 +5305,7 @@ Filtered  by config value: `Notice`
 ### LedgerPeers.PickedPeers
 
 
-***
-Trace for the number of peers we wanted to pick and the list of peers picked.
-***
+> Trace for the number of peers we wanted to pick and the list of peers picked.
 
 
 From current configuration:
@@ -6137,9 +5319,7 @@ Filtered  by config value: `Notice`
 ### LedgerPeers.RequestForPeers
 
 
-***
-RequestForPeers (NumberOfPeers 1)
-***
+> RequestForPeers (NumberOfPeers 1)
 
 
 From current configuration:
@@ -6153,9 +5333,6 @@ Filtered  by config value: `Notice`
 ### LedgerPeers.ReusingLedgerState
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6169,9 +5346,7 @@ Filtered  by config value: `Notice`
 ### LedgerPeers.TraceUseLedgerAfter
 
 
-***
-Trace UseLedgerAfter value.
-***
+> Trace UseLedgerAfter value.
 
 
 From current configuration:
@@ -6185,9 +5360,6 @@ Filtered  by config value: `Notice`
 ### LedgerPeers.WaitingOnRequest
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6201,9 +5373,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.Connect
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6217,9 +5386,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.ConnectError
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6233,9 +5399,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.ConnectionCleanup
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6249,9 +5412,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.ConnectionExists
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6265,9 +5425,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.ConnectionFailure
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6281,9 +5438,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.ConnectionHandler
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6297,9 +5451,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.ConnectionManagerCounters
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6313,9 +5464,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.ConnectionNotFound
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6329,9 +5477,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.ConnectionTimeWait
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6345,9 +5490,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.ConnectionTimeWaitDone
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6361,9 +5503,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.ForbiddenConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6377,9 +5516,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.ForbiddenOperation
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6393,9 +5529,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.ImpossibleConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6409,9 +5542,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.IncludeConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6425,9 +5555,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.PruneConnections
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6441,9 +5568,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.Shutdown
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6457,9 +5581,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.State
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6473,9 +5594,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.TerminatedConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6489,9 +5607,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.TerminatingConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6505,9 +5620,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.UnexpectedlyFalseAssertion
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6521,9 +5633,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.UnknownConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6537,9 +5646,6 @@ Filtered  by config value: `Notice`
 ### LocalConnectionManager.UnregisterConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6553,9 +5659,7 @@ Filtered  by config value: `Notice`
 ### LocalErrorPolicy.AcceptException
 
 
-***
-'accept' threw an exception.
-***
+> 'accept' threw an exception.
 
 
 From current configuration:
@@ -6569,9 +5673,7 @@ Filtered  by config value: `Info`
 ### LocalErrorPolicy.KeepSuspended
 
 
-***
-Consumer was suspended until producer will resume.
-***
+> Consumer was suspended until producer will resume.
 
 
 From current configuration:
@@ -6585,9 +5687,7 @@ Filtered  by config value: `Info`
 ### LocalErrorPolicy.LocalNodeError
 
 
-***
-caught a local exception.
-***
+> caught a local exception.
 
 
 From current configuration:
@@ -6601,9 +5701,7 @@ Filtered  by config value: `Info`
 ### LocalErrorPolicy.ResumeConsumer
 
 
-***
-Resume consumer.
-***
+> Resume consumer.
 
 
 From current configuration:
@@ -6617,9 +5715,7 @@ Filtered  by config value: `Info`
 ### LocalErrorPolicy.ResumePeer
 
 
-***
-Resume a peer (both consumer and producer).
-***
+> Resume a peer (both consumer and producer).
 
 
 From current configuration:
@@ -6633,9 +5729,7 @@ Filtered  by config value: `Info`
 ### LocalErrorPolicy.ResumeProducer
 
 
-***
-Resume producer.
-***
+> Resume producer.
 
 
 From current configuration:
@@ -6649,9 +5743,7 @@ Filtered  by config value: `Info`
 ### LocalErrorPolicy.SuspendConsumer
 
 
-***
-Suspending consumer.
-***
+> Suspending consumer.
 
 
 From current configuration:
@@ -6665,9 +5757,7 @@ Filtered  by config value: `Info`
 ### LocalErrorPolicy.SuspendPeer
 
 
-***
-Suspending peer with a given exception.
-***
+> Suspending peer with a given exception.
 
 
 From current configuration:
@@ -6681,9 +5771,7 @@ Filtered  by config value: `Info`
 ### LocalErrorPolicy.UnhandledApplicationException
 
 
-***
-An application threw an exception, which was not handled.
-***
+> An application threw an exception, which was not handled.
 
 
 From current configuration:
@@ -6697,9 +5785,7 @@ Filtered  by config value: `Info`
 ### LocalErrorPolicy.UnhandledConnectionException
 
 
-***
-'connect' threw an exception, which was not handled by any 'ErrorPolicy'.
-***
+> 'connect' threw an exception, which was not handled by any 'ErrorPolicy'.
 
 
 From current configuration:
@@ -6713,9 +5799,7 @@ Filtered  by config value: `Info`
 ### LocalHandshake.Receive.AcceptVersion
 
 
-***
-The remote end decides which version to use and sends chosen version.The server is allowed to modify version parameters.
-***
+> The remote end decides which version to use and sends chosen version.The server is allowed to modify version parameters.
 
 
 From current configuration:
@@ -6729,9 +5813,7 @@ Filtered  by config value: `Notice`
 ### LocalHandshake.Receive.ProposeVersions
 
 
-***
-Propose versions together with version parameters.  It must be encoded to a sorted list..
-***
+> Propose versions together with version parameters.  It must be encoded to a sorted list..
 
 
 From current configuration:
@@ -6745,9 +5827,7 @@ Filtered  by config value: `Notice`
 ### LocalHandshake.Receive.Refuse
 
 
-***
-It refuses to run any version.
-***
+> It refuses to run any version.
 
 
 From current configuration:
@@ -6761,9 +5841,7 @@ Filtered  by config value: `Notice`
 ### LocalHandshake.Receive.ReplyVersions
 
 
-***
-`MsgReplyVersions` received as a response to 'MsgProposeVersions'.  It is not supported to explicitly send this message. It can only be received as a copy of 'MsgProposeVersions' in a simultaneous open scenario.
-***
+> `MsgReplyVersions` received as a response to 'MsgProposeVersions'.  It is not supported to explicitly send this message. It can only be received as a copy of 'MsgProposeVersions' in a simultaneous open scenario.
 
 
 From current configuration:
@@ -6777,9 +5855,7 @@ Filtered  by config value: `Notice`
 ### LocalHandshake.Send.AcceptVersion
 
 
-***
-The remote end decides which version to use and sends chosen version.The server is allowed to modify version parameters.
-***
+> The remote end decides which version to use and sends chosen version.The server is allowed to modify version parameters.
 
 
 From current configuration:
@@ -6793,9 +5869,7 @@ Filtered  by config value: `Notice`
 ### LocalHandshake.Send.ProposeVersions
 
 
-***
-Propose versions together with version parameters.  It must be encoded to a sorted list..
-***
+> Propose versions together with version parameters.  It must be encoded to a sorted list..
 
 
 From current configuration:
@@ -6809,9 +5883,7 @@ Filtered  by config value: `Notice`
 ### LocalHandshake.Send.Refuse
 
 
-***
-It refuses to run any version.
-***
+> It refuses to run any version.
 
 
 From current configuration:
@@ -6825,9 +5897,7 @@ Filtered  by config value: `Notice`
 ### LocalHandshake.Send.ReplyVersions
 
 
-***
-`MsgReplyVersions` received as a response to 'MsgProposeVersions'.  It is not supported to explicitly send this message. It can only be received as a copy of 'MsgProposeVersions' in a simultaneous open scenario.
-***
+> `MsgReplyVersions` received as a response to 'MsgProposeVersions'.  It is not supported to explicitly send this message. It can only be received as a copy of 'MsgProposeVersions' in a simultaneous open scenario.
 
 
 From current configuration:
@@ -6841,9 +5911,7 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.DemotedToColdRemote
 
 
-***
-All mini-protocols terminated.  The boolean is true if this connection was not used by p2p-governor, and thus the connection will be terminated.
-***
+> All mini-protocols terminated.  The boolean is true if this connection was not used by p2p-governor, and thus the connection will be terminated.
 
 
 From current configuration:
@@ -6857,9 +5925,7 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.DemotedToWarmRemote
 
 
-***
-All mini-protocols terminated.  The boolean is true if this connection was not used by p2p-governor, and thus the connection will be terminated.
-***
+> All mini-protocols terminated.  The boolean is true if this connection was not used by p2p-governor, and thus the connection will be terminated.
 
 
 From current configuration:
@@ -6873,9 +5939,6 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.InboundGovernorCounters
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6889,9 +5952,6 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.InboundGovernorError
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6905,9 +5965,6 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.MuxCleanExit
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6921,9 +5978,6 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.MuxErrored
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6937,9 +5991,6 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.NewConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6953,9 +6004,6 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.PromotedToHotRemote
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6969,9 +6017,6 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.PromotedToWarmRemote
 
 
-***
-
-***
 
 
 From current configuration:
@@ -6985,9 +6030,6 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.RemoteState
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7001,9 +6043,6 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.ResponderErrored
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7017,9 +6056,6 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.ResponderRestarted
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7033,9 +6069,6 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.ResponderStartFailure
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7049,9 +6082,6 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.ResponderStarted
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7065,9 +6095,6 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.ResponderTerminated
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7081,9 +6108,6 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.UnexpectedlyFalseAssertion
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7097,9 +6121,6 @@ Filtered  by config value: `Notice`
 ### LocalInboundGovernor.WaitIdleRemote
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7113,9 +6134,6 @@ Filtered  by config value: `Notice`
 ### LocalRootPeers.LocalRootDomains
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7129,9 +6147,6 @@ Filtered  by config value: `Notice`
 ### LocalRootPeers.LocalRootError
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7145,9 +6160,6 @@ Filtered  by config value: `Notice`
 ### LocalRootPeers.LocalRootFailure
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7161,9 +6173,6 @@ Filtered  by config value: `Notice`
 ### LocalRootPeers.LocalRootGroups
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7177,9 +6186,6 @@ Filtered  by config value: `Notice`
 ### LocalRootPeers.LocalRootResult
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7193,9 +6199,6 @@ Filtered  by config value: `Notice`
 ### LocalRootPeers.LocalRootWaiting
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7209,9 +6212,6 @@ Filtered  by config value: `Notice`
 ### LocalServer.AcceptConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7225,9 +6225,6 @@ Filtered  by config value: `Notice`
 ### LocalServer.AcceptError
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7241,9 +6238,6 @@ Filtered  by config value: `Notice`
 ### LocalServer.AcceptPolicy
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7257,9 +6251,6 @@ Filtered  by config value: `Notice`
 ### LocalServer.Error
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7273,9 +6264,6 @@ Filtered  by config value: `Notice`
 ### LocalServer.Started
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7289,9 +6277,6 @@ Filtered  by config value: `Notice`
 ### LocalServer.Stopped
 
 
-***
-
-***
 
 
 From current configuration:
@@ -7305,9 +6290,7 @@ Filtered  by config value: `Notice`
 ### LocalTxSubmissionServer.ReceivedTx
 
 
-***
-A transaction was received.
-***
+> A transaction was received.
 
 
 From current configuration:
@@ -7321,9 +6304,7 @@ Filtered  by config value: `Notice`
 ### Mempool.AddedTx
 
 
-***
-New, valid transaction that was added to the Mempool.
-***
+> New, valid transaction that was added to the Mempool.
 
 
 From current configuration:
@@ -7337,9 +6318,7 @@ Filtered  by config value: `Info`
 ### Mempool.ManuallyRemovedTxs
 
 
-***
-Transactions that have been manually removed from the Mempool.
-***
+> Transactions that have been manually removed from the Mempool.
 
 
 From current configuration:
@@ -7353,9 +6332,7 @@ Filtered  by config value: `Info`
 ### Mempool.RejectedTx
 
 
-***
-New, invalid transaction thas was rejected and thus not added to the Mempool.
-***
+> New, invalid transaction thas was rejected and thus not added to the Mempool.
 
 
 From current configuration:
@@ -7369,9 +6346,7 @@ Filtered  by config value: `Info`
 ### Mempool.RemoveTxs
 
 
-***
-Previously valid transactions that are no longer valid because of changes in the ledger state. These transactions have been removed from the Mempool.
-***
+> Previously valid transactions that are no longer valid because of changes in the ledger state. These transactions have been removed from the Mempool.
 
 
 From current configuration:
@@ -7385,9 +6360,7 @@ Filtered  by config value: `Info`
 ### Mux.ChannelRecvEnd
 
 
-***
-Channel receive end.
-***
+> Channel receive end.
 
 
 From current configuration:
@@ -7401,9 +6374,7 @@ Filtered  by config value: `Notice`
 ### Mux.ChannelRecvStart
 
 
-***
-Channel receive start.
-***
+> Channel receive start.
 
 
 From current configuration:
@@ -7417,9 +6388,7 @@ Filtered  by config value: `Notice`
 ### Mux.ChannelSendEnd
 
 
-***
-Channel send end.
-***
+> Channel send end.
 
 
 From current configuration:
@@ -7433,9 +6402,7 @@ Filtered  by config value: `Notice`
 ### Mux.ChannelSendStart
 
 
-***
-Channel send start.
-***
+> Channel send start.
 
 
 From current configuration:
@@ -7449,9 +6416,7 @@ Filtered  by config value: `Notice`
 ### Mux.CleanExit
 
 
-***
-Miniprotocol terminated cleanly.
-***
+> Miniprotocol terminated cleanly.
 
 
 From current configuration:
@@ -7465,9 +6430,7 @@ Filtered  by config value: `Notice`
 ### Mux.ExceptionExit
 
 
-***
-Miniprotocol terminated with exception.
-***
+> Miniprotocol terminated with exception.
 
 
 From current configuration:
@@ -7481,9 +6444,7 @@ Filtered  by config value: `Notice`
 ### Mux.HandshakeClientEnd
 
 
-***
-Handshake client end.
-***
+> Handshake client end.
 
 
 From current configuration:
@@ -7497,9 +6458,7 @@ Filtered  by config value: `Notice`
 ### Mux.HandshakeClientError
 
 
-***
-Handshake client error.
-***
+> Handshake client error.
 
 
 From current configuration:
@@ -7513,9 +6472,7 @@ Filtered  by config value: `Notice`
 ### Mux.HandshakeServerEnd
 
 
-***
-Handshake server end.
-***
+> Handshake server end.
 
 
 From current configuration:
@@ -7529,9 +6486,7 @@ Filtered  by config value: `Notice`
 ### Mux.HandshakeServerError
 
 
-***
-Handshake server error.
-***
+> Handshake server error.
 
 
 From current configuration:
@@ -7545,9 +6500,7 @@ Filtered  by config value: `Notice`
 ### Mux.HandshakeStart
 
 
-***
-Handshake start.
-***
+> Handshake start.
 
 
 From current configuration:
@@ -7561,9 +6514,7 @@ Filtered  by config value: `Notice`
 ### Mux.RecvDeltaQObservation
 
 
-***
-Bearer DeltaQ observation.
-***
+> Bearer DeltaQ observation.
 
 
 From current configuration:
@@ -7577,9 +6528,7 @@ Filtered  by config value: `Notice`
 ### Mux.RecvDeltaQSample
 
 
-***
-Bearer DeltaQ sample.
-***
+> Bearer DeltaQ sample.
 
 
 From current configuration:
@@ -7593,9 +6542,7 @@ Filtered  by config value: `Notice`
 ### Mux.RecvEnd
 
 
-***
-Bearer receive end.
-***
+> Bearer receive end.
 
 
 From current configuration:
@@ -7609,9 +6556,7 @@ Filtered  by config value: `Notice`
 ### Mux.RecvHeaderEnd
 
 
-***
-Bearer receive header end.
-***
+> Bearer receive header end.
 
 
 From current configuration:
@@ -7625,9 +6570,7 @@ Filtered  by config value: `Notice`
 ### Mux.RecvHeaderStart
 
 
-***
-Bearer receive header start.
-***
+> Bearer receive header start.
 
 
 From current configuration:
@@ -7641,9 +6584,7 @@ Filtered  by config value: `Notice`
 ### Mux.RecvStart
 
 
-***
-Bearer receive start.
-***
+> Bearer receive start.
 
 
 From current configuration:
@@ -7657,9 +6598,7 @@ Filtered  by config value: `Notice`
 ### Mux.SDUReadTimeoutException
 
 
-***
-Timed out reading SDU.
-***
+> Timed out reading SDU.
 
 
 From current configuration:
@@ -7673,9 +6612,7 @@ Filtered  by config value: `Notice`
 ### Mux.SDUWriteTimeoutException
 
 
-***
-Timed out writing SDU.
-***
+> Timed out writing SDU.
 
 
 From current configuration:
@@ -7689,9 +6626,7 @@ Filtered  by config value: `Notice`
 ### Mux.SendEnd
 
 
-***
-Bearer send end.
-***
+> Bearer send end.
 
 
 From current configuration:
@@ -7705,9 +6640,7 @@ Filtered  by config value: `Notice`
 ### Mux.SendStart
 
 
-***
-Bearer send start.
-***
+> Bearer send start.
 
 
 From current configuration:
@@ -7721,9 +6654,7 @@ Filtered  by config value: `Notice`
 ### Mux.Shutdown
 
 
-***
-Mux shutdown.
-***
+> Mux shutdown.
 
 
 From current configuration:
@@ -7737,9 +6668,7 @@ Filtered  by config value: `Notice`
 ### Mux.StartEagerly
 
 
-***
-Eagerly started.
-***
+> Eagerly started.
 
 
 From current configuration:
@@ -7753,9 +6682,7 @@ Filtered  by config value: `Notice`
 ### Mux.StartOnDemand
 
 
-***
-Preparing to start.
-***
+> Preparing to start.
 
 
 From current configuration:
@@ -7769,9 +6696,7 @@ Filtered  by config value: `Notice`
 ### Mux.StartedOnDemand
 
 
-***
-Started on demand.
-***
+> Started on demand.
 
 
 From current configuration:
@@ -7785,9 +6710,7 @@ Filtered  by config value: `Notice`
 ### Mux.State
 
 
-***
-State.
-***
+> State.
 
 
 From current configuration:
@@ -7801,9 +6724,7 @@ Filtered  by config value: `Notice`
 ### Mux.TCPInfo
 
 
-***
-TCPInfo.
-***
+> TCPInfo.
 
 
 From current configuration:
@@ -7817,9 +6738,7 @@ Filtered  by config value: `Notice`
 ### Mux.Terminating
 
 
-***
-Terminating.
-***
+> Terminating.
 
 
 From current configuration:
@@ -7833,9 +6752,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.ChannelRecvEnd
 
 
-***
-Channel receive end.
-***
+> Channel receive end.
 
 
 From current configuration:
@@ -7849,9 +6766,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.ChannelRecvStart
 
 
-***
-Channel receive start.
-***
+> Channel receive start.
 
 
 From current configuration:
@@ -7865,9 +6780,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.ChannelSendEnd
 
 
-***
-Channel send end.
-***
+> Channel send end.
 
 
 From current configuration:
@@ -7881,9 +6794,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.ChannelSendStart
 
 
-***
-Channel send start.
-***
+> Channel send start.
 
 
 From current configuration:
@@ -7897,9 +6808,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.CleanExit
 
 
-***
-Miniprotocol terminated cleanly.
-***
+> Miniprotocol terminated cleanly.
 
 
 From current configuration:
@@ -7913,9 +6822,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.ExceptionExit
 
 
-***
-Miniprotocol terminated with exception.
-***
+> Miniprotocol terminated with exception.
 
 
 From current configuration:
@@ -7929,9 +6836,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.HandshakeClientEnd
 
 
-***
-Handshake client end.
-***
+> Handshake client end.
 
 
 From current configuration:
@@ -7945,9 +6850,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.HandshakeClientError
 
 
-***
-Handshake client error.
-***
+> Handshake client error.
 
 
 From current configuration:
@@ -7961,9 +6864,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.HandshakeServerEnd
 
 
-***
-Handshake server end.
-***
+> Handshake server end.
 
 
 From current configuration:
@@ -7977,9 +6878,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.HandshakeServerError
 
 
-***
-Handshake server error.
-***
+> Handshake server error.
 
 
 From current configuration:
@@ -7993,9 +6892,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.HandshakeStart
 
 
-***
-Handshake start.
-***
+> Handshake start.
 
 
 From current configuration:
@@ -8009,9 +6906,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.RecvDeltaQObservation
 
 
-***
-Bearer DeltaQ observation.
-***
+> Bearer DeltaQ observation.
 
 
 From current configuration:
@@ -8025,9 +6920,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.RecvDeltaQSample
 
 
-***
-Bearer DeltaQ sample.
-***
+> Bearer DeltaQ sample.
 
 
 From current configuration:
@@ -8041,9 +6934,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.RecvEnd
 
 
-***
-Bearer receive end.
-***
+> Bearer receive end.
 
 
 From current configuration:
@@ -8057,9 +6948,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.RecvHeaderEnd
 
 
-***
-Bearer receive header end.
-***
+> Bearer receive header end.
 
 
 From current configuration:
@@ -8073,9 +6962,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.RecvHeaderStart
 
 
-***
-Bearer receive header start.
-***
+> Bearer receive header start.
 
 
 From current configuration:
@@ -8089,9 +6976,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.RecvStart
 
 
-***
-Bearer receive start.
-***
+> Bearer receive start.
 
 
 From current configuration:
@@ -8105,9 +6990,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.SDUReadTimeoutException
 
 
-***
-Timed out reading SDU.
-***
+> Timed out reading SDU.
 
 
 From current configuration:
@@ -8121,9 +7004,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.SDUWriteTimeoutException
 
 
-***
-Timed out writing SDU.
-***
+> Timed out writing SDU.
 
 
 From current configuration:
@@ -8137,9 +7018,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.SendEnd
 
 
-***
-Bearer send end.
-***
+> Bearer send end.
 
 
 From current configuration:
@@ -8153,9 +7032,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.SendStart
 
 
-***
-Bearer send start.
-***
+> Bearer send start.
 
 
 From current configuration:
@@ -8169,9 +7046,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.Shutdown
 
 
-***
-Mux shutdown.
-***
+> Mux shutdown.
 
 
 From current configuration:
@@ -8185,9 +7060,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.StartEagerly
 
 
-***
-Eagerly started.
-***
+> Eagerly started.
 
 
 From current configuration:
@@ -8201,9 +7074,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.StartOnDemand
 
 
-***
-Preparing to start.
-***
+> Preparing to start.
 
 
 From current configuration:
@@ -8217,9 +7088,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.StartedOnDemand
 
 
-***
-Started on demand.
-***
+> Started on demand.
 
 
 From current configuration:
@@ -8233,9 +7102,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.State
 
 
-***
-State.
-***
+> State.
 
 
 From current configuration:
@@ -8249,9 +7116,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.TCPInfo
 
 
-***
-TCPInfo.
-***
+> TCPInfo.
 
 
 From current configuration:
@@ -8265,9 +7130,7 @@ Filtered  by config value: `Notice`
 ### MuxLocal.Terminating
 
 
-***
-Terminating.
-***
+> Terminating.
 
 
 From current configuration:
@@ -8281,9 +7144,6 @@ Filtered  by config value: `Notice`
 ### PeerSelection.ChurnMode
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8297,9 +7157,6 @@ Filtered  by config value: `Notice`
 ### PeerSelection.ChurnWait
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8313,9 +7170,6 @@ Filtered  by config value: `Notice`
 ### PeerSelection.DemoteAsynchronous
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8329,9 +7183,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.DemoteHotDone
 
 
-***
-target active, actual active, peer
-***
+> target active, actual active, peer
 
 
 From current configuration:
@@ -8345,9 +7197,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.DemoteHotFailed
 
 
-***
-target active, actual active, peer, reason
-***
+> target active, actual active, peer, reason
 
 
 From current configuration:
@@ -8361,9 +7211,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.DemoteHotPeers
 
 
-***
-target active, actual active, selected peers
-***
+> target active, actual active, selected peers
 
 
 From current configuration:
@@ -8377,9 +7225,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.DemoteLocalHotPeers
 
 
-***
-local per-group (target active, actual active), selected peers
-***
+> local per-group (target active, actual active), selected peers
 
 
 From current configuration:
@@ -8393,9 +7239,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.DemoteWarmDone
 
 
-***
-target established, actual established, peer
-***
+> target established, actual established, peer
 
 
 From current configuration:
@@ -8409,9 +7253,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.DemoteWarmFailed
 
 
-***
-target established, actual established, peer, reason
-***
+> target established, actual established, peer, reason
 
 
 From current configuration:
@@ -8425,9 +7267,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.DemoteWarmPeers
 
 
-***
-target established, actual established, selected peers
-***
+> target established, actual established, selected peers
 
 
 From current configuration:
@@ -8441,9 +7281,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.ForgetColdPeers
 
 
-***
-target known peers, actual known peers, selected peers
-***
+> target known peers, actual known peers, selected peers
 
 
 From current configuration:
@@ -8457,9 +7295,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.GossipRequests
 
 
-***
-target known peers, actual known peers, peers available for gossip, peers selected for gossip
-***
+> target known peers, actual known peers, peers available for gossip, peers selected for gossip
 
 
 From current configuration:
@@ -8473,9 +7309,6 @@ Filtered  by config value: `Notice`
 ### PeerSelection.GossipResults
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8489,9 +7322,6 @@ Filtered  by config value: `Notice`
 ### PeerSelection.GovernorWakeup
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8505,9 +7335,6 @@ Filtered  by config value: `Notice`
 ### PeerSelection.LocalRootPeersChanged
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8521,9 +7348,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.PromoteColdDone
 
 
-***
-target active, actual active, selected peers
-***
+> target active, actual active, selected peers
 
 
 From current configuration:
@@ -8537,9 +7362,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.PromoteColdFailed
 
 
-***
-target established, actual established, peer, delay until next promotion, reason
-***
+> target established, actual established, peer, delay until next promotion, reason
 
 
 From current configuration:
@@ -8553,9 +7376,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.PromoteColdLocalPeers
 
 
-***
-target local established, actual local established, selected peers
-***
+> target local established, actual local established, selected peers
 
 
 From current configuration:
@@ -8569,9 +7390,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.PromoteColdPeers
 
 
-***
-target established, actual established, selected peers
-***
+> target established, actual established, selected peers
 
 
 From current configuration:
@@ -8585,9 +7404,6 @@ Filtered  by config value: `Notice`
 ### PeerSelection.PromoteWarmAborted
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8601,9 +7417,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.PromoteWarmDone
 
 
-***
-target active, actual active, peer
-***
+> target active, actual active, peer
 
 
 From current configuration:
@@ -8617,9 +7431,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.PromoteWarmFailed
 
 
-***
-target active, actual active, peer, reason
-***
+> target active, actual active, peer, reason
 
 
 From current configuration:
@@ -8633,9 +7445,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.PromoteWarmLocalPeers
 
 
-***
-local per-group (target active, actual active), selected peers
-***
+> local per-group (target active, actual active), selected peers
 
 
 From current configuration:
@@ -8649,9 +7459,7 @@ Filtered  by config value: `Notice`
 ### PeerSelection.PromoteWarmPeers
 
 
-***
-target active, actual active, selected peers
-***
+> target active, actual active, selected peers
 
 
 From current configuration:
@@ -8665,9 +7473,6 @@ Filtered  by config value: `Notice`
 ### PeerSelection.PublicRootsFailure
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8681,9 +7486,6 @@ Filtered  by config value: `Notice`
 ### PeerSelection.PublicRootsRequest
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8697,9 +7499,6 @@ Filtered  by config value: `Notice`
 ### PeerSelection.PublicRootsResults
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8713,9 +7512,6 @@ Filtered  by config value: `Notice`
 ### PeerSelection.TargetsChanged
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8729,9 +7525,6 @@ Filtered  by config value: `Notice`
 ### PeerSelectionActions.MonitoringError
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8745,9 +7538,6 @@ Filtered  by config value: `Notice`
 ### PeerSelectionActions.MonitoringResult
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8761,9 +7551,6 @@ Filtered  by config value: `Notice`
 ### PeerSelectionActions.StatusChangeFailure
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8777,9 +7564,6 @@ Filtered  by config value: `Notice`
 ### PeerSelectionActions.StatusChanged
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8793,9 +7577,7 @@ Filtered  by config value: `Notice`
 ### PeerSelectionCounters.PeerSelectionCounters
 
 
-***
-Counters for cold, warm and hot peers
-***
+> Counters for cold, warm and hot peers
 
 
 From current configuration:
@@ -8809,9 +7591,6 @@ Filtered  by config value: `Notice`
 ### Peers
 
 
-***
-TODO Doc
-***
 
 
 From current configuration:
@@ -8825,9 +7604,6 @@ Filtered  by config value: `Notice`
 ### PublicRootPeers.PublicRootPeers.PublicRootDomains
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8841,9 +7617,6 @@ Filtered  by config value: `Notice`
 ### PublicRootPeers.PublicRootPeers.PublicRootFailure
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8857,9 +7630,6 @@ Filtered  by config value: `Notice`
 ### PublicRootPeers.PublicRootPeers.PublicRootRelayAccessPoint
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8873,9 +7643,6 @@ Filtered  by config value: `Notice`
 ### PublicRootPeers.PublicRootPeers.PublicRootResult
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8889,9 +7656,7 @@ Filtered  by config value: `Notice`
 ### ReplayBlock.LedgerReplay
 
 
-***
-Counts up the percent of a block replay.
-***
+> Counts up the percent of a block replay.
 
 
 From current configuration:
@@ -8905,9 +7670,6 @@ Filtered  by config value: `Notice`
 ### Resources
 
 
-***
-TODO JNF
-***
 
 
 From current configuration:
@@ -8921,9 +7683,6 @@ Filtered  by config value: `Info`
 ### Server.AcceptConnection
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8937,9 +7696,6 @@ Filtered  by config value: `Notice`
 ### Server.AcceptError
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8953,9 +7709,6 @@ Filtered  by config value: `Notice`
 ### Server.AcceptPolicy
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8969,9 +7722,6 @@ Filtered  by config value: `Notice`
 ### Server.Error
 
 
-***
-
-***
 
 
 From current configuration:
@@ -8985,9 +7735,6 @@ Filtered  by config value: `Notice`
 ### Server.Started
 
 
-***
-
-***
 
 
 From current configuration:
@@ -9001,9 +7748,6 @@ Filtered  by config value: `Notice`
 ### Server.Stopped
 
 
-***
-
-***
 
 
 From current configuration:
@@ -9017,9 +7761,7 @@ Filtered  by config value: `Notice`
 ### Shutdown.AbnormalShutdown
 
 
-***
-non-isEOFerror shutdown request
-***
+> non-isEOFerror shutdown request
 
 
 From current configuration:
@@ -9033,9 +7775,7 @@ Filtered  by config value: `Notice`
 ### Shutdown.RequestingShutdown
 
 
-***
-Ringing the node shutdown doorbell
-***
+> Ringing the node shutdown doorbell
 
 
 From current configuration:
@@ -9046,12 +7786,10 @@ Backends:
 			`Forwarder`
 Filtered  by config value: `Notice`
 
-### Shutdown.ShutdownArmedAtSlot
+### Shutdown.ShutdownArmedAt
 
 
-***
-Setting up node shutdown at given slot / block.
-***
+> Setting up node shutdown at given slot / block.
 
 
 From current configuration:
@@ -9065,9 +7803,7 @@ Filtered  by config value: `Notice`
 ### Shutdown.ShutdownRequested
 
 
-***
-Node shutdown was requested.
-***
+> Node shutdown was requested.
 
 
 From current configuration:
@@ -9081,9 +7817,7 @@ Filtered  by config value: `Notice`
 ### Shutdown.ShutdownUnexpectedInput
 
 
-***
-Received shutdown request but found unexpected input in --shutdown-ipc FD: 
-***
+> Received shutdown request but found unexpected input in --shutdown-ipc FD: 
 
 
 From current configuration:
@@ -9097,11 +7831,9 @@ Filtered  by config value: `Notice`
 ### Startup.Byron
 
 
-***
-_bibSystemStartTime_: TODO JNF 
-_bibSlotLength_: gives the length of a slot as time interval. 
-_bibEpochLength_: gives the number of slots which forms an epoch.
-***
+> _bibSystemStartTime_: TODO JNF 
+> _bibSlotLength_: gives the length of a slot as time interval. 
+> _bibEpochLength_: gives the number of slots which forms an epoch.
 
 
 From current configuration:
@@ -9115,13 +7847,11 @@ Filtered  by config value: `Notice`
 ### Startup.Common
 
 
-***
-_biConfigPath_: is the path to the config in use. 
-_biProtocol_: is the name of the protocol, e.g. "Byron", "Shelley" or "Byron; Shelley". 
-_biVersion_: is the version of the node software running. 
-_biCommit_: is the commit revision of the software running. 
-_biNodeStartTime_: gives the time this node was started.
-***
+> _biConfigPath_: is the path to the config in use. 
+> _biProtocol_: is the name of the protocol, e.g. "Byron", "Shelley" or "Byron; Shelley". 
+> _biVersion_: is the version of the node software running. 
+> _biCommit_: is the commit revision of the software running. 
+> _biNodeStartTime_: gives the time this node was started.
 
 
 From current configuration:
@@ -9135,12 +7865,10 @@ Filtered  by config value: `Notice`
 ### Startup.Network
 
 
-***
-_niAddresses_: IPv4 or IPv6 socket ready to accept connectionsor diffusion addresses. 
-_niDiffusionMode_: shows if the node runs only initiator or bothinitiator or responder node. 
-_niDnsProducers_: shows the list of domain names to subscribe to. 
-_niIpProducers_: shows the list of ip subscription addresses.
-***
+> _niAddresses_: IPv4 or IPv6 socket ready to accept connectionsor diffusion addresses. 
+> _niDiffusionMode_: shows if the node runs only initiator or bothinitiator or responder node. 
+> _niDnsProducers_: shows the list of domain names to subscribe to. 
+> _niIpProducers_: shows the list of ip subscription addresses.
 
 
 From current configuration:
@@ -9154,9 +7882,6 @@ Filtered  by config value: `Notice`
 ### Startup.NetworkConfig
 
 
-***
-
-***
 
 
 From current configuration:
@@ -9170,9 +7895,6 @@ Filtered  by config value: `Notice`
 ### Startup.NetworkConfigUpdate
 
 
-***
-
-***
 
 
 From current configuration:
@@ -9186,9 +7908,6 @@ Filtered  by config value: `Notice`
 ### Startup.NetworkConfigUpdateError
 
 
-***
-
-***
 
 
 From current configuration:
@@ -9202,9 +7921,6 @@ Filtered  by config value: `Notice`
 ### Startup.P2PWarning
 
 
-***
-
-***
 
 
 From current configuration:
@@ -9218,9 +7934,6 @@ Filtered  by config value: `Notice`
 ### Startup.P2PWarningDevelopementNetworkProtocols
 
 
-***
-
-***
 
 
 From current configuration:
@@ -9234,13 +7947,11 @@ Filtered  by config value: `Notice`
 ### Startup.ShelleyBased
 
 
-***
-bisEra is the current era, e.g. "Shelley", "Allegra", "Mary" or "Alonzo". 
-_bisSystemStartTime_: TODO JNF 
-_bisSlotLength_: gives the length of a slot as time interval. 
-_bisEpochLength_: gives the number of slots which forms an epoch. 
-_bisSlotsPerKESPeriod_: gives the slots per KES period.
-***
+> bisEra is the current era, e.g. "Shelley", "Allegra", "Mary" or "Alonzo". 
+> _bisSystemStartTime_: TODO JNF 
+> _bisSlotLength_: gives the length of a slot as time interval. 
+> _bisEpochLength_: gives the number of slots which forms an epoch. 
+> _bisSlotsPerKESPeriod_: gives the slots per KES period.
 
 
 From current configuration:
@@ -9254,9 +7965,6 @@ Filtered  by config value: `Notice`
 ### Startup.StartupDBValidation
 
 
-***
-
-***
 
 
 From current configuration:
@@ -9270,9 +7978,6 @@ Filtered  by config value: `Notice`
 ### Startup.StartupInfo
 
 
-***
-
-***
 
 
 From current configuration:
@@ -9286,9 +7991,6 @@ Filtered  by config value: `Notice`
 ### Startup.StartupNetworkMagic
 
 
-***
-
-***
 
 
 From current configuration:
@@ -9302,9 +8004,6 @@ Filtered  by config value: `Notice`
 ### Startup.StartupP2PInfo
 
 
-***
-
-***
 
 
 From current configuration:
@@ -9318,9 +8017,6 @@ Filtered  by config value: `Notice`
 ### Startup.StartupSocketConfigError
 
 
-***
-
-***
 
 
 From current configuration:
@@ -9334,9 +8030,6 @@ Filtered  by config value: `Notice`
 ### Startup.StartupTime
 
 
-***
-
-***
 
 
 From current configuration:
@@ -9350,9 +8043,6 @@ Filtered  by config value: `Notice`
 ### Startup.WarningDevelopmentNetworkProtocols
 
 
-***
-
-***
 
 
 From current configuration:
@@ -9366,10 +8056,8 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Recieve.Acquire
 
 
-***
-The client requests that the state as of a particular recent point onthe server's chain (within K of the tip) be made available to query,and waits for confirmation or failure.
-From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
-***
+> The client requests that the state as of a particular recent point onthe server's chain (within K of the tip) be made available to query,and waits for confirmation or failure.
+> From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
 
 
 From current configuration:
@@ -9383,9 +8071,7 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Recieve.Acquired
 
 
-***
-The server can confirm that it has the state at the requested point.
-***
+> The server can confirm that it has the state at the requested point.
 
 
 From current configuration:
@@ -9399,9 +8085,7 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Recieve.Done
 
 
-***
-The client can terminate the protocol.
-***
+> The client can terminate the protocol.
 
 
 From current configuration:
@@ -9415,9 +8099,7 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Recieve.Failure
 
 
-***
-The server can report that it cannot obtain the state for therequested point.
-***
+> The server can report that it cannot obtain the state for therequested point.
 
 
 From current configuration:
@@ -9431,9 +8113,7 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Recieve.Query
 
 
-***
-The client can perform queries on the current acquired state.
-***
+> The client can perform queries on the current acquired state.
 
 
 From current configuration:
@@ -9447,11 +8127,9 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Recieve.ReAcquire
 
 
-***
-This is like 'MsgAcquire' but for when the client already has astate. By moveing to another state directly without a 'MsgRelease' itenables optimisations on the server side (e.g. moving to the state forthe immediate next block).
-Note that failure to re-acquire is equivalent to 'MsgRelease',rather than keeping the exiting acquired state.
-From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
-***
+> This is like 'MsgAcquire' but for when the client already has astate. By moveing to another state directly without a 'MsgRelease' itenables optimisations on the server side (e.g. moving to the state forthe immediate next block).
+> Note that failure to re-acquire is equivalent to 'MsgRelease',rather than keeping the exiting acquired state.
+> From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
 
 
 From current configuration:
@@ -9465,9 +8143,7 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Recieve.Release
 
 
-***
-The client can instruct the server to release the state. This letsthe server free resources.
-***
+> The client can instruct the server to release the state. This letsthe server free resources.
 
 
 From current configuration:
@@ -9481,9 +8157,7 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Recieve.Result
 
 
-***
-The server must reply with the queries.
-***
+> The server must reply with the queries.
 
 
 From current configuration:
@@ -9497,10 +8171,8 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Send.Acquire
 
 
-***
-The client requests that the state as of a particular recent point onthe server's chain (within K of the tip) be made available to query,and waits for confirmation or failure.
-From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
-***
+> The client requests that the state as of a particular recent point onthe server's chain (within K of the tip) be made available to query,and waits for confirmation or failure.
+> From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
 
 
 From current configuration:
@@ -9514,9 +8186,7 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Send.Acquired
 
 
-***
-The server can confirm that it has the state at the requested point.
-***
+> The server can confirm that it has the state at the requested point.
 
 
 From current configuration:
@@ -9530,9 +8200,7 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Send.Done
 
 
-***
-The client can terminate the protocol.
-***
+> The client can terminate the protocol.
 
 
 From current configuration:
@@ -9546,9 +8214,7 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Send.Failure
 
 
-***
-The server can report that it cannot obtain the state for therequested point.
-***
+> The server can report that it cannot obtain the state for therequested point.
 
 
 From current configuration:
@@ -9562,9 +8228,7 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Send.Query
 
 
-***
-The client can perform queries on the current acquired state.
-***
+> The client can perform queries on the current acquired state.
 
 
 From current configuration:
@@ -9578,11 +8242,9 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Send.ReAcquire
 
 
-***
-This is like 'MsgAcquire' but for when the client already has astate. By moveing to another state directly without a 'MsgRelease' itenables optimisations on the server side (e.g. moving to the state forthe immediate next block).
-Note that failure to re-acquire is equivalent to 'MsgRelease',rather than keeping the exiting acquired state.
-From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
-***
+> This is like 'MsgAcquire' but for when the client already has astate. By moveing to another state directly without a 'MsgRelease' itenables optimisations on the server side (e.g. moving to the state forthe immediate next block).
+> Note that failure to re-acquire is equivalent to 'MsgRelease',rather than keeping the exiting acquired state.
+> From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
 
 
 From current configuration:
@@ -9596,9 +8258,7 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Send.Release
 
 
-***
-The client can instruct the server to release the state. This letsthe server free resources.
-***
+> The client can instruct the server to release the state. This letsthe server free resources.
 
 
 From current configuration:
@@ -9612,9 +8272,7 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Send.Result
 
 
-***
-The server must reply with the queries.
-***
+> The server must reply with the queries.
 
 
 From current configuration:
@@ -9628,9 +8286,7 @@ Filtered  by config value: `Notice`
 ### TxInbound.TxInboundCanRequestMoreTxs
 
 
-***
-There are no replies in flight, but we do know some more txs we can ask for, so lets ask for them and more txids.
-***
+> There are no replies in flight, but we do know some more txs we can ask for, so lets ask for them and more txids.
 
 
 From current configuration:
@@ -9644,9 +8300,7 @@ Filtered  by config value: `Notice`
 ### TxInbound.TxInboundCannotRequestMoreTxs
 
 
-***
-There's no replies in flight, and we have no more txs we can ask for so the only remaining thing to do is to ask for more txids. Since this is the only thing to do now, we make this a blocking call.
-***
+> There's no replies in flight, and we have no more txs we can ask for so the only remaining thing to do is to ask for more txids. Since this is the only thing to do now, we make this a blocking call.
 
 
 From current configuration:
@@ -9660,9 +8314,7 @@ Filtered  by config value: `Notice`
 ### TxInbound.TxInboundTerminated
 
 
-***
-Server received 'MsgDone'.
-***
+> Server received 'MsgDone'.
 
 
 From current configuration:
@@ -9676,9 +8328,7 @@ Filtered  by config value: `Notice`
 ### TxInbound.TxSubmissionCollected
 
 
-***
-Number of transactions just about to be inserted.
-***
+> Number of transactions just about to be inserted.
 
 
 From current configuration:
@@ -9692,9 +8342,7 @@ Filtered  by config value: `Notice`
 ### TxInbound.TxSubmissionProcessed
 
 
-***
-Just processed transaction pass/fail breakdown.
-***
+> Just processed transaction pass/fail breakdown.
 
 
 From current configuration:
@@ -9708,10 +8356,8 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Recieve.Acquire
 
 
-***
-The client requests that the state as of a particular recent point onthe server's chain (within K of the tip) be made available to query,and waits for confirmation or failure.
-From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
-***
+> The client requests that the state as of a particular recent point onthe server's chain (within K of the tip) be made available to query,and waits for confirmation or failure.
+> From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
 
 
 From current configuration:
@@ -9725,9 +8371,7 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Recieve.Acquired
 
 
-***
-The server can confirm that it has the state at the requested point.
-***
+> The server can confirm that it has the state at the requested point.
 
 
 From current configuration:
@@ -9741,9 +8385,7 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Recieve.Done
 
 
-***
-The client can terminate the protocol.
-***
+> The client can terminate the protocol.
 
 
 From current configuration:
@@ -9757,9 +8399,7 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Recieve.Failure
 
 
-***
-The server can report that it cannot obtain the state for therequested point.
-***
+> The server can report that it cannot obtain the state for therequested point.
 
 
 From current configuration:
@@ -9773,9 +8413,7 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Recieve.Query
 
 
-***
-The client can perform queries on the current acquired state.
-***
+> The client can perform queries on the current acquired state.
 
 
 From current configuration:
@@ -9789,11 +8427,9 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Recieve.ReAcquire
 
 
-***
-This is like 'MsgAcquire' but for when the client already has astate. By moveing to another state directly without a 'MsgRelease' itenables optimisations on the server side (e.g. moving to the state forthe immediate next block).
-Note that failure to re-acquire is equivalent to 'MsgRelease',rather than keeping the exiting acquired state.
-From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
-***
+> This is like 'MsgAcquire' but for when the client already has astate. By moveing to another state directly without a 'MsgRelease' itenables optimisations on the server side (e.g. moving to the state forthe immediate next block).
+> Note that failure to re-acquire is equivalent to 'MsgRelease',rather than keeping the exiting acquired state.
+> From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
 
 
 From current configuration:
@@ -9807,9 +8443,7 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Recieve.Release
 
 
-***
-The client can instruct the server to release the state. This letsthe server free resources.
-***
+> The client can instruct the server to release the state. This letsthe server free resources.
 
 
 From current configuration:
@@ -9823,9 +8457,7 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Recieve.Result
 
 
-***
-The server must reply with the queries.
-***
+> The server must reply with the queries.
 
 
 From current configuration:
@@ -9839,10 +8471,8 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Send.Acquire
 
 
-***
-The client requests that the state as of a particular recent point onthe server's chain (within K of the tip) be made available to query,and waits for confirmation or failure.
-From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
-***
+> The client requests that the state as of a particular recent point onthe server's chain (within K of the tip) be made available to query,and waits for confirmation or failure.
+> From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
 
 
 From current configuration:
@@ -9856,9 +8486,7 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Send.Acquired
 
 
-***
-The server can confirm that it has the state at the requested point.
-***
+> The server can confirm that it has the state at the requested point.
 
 
 From current configuration:
@@ -9872,9 +8500,7 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Send.Done
 
 
-***
-The client can terminate the protocol.
-***
+> The client can terminate the protocol.
 
 
 From current configuration:
@@ -9888,9 +8514,7 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Send.Failure
 
 
-***
-The server can report that it cannot obtain the state for therequested point.
-***
+> The server can report that it cannot obtain the state for therequested point.
 
 
 From current configuration:
@@ -9904,9 +8528,7 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Send.Query
 
 
-***
-The client can perform queries on the current acquired state.
-***
+> The client can perform queries on the current acquired state.
 
 
 From current configuration:
@@ -9920,11 +8542,9 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Send.ReAcquire
 
 
-***
-This is like 'MsgAcquire' but for when the client already has astate. By moveing to another state directly without a 'MsgRelease' itenables optimisations on the server side (e.g. moving to the state forthe immediate next block).
-Note that failure to re-acquire is equivalent to 'MsgRelease',rather than keeping the exiting acquired state.
-From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
-***
+> This is like 'MsgAcquire' but for when the client already has astate. By moveing to another state directly without a 'MsgRelease' itenables optimisations on the server side (e.g. moving to the state forthe immediate next block).
+> Note that failure to re-acquire is equivalent to 'MsgRelease',rather than keeping the exiting acquired state.
+> From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
 
 
 From current configuration:
@@ -9938,9 +8558,7 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Send.Release
 
 
-***
-The client can instruct the server to release the state. This letsthe server free resources.
-***
+> The client can instruct the server to release the state. This letsthe server free resources.
 
 
 From current configuration:
@@ -9954,9 +8572,7 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Send.Result
 
 
-***
-The server must reply with the queries.
-***
+> The server must reply with the queries.
 
 
 From current configuration:
@@ -9970,9 +8586,6 @@ Filtered  by config value: `Notice`
 ### TxOutbound.ControlMessage
 
 
-***
-
-***
 
 
 From current configuration:
@@ -9986,9 +8599,7 @@ Filtered  by config value: `Notice`
 ### TxOutbound.RecvMsgRequest
 
 
-***
-The IDs of the transactions requested.
-***
+> The IDs of the transactions requested.
 
 
 From current configuration:
@@ -10002,9 +8613,7 @@ Filtered  by config value: `Notice`
 ### TxOutbound.SendMsgReply
 
 
-***
-The transactions to be sent in the response.
-***
+> The transactions to be sent in the response.
 
 
 From current configuration:
@@ -10018,9 +8627,7 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Recieve.Done
 
 
-***
-Termination message, initiated by the client when the server ismaking a blocking call for more transaction identifiers.
-***
+> Termination message, initiated by the client when the server ismaking a blocking call for more transaction identifiers.
 
 
 From current configuration:
@@ -10034,9 +8641,7 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Recieve.MsgHello
 
 
-***
-Client side hello message.
-***
+> Client side hello message.
 
 
 From current configuration:
@@ -10050,13 +8655,11 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Recieve.ReplyTxIds
 
 
-***
-Reply with a list of transaction identifiers for availabletransactions, along with the size of each transaction.
-The list must not be longer than the maximum number requested.
-In the 'StTxIds' 'StBlocking' state the list must be non-empty whilein the 'StTxIds' 'StNonBlocking' state the list may be empty.
-These transactions are added to the notional FIFO of outstandingtransaction identifiers for the protocol.
-The order in which these transaction identifiers are returned must bethe order in which they are submitted to the mempool, to preservedependent transactions.
-***
+> Reply with a list of transaction identifiers for availabletransactions, along with the size of each transaction.
+> The list must not be longer than the maximum number requested.
+> In the 'StTxIds' 'StBlocking' state the list must be non-empty whilein the 'StTxIds' 'StNonBlocking' state the list may be empty.
+> These transactions are added to the notional FIFO of outstandingtransaction identifiers for the protocol.
+> The order in which these transaction identifiers are returned must bethe order in which they are submitted to the mempool, to preservedependent transactions.
 
 
 From current configuration:
@@ -10070,11 +8673,9 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Recieve.ReplyTxs
 
 
-***
-Reply with the requested transactions, or implicitly discard.
-Transactions can become invalid between the time the transactionidentifier was sent and the transaction being requested. Invalid(including committed) transactions do not need to be sent.
-Any transaction identifiers requested but not provided in this replyshould be considered as if this peer had never announced them. (Notethat this is no guarantee that the transaction is invalid, it may stillbe valid and available from another peer).
-***
+> Reply with the requested transactions, or implicitly discard.
+> Transactions can become invalid between the time the transactionidentifier was sent and the transaction being requested. Invalid(including committed) transactions do not need to be sent.
+> Any transaction identifiers requested but not provided in this replyshould be considered as if this peer had never announced them. (Notethat this is no guarantee that the transaction is invalid, it may stillbe valid and available from another peer).
 
 
 From current configuration:
@@ -10088,16 +8689,14 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Recieve.RequestTxIds
 
 
-***
-Request a non-empty list of transaction identifiers from the client, and confirm a number of outstanding transaction identifiers. 
-With 'TokBlocking' this is a a blocking operation: the response will always have at least one transaction identifier, and it does not expect a prompt response: there is no timeout. This covers the case when there is nothing else to do but wait. For example this covers leaf nodes that rarely, if ever, create and submit a transaction. 
-With 'TokNonBlocking' this is a non-blocking operation: the response may be an empty list and this does expect a prompt response. This covers high throughput use cases where we wish to pipeline, by interleaving requests for additional transaction identifiers with requests for transactions, which requires these requests not block. 
-The request gives the maximum number of transaction identifiers that can be accepted in the response. This must be greater than zero in the 'TokBlocking' case. In the 'TokNonBlocking' case either the numbers acknowledged or the number requested must be non-zero. In either case, the number requested must not put the total outstanding over the fixed protocol limit. 
-The request also gives the number of outstanding transaction identifiers that can now be acknowledged. The actual transactions to acknowledge are known to the peer based on the FIFO order in which they were provided. 
-There is no choice about when to use the blocking case versus the non-blocking case, it depends on whether there are any remaining unacknowledged transactions (after taking into account the ones acknowledged in this message): 
-* The blocking case must be used when there are zero remaining   unacknowledged transactions. 
-* The non-blocking case must be used when there are non-zero remaining   unacknowledged transactions.
-***
+> Request a non-empty list of transaction identifiers from the client, and confirm a number of outstanding transaction identifiers. 
+> With 'TokBlocking' this is a a blocking operation: the response will always have at least one transaction identifier, and it does not expect a prompt response: there is no timeout. This covers the case when there is nothing else to do but wait. For example this covers leaf nodes that rarely, if ever, create and submit a transaction. 
+> With 'TokNonBlocking' this is a non-blocking operation: the response may be an empty list and this does expect a prompt response. This covers high throughput use cases where we wish to pipeline, by interleaving requests for additional transaction identifiers with requests for transactions, which requires these requests not block. 
+> The request gives the maximum number of transaction identifiers that can be accepted in the response. This must be greater than zero in the 'TokBlocking' case. In the 'TokNonBlocking' case either the numbers acknowledged or the number requested must be non-zero. In either case, the number requested must not put the total outstanding over the fixed protocol limit. 
+> The request also gives the number of outstanding transaction identifiers that can now be acknowledged. The actual transactions to acknowledge are known to the peer based on the FIFO order in which they were provided. 
+> There is no choice about when to use the blocking case versus the non-blocking case, it depends on whether there are any remaining unacknowledged transactions (after taking into account the ones acknowledged in this message): 
+> * The blocking case must be used when there are zero remaining   unacknowledged transactions. 
+> * The non-blocking case must be used when there are non-zero remaining   unacknowledged transactions.
 
 
 From current configuration:
@@ -10111,12 +8710,10 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Recieve.RequestTxs
 
 
-***
-Request one or more transactions corresponding to the given transaction identifiers. 
-While it is the responsibility of the replying peer to keep withinpipelining in-flight limits, the sender must also cooperate by keepingthe total requested across all in-flight requests within the limits.
-It is an error to ask for transaction identifiers that were notpreviously announced (via 'MsgReplyTxIds').
-It is an error to ask for transaction identifiers that are notoutstanding or that were already asked for.
-***
+> Request one or more transactions corresponding to the given transaction identifiers. 
+> While it is the responsibility of the replying peer to keep withinpipelining in-flight limits, the sender must also cooperate by keepingthe total requested across all in-flight requests within the limits.
+> It is an error to ask for transaction identifiers that were notpreviously announced (via 'MsgReplyTxIds').
+> It is an error to ask for transaction identifiers that are notoutstanding or that were already asked for.
 
 
 From current configuration:
@@ -10130,9 +8727,7 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Send.Done
 
 
-***
-Termination message, initiated by the client when the server ismaking a blocking call for more transaction identifiers.
-***
+> Termination message, initiated by the client when the server ismaking a blocking call for more transaction identifiers.
 
 
 From current configuration:
@@ -10146,9 +8741,7 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Send.MsgHello
 
 
-***
-Client side hello message.
-***
+> Client side hello message.
 
 
 From current configuration:
@@ -10162,13 +8755,11 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Send.ReplyTxIds
 
 
-***
-Reply with a list of transaction identifiers for availabletransactions, along with the size of each transaction.
-The list must not be longer than the maximum number requested.
-In the 'StTxIds' 'StBlocking' state the list must be non-empty whilein the 'StTxIds' 'StNonBlocking' state the list may be empty.
-These transactions are added to the notional FIFO of outstandingtransaction identifiers for the protocol.
-The order in which these transaction identifiers are returned must bethe order in which they are submitted to the mempool, to preservedependent transactions.
-***
+> Reply with a list of transaction identifiers for availabletransactions, along with the size of each transaction.
+> The list must not be longer than the maximum number requested.
+> In the 'StTxIds' 'StBlocking' state the list must be non-empty whilein the 'StTxIds' 'StNonBlocking' state the list may be empty.
+> These transactions are added to the notional FIFO of outstandingtransaction identifiers for the protocol.
+> The order in which these transaction identifiers are returned must bethe order in which they are submitted to the mempool, to preservedependent transactions.
 
 
 From current configuration:
@@ -10182,11 +8773,9 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Send.ReplyTxs
 
 
-***
-Reply with the requested transactions, or implicitly discard.
-Transactions can become invalid between the time the transactionidentifier was sent and the transaction being requested. Invalid(including committed) transactions do not need to be sent.
-Any transaction identifiers requested but not provided in this replyshould be considered as if this peer had never announced them. (Notethat this is no guarantee that the transaction is invalid, it may stillbe valid and available from another peer).
-***
+> Reply with the requested transactions, or implicitly discard.
+> Transactions can become invalid between the time the transactionidentifier was sent and the transaction being requested. Invalid(including committed) transactions do not need to be sent.
+> Any transaction identifiers requested but not provided in this replyshould be considered as if this peer had never announced them. (Notethat this is no guarantee that the transaction is invalid, it may stillbe valid and available from another peer).
 
 
 From current configuration:
@@ -10200,16 +8789,14 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Send.RequestTxIds
 
 
-***
-Request a non-empty list of transaction identifiers from the client, and confirm a number of outstanding transaction identifiers. 
-With 'TokBlocking' this is a a blocking operation: the response will always have at least one transaction identifier, and it does not expect a prompt response: there is no timeout. This covers the case when there is nothing else to do but wait. For example this covers leaf nodes that rarely, if ever, create and submit a transaction. 
-With 'TokNonBlocking' this is a non-blocking operation: the response may be an empty list and this does expect a prompt response. This covers high throughput use cases where we wish to pipeline, by interleaving requests for additional transaction identifiers with requests for transactions, which requires these requests not block. 
-The request gives the maximum number of transaction identifiers that can be accepted in the response. This must be greater than zero in the 'TokBlocking' case. In the 'TokNonBlocking' case either the numbers acknowledged or the number requested must be non-zero. In either case, the number requested must not put the total outstanding over the fixed protocol limit. 
-The request also gives the number of outstanding transaction identifiers that can now be acknowledged. The actual transactions to acknowledge are known to the peer based on the FIFO order in which they were provided. 
-There is no choice about when to use the blocking case versus the non-blocking case, it depends on whether there are any remaining unacknowledged transactions (after taking into account the ones acknowledged in this message): 
-* The blocking case must be used when there are zero remaining   unacknowledged transactions. 
-* The non-blocking case must be used when there are non-zero remaining   unacknowledged transactions.
-***
+> Request a non-empty list of transaction identifiers from the client, and confirm a number of outstanding transaction identifiers. 
+> With 'TokBlocking' this is a a blocking operation: the response will always have at least one transaction identifier, and it does not expect a prompt response: there is no timeout. This covers the case when there is nothing else to do but wait. For example this covers leaf nodes that rarely, if ever, create and submit a transaction. 
+> With 'TokNonBlocking' this is a non-blocking operation: the response may be an empty list and this does expect a prompt response. This covers high throughput use cases where we wish to pipeline, by interleaving requests for additional transaction identifiers with requests for transactions, which requires these requests not block. 
+> The request gives the maximum number of transaction identifiers that can be accepted in the response. This must be greater than zero in the 'TokBlocking' case. In the 'TokNonBlocking' case either the numbers acknowledged or the number requested must be non-zero. In either case, the number requested must not put the total outstanding over the fixed protocol limit. 
+> The request also gives the number of outstanding transaction identifiers that can now be acknowledged. The actual transactions to acknowledge are known to the peer based on the FIFO order in which they were provided. 
+> There is no choice about when to use the blocking case versus the non-blocking case, it depends on whether there are any remaining unacknowledged transactions (after taking into account the ones acknowledged in this message): 
+> * The blocking case must be used when there are zero remaining   unacknowledged transactions. 
+> * The non-blocking case must be used when there are non-zero remaining   unacknowledged transactions.
 
 
 From current configuration:
@@ -10223,12 +8810,10 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Send.RequestTxs
 
 
-***
-Request one or more transactions corresponding to the given transaction identifiers. 
-While it is the responsibility of the replying peer to keep withinpipelining in-flight limits, the sender must also cooperate by keepingthe total requested across all in-flight requests within the limits.
-It is an error to ask for transaction identifiers that were notpreviously announced (via 'MsgReplyTxIds').
-It is an error to ask for transaction identifiers that are notoutstanding or that were already asked for.
-***
+> Request one or more transactions corresponding to the given transaction identifiers. 
+> While it is the responsibility of the replying peer to keep withinpipelining in-flight limits, the sender must also cooperate by keepingthe total requested across all in-flight requests within the limits.
+> It is an error to ask for transaction identifiers that were notpreviously announced (via 'MsgReplyTxIds').
+> It is an error to ask for transaction identifiers that are notoutstanding or that were already asked for.
 
 
 From current configuration:
@@ -10242,9 +8827,7 @@ Filtered  by config value: `Notice`
 ### TxSubmissionClient.Recieve.AcceptTx
 
 
-***
-The server can reply to inform the client that it has accepted thetransaction.
-***
+> The server can reply to inform the client that it has accepted thetransaction.
 
 
 From current configuration:
@@ -10258,9 +8841,7 @@ Filtered  by config value: `Notice`
 ### TxSubmissionClient.Recieve.Done
 
 
-***
-The client can terminate the protocol.
-***
+> The client can terminate the protocol.
 
 
 From current configuration:
@@ -10274,9 +8855,7 @@ Filtered  by config value: `Notice`
 ### TxSubmissionClient.Recieve.RejectTx
 
 
-***
-The server can reply to inform the client that it has rejected thetransaction. A reason for the rejection is included.
-***
+> The server can reply to inform the client that it has rejected thetransaction. A reason for the rejection is included.
 
 
 From current configuration:
@@ -10290,9 +8869,7 @@ Filtered  by config value: `Notice`
 ### TxSubmissionClient.Recieve.SubmitTx
 
 
-***
-The client submits a single transaction and waits a reply.
-***
+> The client submits a single transaction and waits a reply.
 
 
 From current configuration:
@@ -10306,9 +8883,7 @@ Filtered  by config value: `Notice`
 ### TxSubmissionClient.Send.AcceptTx
 
 
-***
-The server can reply to inform the client that it has accepted thetransaction.
-***
+> The server can reply to inform the client that it has accepted thetransaction.
 
 
 From current configuration:
@@ -10322,9 +8897,7 @@ Filtered  by config value: `Notice`
 ### TxSubmissionClient.Send.Done
 
 
-***
-The client can terminate the protocol.
-***
+> The client can terminate the protocol.
 
 
 From current configuration:
@@ -10338,9 +8911,7 @@ Filtered  by config value: `Notice`
 ### TxSubmissionClient.Send.RejectTx
 
 
-***
-The server can reply to inform the client that it has rejected thetransaction. A reason for the rejection is included.
-***
+> The server can reply to inform the client that it has rejected thetransaction. A reason for the rejection is included.
 
 
 From current configuration:
@@ -10354,9 +8925,7 @@ Filtered  by config value: `Notice`
 ### TxSubmissionClient.Send.SubmitTx
 
 
-***
-The client submits a single transaction and waits a reply.
-***
+> The client submits a single transaction and waits a reply.
 
 
 From current configuration:
@@ -10368,1127 +8937,541 @@ Backends:
 Filtered  by config value: `Notice`
 
 ## Metrics
-### Block replay progress (%)
+### BlockFetch.BlocksServed
 
-***
-Progress in percent
-***
-
-
-Dispatched by: 
-ReplayBlock.LedgerReplay
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### blocksForgedNum
-
-***
-How many blocks did forge in this node?
-***
-
-
-Dispatched by: 
-ForgeStats
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.aboutToLeadSlotLast
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.StartLeadershipCheck
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.aboutToLeadSlotLast
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.StartLeadershipCheckPlus
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.adoptedSlotLast
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.AdoptedBlock
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.blockContext
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.BlockContext
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.blockFromFuture
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.BlockFromFuture
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.blocks
-
-***
-Number of blocks in this chain fragment.
-***
-
-
-Dispatched by: 
-ChainDB.AddBlockEvent.AddedToCurrentChain
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.blocks
-
-***
-Number of blocks in this chain fragment.
-***
-
-
-Dispatched by: 
-ChainDB.AddBlockEvent.SwitchedToAFork
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.connectedPeers
-
-***
-Number of connected peers
-***
-
-
-Dispatched by: 
-BlockFetchDecision
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.connectionManager.duplexConns
-
-***
-
-***
-
-
-Dispatched by: 
-ConnectionManager.ConnectionManagerCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.connectionManager.duplexConns
-
-***
-
-***
-
-
-Dispatched by: 
-LocalConnectionManager.ConnectionManagerCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.connectionManager.fullDuplexConns
-
-***
-
-***
-
-
-Dispatched by: 
-ConnectionManager.ConnectionManagerCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.connectionManager.fullDuplexConns
-
-***
-
-***
-
-
-Dispatched by: 
-LocalConnectionManager.ConnectionManagerCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.connectionManager.inboundConns
-
-***
-
-***
-
-
-Dispatched by: 
-ConnectionManager.ConnectionManagerCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.connectionManager.inboundConns
-
-***
-
-***
-
-
-Dispatched by: 
-LocalConnectionManager.ConnectionManagerCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.connectionManager.outboundConns
-
-***
-
-***
-
-
-Dispatched by: 
-ConnectionManager.ConnectionManagerCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.connectionManager.outboundConns
-
-***
-
-***
-
-
-Dispatched by: 
-LocalConnectionManager.ConnectionManagerCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.connectionManager.unidirectionalConns
-
-***
-
-***
-
-
-Dispatched by: 
-ConnectionManager.ConnectionManagerCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.connectionManager.unidirectionalConns
-
-***
-
-***
-
-
-Dispatched by: 
-LocalConnectionManager.ConnectionManagerCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.couldNotForgeSlotLast
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.NoLedgerState
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.couldNotForgeSlotLast
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.NoLedgerView
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.currentKESPeriod
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.ForgeStateUpdateError
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.delegMapSize
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.StartLeadershipCheckPlus
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.density
-
-***
-The actual number of blocks created over the maximum expected number of blocks that could be created over the span of the last @k@ blocks.
-***
-
-
-Dispatched by: 
-ChainDB.AddBlockEvent.AddedToCurrentChain
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.density
-
-***
-The actual number of blocks created over the maximum expected number of blocks that could be created over the span of the last @k@ blocks.
-***
-
-
-Dispatched by: 
-ChainDB.AddBlockEvent.SwitchedToAFork
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.epoch
-
-***
-In which epoch is the tip of the current chain.
-***
-
-
-Dispatched by: 
-ChainDB.AddBlockEvent.AddedToCurrentChain
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.epoch
-
-***
-In which epoch is the tip of the current chain.
-***
-
-
-Dispatched by: 
-ChainDB.AddBlockEvent.SwitchedToAFork
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.forgedInvalidSlotLast
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.ForgedInvalidBlock
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.forgedSlotLast
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.ForgedBlock
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.inbound-governor.cold
-
-***
-
-***
-
-
-Dispatched by: 
-InboundGovernor.InboundGovernorCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.inbound-governor.cold
-
-***
-
-***
-
-
-Dispatched by: 
-LocalInboundGovernor.InboundGovernorCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.inbound-governor.hot
-
-***
-
-***
-
-
-Dispatched by: 
-InboundGovernor.InboundGovernorCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.inbound-governor.hot
-
-***
-
-***
-
-
-Dispatched by: 
-LocalInboundGovernor.InboundGovernorCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.inbound-governor.idle
-
-***
-
-***
-
-
-Dispatched by: 
-InboundGovernor.InboundGovernorCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.inbound-governor.idle
-
-***
-
-***
-
-
-Dispatched by: 
-LocalInboundGovernor.InboundGovernorCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.inbound-governor.warm
-
-***
-
-***
-
-
-Dispatched by: 
-InboundGovernor.InboundGovernorCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.inbound-governor.warm
-
-***
-
-***
-
-
-Dispatched by: 
-LocalInboundGovernor.InboundGovernorCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.ledgerState
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.LedgerState
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.ledgerView
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.LedgerView
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.mempoolBytes
-
-***
-Byte size of the mempool
-***
-
-
-Dispatched by: 
-Mempool.AddedTx
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.mempoolBytes
-
-***
-Byte size of the mempool
-***
-
-
-Dispatched by: 
-Mempool.ManuallyRemovedTxs
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.mempoolBytes
-
-***
-Byte size of the mempool
-***
-
-
-Dispatched by: 
-Mempool.RejectedTx
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.mempoolBytes
-
-***
-Byte size of the mempool
-***
-
-
-Dispatched by: 
-Mempool.RemoveTxs
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.metrics.served.header
-
-***
-A counter triggered ony on header event
-***
-
-
-Dispatched by: 
-ChainSyncServerHeader.ChainSyncServerEvent.ServerRead.RollBackward
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.metrics.served.header
-
-***
-A counter triggered ony on header event
-***
-
-
-Dispatched by: 
-ChainSyncServerHeader.ChainSyncServerEvent.ServerRead.RollForward
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.metrics.served.header
-
-***
-A counter triggered ony on header event
-***
-
-
-Dispatched by: 
-ChainSyncServerHeader.ChainSyncServerEvent.ServerRead.ServerRead
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.metrics.served.header
-
-***
-A counter triggered ony on header event
-***
-
-
-Dispatched by: 
-ChainSyncServerHeader.ChainSyncServerEvent.ServerRead.ServerReadBlocked
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.nodeCannotForge
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.NodeCannotForge
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.nodeIsLeader
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.NodeIsLeader
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.nodeNotLeader
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.NodeNotLeader
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.notAdoptedSlotLast
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.DidntAdoptBlock
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.operationalCertificateExpiryKESPeriod
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.ForgeStateUpdateError
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.operationalCertificateStartKESPeriod
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.ForgeStateUpdateError
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.peerSelection.cold
-
-***
-Number of cold peers
-***
-
-
-Dispatched by: 
-PeerSelectionCounters.PeerSelectionCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.peerSelection.hot
-
-***
-Number of hot peers
-***
-
-
-Dispatched by: 
-PeerSelectionCounters.PeerSelectionCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.peerSelection.warm
-
-***
-Number of warm peers
-***
-
-
-Dispatched by: 
-PeerSelectionCounters.PeerSelectionCounters
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### cardano.node.remainingKESPeriods
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.ForgeStateUpdateError
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.served.block
-
-***
-
-***
 
 
 Dispatched by: 
 BlockFetchServer.SendBlock
 
-From current configuration:
-Filtered  by config value: `Notice`
+### BlockFetch.ConnectedPeers
 
-### cardano.node.slotInEpoch
+> Number of connected peers
 
-***
-Relative slot number of the tip of the current chain within theepoch..
-***
+
+Dispatched by: 
+BlockFetchDecision
+
+### ChainDB.BlockReplayProgress
+
+> Progress in percent
+
+
+Dispatched by: 
+ReplayBlock.LedgerReplay
+
+### ChainDB.Blocks
+
+> Number of blocks in this chain fragment.
 
 
 Dispatched by: 
 ChainDB.AddBlockEvent.AddedToCurrentChain
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.slotInEpoch
-
-***
-Relative slot number of the tip of the current chain within theepoch..
-***
-
-
-Dispatched by: 
 ChainDB.AddBlockEvent.SwitchedToAFork
 
-From current configuration:
-Filtered  by config value: `Info`
+### ChainDB.Density
 
-### cardano.node.slotIsImmutable
-
-***
-
-***
-
-
-Dispatched by: 
-Forge.SlotIsImmutable
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.slots
-
-***
-Number of slots in this chain fragment.
-***
+> The actual number of blocks created over the maximum expected number of blocks that could be created over the span of the last @k@ blocks.
 
 
 Dispatched by: 
 ChainDB.AddBlockEvent.AddedToCurrentChain
-
-From current configuration:
-Filtered  by config value: `Info`
-
-### cardano.node.slots
-
-***
-Number of slots in this chain fragment.
-***
-
-
-Dispatched by: 
 ChainDB.AddBlockEvent.SwitchedToAFork
 
-From current configuration:
-Filtered  by config value: `Info`
+### ChainDB.Epoch
 
-### cardano.node.submissions.accepted
-
-***
-
-***
+> In which epoch is the tip of the current chain.
 
 
 Dispatched by: 
-TxInbound.TxSubmissionProcessed
+ChainDB.AddBlockEvent.AddedToCurrentChain
+ChainDB.AddBlockEvent.SwitchedToAFork
 
-From current configuration:
-Filtered  by config value: `Notice`
+### ChainDB.SlotInEpoch
 
-### cardano.node.submissions.rejected
-
-***
-
-***
+> Relative slot number of the tip of the current chain within theepoch..
 
 
 Dispatched by: 
-TxInbound.TxSubmissionProcessed
+ChainDB.AddBlockEvent.AddedToCurrentChain
+ChainDB.AddBlockEvent.SwitchedToAFork
 
-From current configuration:
-Filtered  by config value: `Notice`
+### ChainDB.Slots
 
-### cardano.node.submissions.submitted
-
-***
-
-***
+> Number of slots in this chain fragment.
 
 
 Dispatched by: 
-TxInbound.TxSubmissionCollected
+ChainDB.AddBlockEvent.AddedToCurrentChain
+ChainDB.AddBlockEvent.SwitchedToAFork
 
-From current configuration:
-Filtered  by config value: `Notice`
+### ChainSync.HeadersServed
 
-### cardano.node.txsInMempool
-
-***
-Transactions in mempool
-***
+> A counter triggered only on header event
 
 
 Dispatched by: 
-Mempool.AddedTx
+ChainSyncServerHeader.ChainSyncServerEvent.Update.Update
 
-From current configuration:
-Filtered  by config value: `Info`
+### ConnectionManager.DuplexConns
 
-### cardano.node.txsInMempool
-
-***
-Transactions in mempool
-***
 
 
 Dispatched by: 
-Mempool.ManuallyRemovedTxs
+ConnectionManager.ConnectionManagerCounters
 
-From current configuration:
-Filtered  by config value: `Info`
+### ConnectionManager.DuplexConns
 
-### cardano.node.txsInMempool
-
-***
-Transactions in mempool
-***
 
 
 Dispatched by: 
-Mempool.RejectedTx
+LocalConnectionManager.ConnectionManagerCounters
 
-From current configuration:
-Filtered  by config value: `Info`
+### ConnectionManager.FullDuplexConns
 
-### cardano.node.txsInMempool
-
-***
-Transactions in mempool
-***
 
 
 Dispatched by: 
-Mempool.RemoveTxs
+ConnectionManager.ConnectionManagerCounters
 
-From current configuration:
-Filtered  by config value: `Info`
+### ConnectionManager.FullDuplexConns
 
-### cardano.node.txsProcessedNum
-
-***
-
-***
 
 
 Dispatched by: 
-Mempool.ManuallyRemovedTxs
+LocalConnectionManager.ConnectionManagerCounters
 
-From current configuration:
-Filtered  by config value: `Info`
+### ConnectionManager.InboundConns
 
-### cardano.node.utxoSize
 
-***
 
-***
+Dispatched by: 
+ConnectionManager.ConnectionManagerCounters
+
+### ConnectionManager.InboundConns
+
+
+
+Dispatched by: 
+LocalConnectionManager.ConnectionManagerCounters
+
+### ConnectionManager.OutboundConns
+
+
+
+Dispatched by: 
+ConnectionManager.ConnectionManagerCounters
+
+### ConnectionManager.OutboundConns
+
+
+
+Dispatched by: 
+LocalConnectionManager.ConnectionManagerCounters
+
+### ConnectionManager.UnidirectionalConns
+
+
+
+Dispatched by: 
+ConnectionManager.ConnectionManagerCounters
+
+### ConnectionManager.UnidirectionalConns
+
+
+
+Dispatched by: 
+LocalConnectionManager.ConnectionManagerCounters
+
+### Forge.AboutToLeadSlotLast
+
+
+
+Dispatched by: 
+Forge.StartLeadershipCheck
+Forge.StartLeadershipCheckPlus
+
+### Forge.AdoptedOwnBlockSlotLast
+
+
+
+Dispatched by: 
+Forge.AdoptedBlock
+
+### Forge.BlockContext
+
+
+
+Dispatched by: 
+Forge.BlockContext
+
+### Forge.BlockFromFuture
+
+
+
+Dispatched by: 
+Forge.BlockFromFuture
+
+### Forge.BlocksForgedNum
+
+> How many blocks did forge in this node?
+
+
+Dispatched by: 
+ForgeStats
+
+### Forge.CouldNotForgeSlotLast
+
+
+
+Dispatched by: 
+Forge.NoLedgerState
+Forge.NoLedgerView
+
+### Forge.CurrentKESPeriod
+
+
+
+Dispatched by: 
+Forge.ForgeStateUpdateError
+
+### Forge.DelegMapSize
+
 
 
 Dispatched by: 
 Forge.StartLeadershipCheckPlus
 
-From current configuration:
-Filtered  by config value: `Info`
+### Forge.ForgedInvalidSlotLast
 
-### mem.resident
-
-***
-TODO JNF
-***
 
 
 Dispatched by: 
-Resources
+Forge.ForgedInvalidBlock
 
-From current configuration:
-Filtered  by config value: `Info`
+### Forge.ForgedSlotLast
 
-### nodeCannotForgeNum
 
-***
-How many times this node could not forge?
-***
+
+Dispatched by: 
+Forge.ForgedBlock
+
+### Forge.LastSlot
+
 
 
 Dispatched by: 
 ForgeStats
 
-From current configuration:
-Filtered  by config value: `Notice`
+### Forge.LedgerState
 
-### nodeIsLeaderNum
 
-***
-How many times this node was leader?
-***
+
+Dispatched by: 
+Forge.LedgerState
+
+### Forge.LedgerView
+
+
+
+Dispatched by: 
+Forge.LedgerView
+
+### Forge.NodeCannotForge
+
+
+
+Dispatched by: 
+Forge.NodeCannotForge
+
+### Forge.NodeCannotForgeNum
+
+> How many times this node could not forge?
 
 
 Dispatched by: 
 ForgeStats
 
-From current configuration:
-Filtered  by config value: `Notice`
+### Forge.NodeIsLeader
 
-### peersFromNodeKernel
 
-***
-TODO Doc
-***
+
+Dispatched by: 
+Forge.NodeIsLeader
+
+### Forge.NodeIsLeaderNum
+
+> How many times this node was leader?
+
+
+Dispatched by: 
+ForgeStats
+
+### Forge.NodeNotLeader
+
+
+
+Dispatched by: 
+Forge.NodeNotLeader
+
+### Forge.NotAdoptedSlotLast
+
+
+
+Dispatched by: 
+Forge.DidntAdoptBlock
+
+### Forge.OperationalCertificateExpiryKESPeriod
+
+
+
+Dispatched by: 
+Forge.ForgeStateUpdateError
+
+### Forge.OperationalCertificateStartKESPeriod
+
+
+
+Dispatched by: 
+Forge.ForgeStateUpdateError
+
+### Forge.RemainingKESPeriods
+
+
+
+Dispatched by: 
+Forge.ForgeStateUpdateError
+
+### Forge.SlotIsImmutable
+
+
+
+Dispatched by: 
+Forge.SlotIsImmutable
+
+### Forge.SlotsMissed
+
+> How many slots were missed in this node?
+
+
+Dispatched by: 
+ForgeStats
+
+### Forge.UtxoSize
+
+
+
+Dispatched by: 
+Forge.StartLeadershipCheckPlus
+
+### Mempool.MempoolBytes
+
+> Byte size of the mempool
+
+
+Dispatched by: 
+Mempool.AddedTx
+Mempool.ManuallyRemovedTxs
+Mempool.RejectedTx
+Mempool.RemoveTxs
+
+### Mempool.TxsInMempool
+
+> Transactions in mempool
+
+
+Dispatched by: 
+Mempool.AddedTx
+Mempool.ManuallyRemovedTxs
+Mempool.RejectedTx
+Mempool.RemoveTxs
+
+### Mempool.TxsProcessedNum
+
+
+
+Dispatched by: 
+Mempool.ManuallyRemovedTxs
+
+### Network.Inbound-governor.Cold
+
+
+
+Dispatched by: 
+InboundGovernor.InboundGovernorCounters
+
+### Network.Inbound-governor.Cold
+
+
+
+Dispatched by: 
+LocalInboundGovernor.InboundGovernorCounters
+
+### Network.Inbound-governor.Hot
+
+
+
+Dispatched by: 
+InboundGovernor.InboundGovernorCounters
+
+### Network.Inbound-governor.Hot
+
+
+
+Dispatched by: 
+LocalInboundGovernor.InboundGovernorCounters
+
+### Network.Inbound-governor.Idle
+
+
+
+Dispatched by: 
+InboundGovernor.InboundGovernorCounters
+
+### Network.Inbound-governor.Idle
+
+
+
+Dispatched by: 
+LocalInboundGovernor.InboundGovernorCounters
+
+### Network.Inbound-governor.Warm
+
+
+
+Dispatched by: 
+InboundGovernor.InboundGovernorCounters
+
+### Network.Inbound-governor.Warm
+
+
+
+Dispatched by: 
+LocalInboundGovernor.InboundGovernorCounters
+
+### Network.PeerSelection.Cold
+
+> Number of cold peers
+
+
+Dispatched by: 
+PeerSelectionCounters.PeerSelectionCounters
+
+### Network.PeerSelection.Hot
+
+> Number of hot peers
+
+
+Dispatched by: 
+PeerSelectionCounters.PeerSelectionCounters
+
+### Network.PeerSelection.Warm
+
+> Number of warm peers
+
+
+Dispatched by: 
+PeerSelectionCounters.PeerSelectionCounters
+
+### Network.PeersFromNodeKernel
+
 
 
 Dispatched by: 
 Peers
 
-From current configuration:
-Filtered  by config value: `Notice`
+### Resources.Mem.Resident
 
-### rts.gcLiveBytes
-
-***
-TODO JNF
-***
 
 
 Dispatched by: 
 Resources
 
-From current configuration:
-Filtered  by config value: `Info`
+### Resources.Rts.GcLiveBytes
 
-### rts.gcMajorNum
-
-***
-TODO JNF
-***
 
 
 Dispatched by: 
 Resources
 
-From current configuration:
-Filtered  by config value: `Info`
+### Resources.Rts.GcMajorNum
 
-### rts.gcMinorNum
-
-***
-TODO JNF
-***
 
 
 Dispatched by: 
 Resources
 
-From current configuration:
-Filtered  by config value: `Info`
+### Resources.Rts.GcMinorNum
 
-### rts.gcticks
-
-***
-TODO JNF
-***
 
 
 Dispatched by: 
 Resources
 
-From current configuration:
-Filtered  by config value: `Info`
+### Resources.Rts.Gcticks
 
-### rts.mutticks
-
-***
-TODO JNF
-***
 
 
 Dispatched by: 
 Resources
 
-From current configuration:
-Filtered  by config value: `Info`
+### Resources.Rts.Mutticks
 
-### rts.threads
-
-***
-TODO JNF
-***
 
 
 Dispatched by: 
 Resources
 
-From current configuration:
-Filtered  by config value: `Info`
+### Resources.Rts.Threads
 
-### slotsMissed
-
-***
-How many slots were missed in this node?
-***
-
-
-Dispatched by: 
-ForgeStats
-
-From current configuration:
-Filtered  by config value: `Notice`
-
-### stat.cputicks
-
-***
-Reports the CPU ticks, sice the process was started
-***
 
 
 Dispatched by: 
 Resources
 
-From current configuration:
-Filtered  by config value: `Info`
+### Resources.Stat.Cputicks
+
+> Reports the CPU ticks, sice the process was started
+
+
+Dispatched by: 
+Resources
+
+### TxSubmission.Accepted
+
+
+
+Dispatched by: 
+TxInbound.TxSubmissionProcessed
+
+### TxSubmission.Rejected
+
+
+
+Dispatched by: 
+TxInbound.TxSubmissionProcessed
+
+### TxSubmission.Submitted
+
+
+
+Dispatched by: 
+TxInbound.TxSubmissionCollected
 
 ## Datapoints
 ### NodeInfo
 
 
-***
-Basic information about this node collected at startup
-
- _niName_: Name of the node. 
- _niProtocol_: Protocol which this nodes uses. 
- _niVersion_: Software version which this node is using. 
- _niStartTime_: Start time of this node. 
- _niSystemStartTime_: How long did the start of the node took.
-***
+> Basic information about this node collected at startup
+> 
+>  _niName_: Name of the node. 
+>  _niProtocol_: Protocol which this nodes uses. 
+>  _niVersion_: Software version which this node is using. 
+>  _niStartTime_: Start time of this node. 
+>  _niSystemStartTime_: How long did the start of the node took.
 
 
-Configuration: TraceConfig {tcOptions = fromList [([],[ConfSeverity {severity = Notice},ConfDetail {detail = DNormal},ConfBackend {backends = [Stdout MachineFormat,EKGBackend,Forwarder]}]),(["AcceptPolicy"],[ConfSeverity {severity = Info}]),(["BlockFetchClient","CompletedBlockFetch"],[ConfLimiter {maxFrequency = 2.0}]),(["ChainDB"],[ConfSeverity {severity = Info}]),(["ChainDB","AddBlockEvent","AddBlockValidation","ValidCandidate"],[ConfLimiter {maxFrequency = 2.0}]),(["ChainDB","AddBlockEvent","AddedBlockToQueue"],[ConfLimiter {maxFrequency = 2.0}]),(["ChainDB","AddBlockEvent","AddedBlockToVolatileDB"],[ConfLimiter {maxFrequency = 2.0}]),(["ChainDB","CopyToImmutableDBEvent","CopiedBlockToImmutableDB"],[ConfLimiter {maxFrequency = 2.0}]),(["DNSResolver"],[ConfSeverity {severity = Info}]),(["DNSSubscription"],[ConfSeverity {severity = Info}]),(["DiffusionInit"],[ConfSeverity {severity = Info}]),(["ErrorPolicy"],[ConfSeverity {severity = Info}]),(["Forge"],[ConfSeverity {severity = Info}]),(["IpSubscription"],[ConfSeverity {severity = Info}]),(["LocalErrorPolicy"],[ConfSeverity {severity = Info}]),(["Mempool"],[ConfSeverity {severity = Info}]),(["Resources"],[ConfSeverity {severity = Info}])], tcForwarder = TraceOptionForwarder {tofAddress = LocalSocket "/tmp/forwarder.sock", tofMode = Initiator, tofConnQueueSize = 2000, tofDisconnQueueSize = 200000, tofVerbosity = Minimum}, tcNodeName = Nothing, tcPeerFrequency = Just 2000, tcResourceFrequency = Just 5000}
+Configuration: TraceConfig {tcOptions = fromList [([],[ConfSeverity {severity = Notice},ConfDetail {detail = DNormal},ConfBackend {backends = [Stdout MachineFormat,EKGBackend,Forwarder]}]),(["AcceptPolicy"],[ConfSeverity {severity = Info}]),(["BlockFetchClient","CompletedBlockFetch"],[ConfLimiter {maxFrequency = 2.0}]),(["ChainDB"],[ConfSeverity {severity = Info}]),(["ChainDB","AddBlockEvent","AddBlockValidation","ValidCandidate"],[ConfLimiter {maxFrequency = 2.0}]),(["ChainDB","AddBlockEvent","AddedBlockToQueue"],[ConfLimiter {maxFrequency = 2.0}]),(["ChainDB","AddBlockEvent","AddedBlockToVolatileDB"],[ConfLimiter {maxFrequency = 2.0}]),(["ChainDB","CopyToImmutableDBEvent","CopiedBlockToImmutableDB"],[ConfLimiter {maxFrequency = 2.0}]),(["DNSResolver"],[ConfSeverity {severity = Info}]),(["DNSSubscription"],[ConfSeverity {severity = Info}]),(["DiffusionInit"],[ConfSeverity {severity = Info}]),(["ErrorPolicy"],[ConfSeverity {severity = Info}]),(["Forge"],[ConfSeverity {severity = Info}]),(["IpSubscription"],[ConfSeverity {severity = Info}]),(["LocalErrorPolicy"],[ConfSeverity {severity = Info}]),(["Mempool"],[ConfSeverity {severity = Info}]),(["Resources"],[ConfSeverity {severity = Info}])], tcForwarder = TraceOptionForwarder {tofConnQueueSize = 2000, tofDisconnQueueSize = 200000, tofVerbosity = Minimum}, tcNodeName = Nothing, tcPeerFrequency = Just 2000, tcResourceFrequency = Just 5000}
 
-677 log messages.
-Generated at 2022-06-03 12:11:02.013173249 CEST.
+656 log messages.
+Generated at 2022-06-15 15:23:04.127612243 CEST.
