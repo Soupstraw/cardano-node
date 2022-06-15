@@ -644,13 +644,13 @@ instance LogFormatting PeerSelectionCounters where
   forHuman = pack . show
   asMetrics PeerSelectionCounters {..} =
     [ IntM
-        "cardano.node.peerSelection.cold"
+        "Network.PeerSelection.Cold"
         (fromIntegral coldPeers)
     , IntM
-        "cardano.node.peerSelection.warm"
+        "Network.PeerSelection.Warm"
         (fromIntegral warmPeers)
     , IntM
-        "cardano.node.peerSelection.hot"
+        "Network.PeerSelection.Hot"
         (fromIntegral hotPeers)
       ]
 
@@ -658,9 +658,9 @@ docPeerSelectionCounters :: Documented PeerSelectionCounters
 docPeerSelectionCounters = Documented
   [  DocMsg
       ["PeerSelectionCounters"]
-      [ ("cardano.node.peerSelection.cold", "Number of cold peers")
-      , ("cardano.node.peerSelection.warm", "Number of warm peers")
-      , ("cardano.node.peerSelection.hot", "Number of hot peers") ]
+      [ ("Network.PeerSelection.Cold", "Number of cold peers")
+      , ("Network.PeerSelection.Warm", "Number of warm peers")
+      , ("Network.PeerSelection.Hot", "Number of hot peers") ]
       "Counters for cold, warm and hot peers"
   ]
 
@@ -935,19 +935,19 @@ instance (Show addr, Show versionNumber, Show agreedOptions, LogFormatting addr,
     forHuman = pack . show
     asMetrics (TrConnectionManagerCounters ConnectionManagerCounters {..}) =
           [ IntM
-              "cardano.node.connectionManager.fullDuplexConns"
+              "ConnectionManager.FullDuplexConns"
               (fromIntegral fullDuplexConns)
           , IntM
-              "cardano.node.connectionManager.duplexConns"
+              "ConnectionManager.DuplexConns"
               (fromIntegral duplexConns)
           , IntM
-              "cardano.node.connectionManager.unidirectionalConns"
+              "ConnectionManager.UnidirectionalConns"
               (fromIntegral unidirectionalConns)
           , IntM
-              "cardano.node.connectionManager.inboundConns"
+              "ConnectionManager.InboundConns"
               (fromIntegral inboundConns)
           , IntM
-              "cardano.node.connectionManager.outboundConns"
+              "ConnectionManager.OutboundConns"
               (fromIntegral outboundConns)
             ]
     asMetrics _ = []
@@ -1067,11 +1067,11 @@ docConnectionManager' = Documented
       ""
   ,  DocMsg
       ["ConnectionManagerCounters"]
-      [("cardano.node.connectionManager.fullDuplexConns","")
-      ,("cardano.node.connectionManager.duplexConns","")
-      ,("cardano.node.connectionManager.unidirectionalConns","")
-      ,("cardano.node.connectionManager.inboundConns","")
-      ,("cardano.node.connectionManager.outboundConns","")
+      [("ConnectionManager.FullDuplexConns","")
+      ,("ConnectionManager.DuplexConns","")
+      ,("ConnectionManager.UnidirectionalConns","")
+      ,("ConnectionManager.InboundConns","")
+      ,("ConnectionManager.OutboundConns","")
       ]
       ""
   ,  DocMsg
@@ -1333,16 +1333,16 @@ instance (ToJSON addr, Show addr)
   forHuman = pack . show
   asMetrics (TrInboundGovernorCounters InboundGovernorCounters {..}) =
             [ IntM
-                "cardano.node.inbound-governor.idle"
+                "Network.Inbound-governor.idle"
                 (fromIntegral idlePeersRemote)
             , IntM
-                "cardano.node.inbound-governor.cold"
+                "Network.Inbound-governor.cold"
                 (fromIntegral coldPeersRemote)
             , IntM
-                "cardano.node.inbound-governor.warm"
+                "Network.Inbound-governor.warm"
                 (fromIntegral warmPeersRemote)
             , IntM
-                "cardano.node.inbound-governor.hot"
+                "Network.Inbound-governor.hot"
                 (fromIntegral hotPeersRemote)
               ]
   asMetrics _ = []
@@ -1416,10 +1416,10 @@ docInboundGovernor = Documented
       ""
   ,  DocMsg
       ["InboundGovernorCounters"]
-      [("cardano.node.inbound-governor.idle","")
-      ,("cardano.node.inbound-governor.cold","")
-      ,("cardano.node.inbound-governor.warm","")
-      ,("cardano.node.inbound-governor.hot","")
+      [("Network.Inbound-governor.idle","")
+      ,("Network.Inbound-governor.cold","")
+      ,("Network.Inbound-governor.warm","")
+      ,("Network.Inbound-governor.hot","")
       ]
       ""
   ,  DocMsg
