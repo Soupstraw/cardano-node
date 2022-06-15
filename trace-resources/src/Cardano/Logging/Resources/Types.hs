@@ -76,16 +76,16 @@ docResourceStats :: Documented ResourceStats
 docResourceStats = Documented [
       DocMsg
         []
-        [("stat.cputicks", "Reports the CPU ticks, sice the process was started")
-        ,("mem.resident", "TODO JNF")
-        ,("rts.gcLiveBytes", "TODO JNF")
-        ,("rts.gcMajorNum", "TODO JNF")
-        ,("rts.gcMinorNum", "TODO JNF")
-        ,("rts.gcticks", "TODO JNF")
-        ,("rts.mutticks", "TODO JNF")
-        ,("rts.threads","TODO JNF")
+        [("Resources.Stat.Cputicks", "Reports the CPU ticks, sice the process was started")
+        ,("Resources.Mem.Resident", "")
+        ,("Resources.Rts.GcLiveBytes", "")
+        ,("Resources.Rts.GcMajorNum", "")
+        ,("Resources.Rts.GcMinorNum", "")
+        ,("Resources.Rts.Gcticks", "")
+        ,("Resources.Rts.Mutticks", "")
+        ,("Resources.Rts.Threads","")
         ]
-        "TODO JNF"
+        ""
     ]
 
 instance LogFormatting ResourceStats where
@@ -118,12 +118,12 @@ instance LogFormatting ResourceStats where
       ]
 
     asMetrics rs =
-      [ IntM "stat.cputicks" (fromIntegral $ rCentiCpu rs)
-      , IntM "mem.resident" (fromIntegral $ rRSS rs)
-      , IntM "rts.gcLiveBytes" (fromIntegral $ rLive rs)
-      , IntM "rts.gcMajorNum" (fromIntegral $ rGcsMajor rs)
-      , IntM "rts.gcMinorNum" (fromIntegral $ rGcsMinor rs)
-      , IntM "rts.gcticks" (fromIntegral $ rCentiGC rs)
-      , IntM "rts.mutticks" (fromIntegral $ rCentiMut rs)
-      , IntM "rts.stat.threads" (fromIntegral $ rThreads rs)
+      [ IntM "Resources.Stat.Cputicks" (fromIntegral $ rCentiCpu rs)
+      , IntM "Resources.mem.Resident" (fromIntegral $ rRSS rs)
+      , IntM "Resources.Rts.GcLiveBytes" (fromIntegral $ rLive rs)
+      , IntM "Resources.Rts.GcMajorNum" (fromIntegral $ rGcsMajor rs)
+      , IntM "Resources.Rts.GcMinorNum" (fromIntegral $ rGcsMinor rs)
+      , IntM "Resources.Rts.Gcticks" (fromIntegral $ rCentiGC rs)
+      , IntM "Resources.Rts.Mutticks" (fromIntegral $ rCentiMut rs)
+      , IntM "Resources.Rts.Stat.Threads" (fromIntegral $ rThreads rs)
       ]
