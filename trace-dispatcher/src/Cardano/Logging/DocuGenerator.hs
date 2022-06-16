@@ -1,6 +1,6 @@
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE OverloadedStrings #-}
 
 module Cardano.Logging.DocuGenerator (
     addDocumentedNamespace
@@ -20,7 +20,7 @@ import           Cardano.Logging.Types
 import           Control.Monad.IO.Class (MonadIO, liftIO)
 import qualified Control.Tracer as T
 import           Data.IORef (modifyIORef, newIORef, readIORef)
-import           Data.List (intersperse, nub, sortBy, groupBy)
+import           Data.List (groupBy, intersperse, nub, sortBy)
 import qualified Data.Map as Map
 import           Data.Text (Text, pack, toLower)
 import qualified Data.Text as T
@@ -428,7 +428,7 @@ asCode :: Builder -> Builder
 asCode b = singleton '`' <> b <> singleton '`'
 
 accentuated :: Text -> Builder
-accentuated t = if t == "" 
-                  then fromText "\n" 
-                  else fromText "\n" 
-                        <> fromText (T.unlines $ map ("> " <>) (T.lines t)) 
+accentuated t = if t == ""
+                  then fromText "\n"
+                  else fromText "\n"
+                        <> fromText (T.unlines $ map ("> " <>) (T.lines t))

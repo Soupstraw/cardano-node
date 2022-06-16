@@ -748,15 +748,15 @@
 	1. [TxsInMempool](#mempooltxsinmempool)
 	1. [TxsProcessedNum](#mempooltxsprocessednum)
 1. __Network__
-	1. __Inbound-governor__
-		1. [Cold](#networkinbound-governorcold)
-		1. [Cold](#networkinbound-governorcold)
-		1. [Hot](#networkinbound-governorhot)
-		1. [Hot](#networkinbound-governorhot)
-		1. [Idle](#networkinbound-governoridle)
-		1. [Idle](#networkinbound-governoridle)
-		1. [Warm](#networkinbound-governorwarm)
-		1. [Warm](#networkinbound-governorwarm)
+	1. __InboundGovernor__
+		1. [Cold](#networkinboundgovernorcold)
+		1. [Cold](#networkinboundgovernorcold)
+		1. [Hot](#networkinboundgovernorhot)
+		1. [Hot](#networkinboundgovernorhot)
+		1. [Idle](#networkinboundgovernoridle)
+		1. [Idle](#networkinboundgovernoridle)
+		1. [Warm](#networkinboundgovernorwarm)
+		1. [Warm](#networkinboundgovernorwarm)
 	1. __PeerSelection__
 		1. [Cold](#networkpeerselectioncold)
 		1. [Hot](#networkpeerselectionhot)
@@ -765,7 +765,7 @@
 1. __Resources__
 	1. __Mem__
 		1. [Resident](#resourcesmemresident)
-	1. __Rts__
+	1. __RTS__
 		1. [GcLiveBytes](#resourcesrtsgclivebytes)
 		1. [GcMajorNum](#resourcesrtsgcmajornum)
 		1. [GcMinorNum](#resourcesrtsgcminornum)
@@ -2535,7 +2535,7 @@ Filtered  by config value: `Info`
 ### ChainSync.NodeToClient.Recieve.AwaitReply
 
 
-> Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
+> Acknowledge the request but require the consumer to wait for the next update. This means that the consumer is synced with the producer, and the producer is waiting for its own chain state to change.
 
 
 From current configuration:
@@ -2549,8 +2549,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Recieve.Done
 
 
-> We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
-> Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
+> We have to explain to the framework what our states mean, in terms of which party has agency in each state. 
+>  Idle states are where it is for the client to send a message, busy states are where the server is expected to send a reply.
 
 
 From current configuration:
@@ -2564,7 +2564,7 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Recieve.FindIntersect
 
 
-> Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
+> Ask the producer to try to find an improved intersection point between the consumer and producer's chains. The consumer sends a sequence of points and it is up to the producer to find the first intersection point on its chain and send it back to the consumer.
 
 
 From current configuration:
@@ -2578,8 +2578,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Recieve.IntersectFound
 
 
-> The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
-> The message also tells the consumer about the head point of the producer.
+> The reply to the consumer about an intersection found. The consumer can decide weather to send more points. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -2593,8 +2593,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Recieve.IntersectNotFound
 
 
-> The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
-> The message also tells the consumer about the head point of the producer.
+> The reply to the consumer that no intersection was found: none of the points the consumer supplied are on the producer chain. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -2608,7 +2608,7 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Recieve.RequestNext
 
 
-> Request the next update from the producer. The response can be a rollforward, a roll back or wait.
+> Request the next update from the producer. The response can be a roll forward, a roll back or wait.
 
 
 From current configuration:
@@ -2622,8 +2622,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Recieve.RollBackward
 
 
-> Tell the consumer to roll back to a given point on their chain.
-> The message also tells the consumer about the head point of the producer.
+> Tell the consumer to roll back to a given point on their chain. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -2637,8 +2637,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Recieve.RollForward
 
 
-> Tell the consumer to extend their chain with the given header.
-> The message also tells the consumer about the head point of the producer.
+> Tell the consumer to extend their chain with the given header. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -2652,7 +2652,7 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Send.AwaitReply
 
 
-> Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
+> Acknowledge the request but require the consumer to wait for the next update. This means that the consumer is synced with the producer, and the producer is waiting for its own chain state to change.
 
 
 From current configuration:
@@ -2666,8 +2666,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Send.Done
 
 
-> We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
-> Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
+> We have to explain to the framework what our states mean, in terms of which party has agency in each state. 
+>  Idle states are where it is for the client to send a message, busy states are where the server is expected to send a reply.
 
 
 From current configuration:
@@ -2681,7 +2681,7 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Send.FindIntersect
 
 
-> Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
+> Ask the producer to try to find an improved intersection point between the consumer and producer's chains. The consumer sends a sequence of points and it is up to the producer to find the first intersection point on its chain and send it back to the consumer.
 
 
 From current configuration:
@@ -2695,8 +2695,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Send.IntersectFound
 
 
-> The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
-> The message also tells the consumer about the head point of the producer.
+> The reply to the consumer about an intersection found. The consumer can decide weather to send more points. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -2710,8 +2710,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Send.IntersectNotFound
 
 
-> The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
-> The message also tells the consumer about the head point of the producer.
+> The reply to the consumer that no intersection was found: none of the points the consumer supplied are on the producer chain. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -2725,7 +2725,7 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Send.RequestNext
 
 
-> Request the next update from the producer. The response can be a rollforward, a roll back or wait.
+> Request the next update from the producer. The response can be a roll forward, a roll back or wait.
 
 
 From current configuration:
@@ -2739,8 +2739,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Send.RollBackward
 
 
-> Tell the consumer to roll back to a given point on their chain.
-> The message also tells the consumer about the head point of the producer.
+> Tell the consumer to roll back to a given point on their chain. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -2754,8 +2754,8 @@ Filtered  by config value: `Notice`
 ### ChainSync.NodeToClient.Send.RollForward
 
 
-> Tell the consumer to extend their chain with the given header.
-> The message also tells the consumer about the head point of the producer.
+> Tell the consumer to extend their chain with the given header. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -2839,7 +2839,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Recieve.AwaitReply
 
 
-> Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
+> Acknowledge the request but require the consumer to wait for the next update. This means that the consumer is synced with the producer, and the producer is waiting for its own chain state to change.
 
 
 From current configuration:
@@ -2853,8 +2853,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Recieve.Done
 
 
-> We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
-> Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
+> We have to explain to the framework what our states mean, in terms of which party has agency in each state. 
+>  Idle states are where it is for the client to send a message, busy states are where the server is expected to send a reply.
 
 
 From current configuration:
@@ -2868,7 +2868,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Recieve.FindIntersect
 
 
-> Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
+> Ask the producer to try to find an improved intersection point between the consumer and producer's chains. The consumer sends a sequence of points and it is up to the producer to find the first intersection point on its chain and send it back to the consumer.
 
 
 From current configuration:
@@ -2882,8 +2882,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Recieve.IntersectFound
 
 
-> The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
-> The message also tells the consumer about the head point of the producer.
+> The reply to the consumer about an intersection found. The consumer can decide weather to send more points. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -2897,8 +2897,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Recieve.IntersectNotFound
 
 
-> The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
-> The message also tells the consumer about the head point of the producer.
+> The reply to the consumer that no intersection was found: none of the points the consumer supplied are on the producer chain. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -2912,7 +2912,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Recieve.RequestNext
 
 
-> Request the next update from the producer. The response can be a rollforward, a roll back or wait.
+> Request the next update from the producer. The response can be a roll forward, a roll back or wait.
 
 
 From current configuration:
@@ -2926,8 +2926,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Recieve.RollBackward
 
 
-> Tell the consumer to roll back to a given point on their chain.
-> The message also tells the consumer about the head point of the producer.
+> Tell the consumer to roll back to a given point on their chain. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -2941,8 +2941,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Recieve.RollForward
 
 
-> Tell the consumer to extend their chain with the given header.
-> The message also tells the consumer about the head point of the producer.
+> Tell the consumer to extend their chain with the given header. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -2956,7 +2956,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Send.AwaitReply
 
 
-> Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
+> Acknowledge the request but require the consumer to wait for the next update. This means that the consumer is synced with the producer, and the producer is waiting for its own chain state to change.
 
 
 From current configuration:
@@ -2970,8 +2970,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Send.Done
 
 
-> We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
-> Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
+> We have to explain to the framework what our states mean, in terms of which party has agency in each state. 
+>  Idle states are where it is for the client to send a message, busy states are where the server is expected to send a reply.
 
 
 From current configuration:
@@ -2985,7 +2985,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Send.FindIntersect
 
 
-> Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
+> Ask the producer to try to find an improved intersection point between the consumer and producer's chains. The consumer sends a sequence of points and it is up to the producer to find the first intersection point on its chain and send it back to the consumer.
 
 
 From current configuration:
@@ -2999,8 +2999,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Send.IntersectFound
 
 
-> The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
-> The message also tells the consumer about the head point of the producer.
+> The reply to the consumer about an intersection found. The consumer can decide weather to send more points. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3014,8 +3014,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Send.IntersectNotFound
 
 
-> The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
-> The message also tells the consumer about the head point of the producer.
+> The reply to the consumer that no intersection was found: none of the points the consumer supplied are on the producer chain. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3029,7 +3029,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Send.RequestNext
 
 
-> Request the next update from the producer. The response can be a rollforward, a roll back or wait.
+> Request the next update from the producer. The response can be a roll forward, a roll back or wait.
 
 
 From current configuration:
@@ -3043,8 +3043,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Send.RollBackward
 
 
-> Tell the consumer to roll back to a given point on their chain.
-> The message also tells the consumer about the head point of the producer.
+> Tell the consumer to roll back to a given point on their chain. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3058,8 +3058,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncNode.NodeToNode.Send.RollForward
 
 
-> Tell the consumer to extend their chain with the given header.
-> The message also tells the consumer about the head point of the producer.
+> Tell the consumer to extend their chain with the given header. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3073,7 +3073,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Recieve.AwaitReply
 
 
-> Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
+> Acknowledge the request but require the consumer to wait for the next update. This means that the consumer is synced with the producer, and the producer is waiting for its own chain state to change.
 
 
 From current configuration:
@@ -3087,8 +3087,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Recieve.Done
 
 
-> We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
-> Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
+> We have to explain to the framework what our states mean, in terms of which party has agency in each state. 
+>  Idle states are where it is for the client to send a message, busy states are where the server is expected to send a reply.
 
 
 From current configuration:
@@ -3102,7 +3102,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Recieve.FindIntersect
 
 
-> Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
+> Ask the producer to try to find an improved intersection point between the consumer and producer's chains. The consumer sends a sequence of points and it is up to the producer to find the first intersection point on its chain and send it back to the consumer.
 
 
 From current configuration:
@@ -3116,8 +3116,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Recieve.IntersectFound
 
 
-> The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
-> The message also tells the consumer about the head point of the producer.
+> The reply to the consumer about an intersection found. The consumer can decide weather to send more points. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3131,8 +3131,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Recieve.IntersectNotFound
 
 
-> The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
-> The message also tells the consumer about the head point of the producer.
+> The reply to the consumer that no intersection was found: none of the points the consumer supplied are on the producer chain. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3146,7 +3146,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Recieve.RequestNext
 
 
-> Request the next update from the producer. The response can be a rollforward, a roll back or wait.
+> Request the next update from the producer. The response can be a roll forward, a roll back or wait.
 
 
 From current configuration:
@@ -3160,8 +3160,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Recieve.RollBackward
 
 
-> Tell the consumer to roll back to a given point on their chain.
-> The message also tells the consumer about the head point of the producer.
+> Tell the consumer to roll back to a given point on their chain. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3175,8 +3175,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Recieve.RollForward
 
 
-> Tell the consumer to extend their chain with the given header.
-> The message also tells the consumer about the head point of the producer.
+> Tell the consumer to extend their chain with the given header. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3190,7 +3190,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Send.AwaitReply
 
 
-> Acknowledge the request but require the consumer to wait for the nextupdate. This means that the consumer is synced with the producer, andthe producer is waiting for its own chain state to change.
+> Acknowledge the request but require the consumer to wait for the next update. This means that the consumer is synced with the producer, and the producer is waiting for its own chain state to change.
 
 
 From current configuration:
@@ -3204,8 +3204,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Send.Done
 
 
-> We have to explain to the framework what our states mean, in terms ofwhich party has agency in each state.
-> Idle states are where it is for the client to send a message,busy states are where the server is expected to send a reply.
+> We have to explain to the framework what our states mean, in terms of which party has agency in each state. 
+>  Idle states are where it is for the client to send a message, busy states are where the server is expected to send a reply.
 
 
 From current configuration:
@@ -3219,7 +3219,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Send.FindIntersect
 
 
-> Ask the producer to try to find an improved intersection point betweenthe consumer and producer's chains. The consumer sends a sequence ofpoints and it is up to the producer to find the first intersection pointon its chain and send it back to the consumer.
+> Ask the producer to try to find an improved intersection point between the consumer and producer's chains. The consumer sends a sequence of points and it is up to the producer to find the first intersection point on its chain and send it back to the consumer.
 
 
 From current configuration:
@@ -3233,8 +3233,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Send.IntersectFound
 
 
-> The reply to the consumer about an intersection found.The consumer can decide weather to send more points.
-> The message also tells the consumer about the head point of the producer.
+> The reply to the consumer about an intersection found. The consumer can decide weather to send more points. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3248,8 +3248,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Send.IntersectNotFound
 
 
-> The reply to the consumer that no intersection was found: none of thepoints the consumer supplied are on the producer chain.
-> The message also tells the consumer about the head point of the producer.
+> The reply to the consumer that no intersection was found: none of the points the consumer supplied are on the producer chain. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3263,7 +3263,7 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Send.RequestNext
 
 
-> Request the next update from the producer. The response can be a rollforward, a roll back or wait.
+> Request the next update from the producer. The response can be a roll forward, a roll back or wait.
 
 
 From current configuration:
@@ -3277,8 +3277,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Send.RollBackward
 
 
-> Tell the consumer to roll back to a given point on their chain.
-> The message also tells the consumer about the head point of the producer.
+> Tell the consumer to roll back to a given point on their chain. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -3292,8 +3292,8 @@ Filtered  by config value: `Notice`
 ### ChainSyncSerialised.NodeToNode.Send.RollForward
 
 
-> Tell the consumer to extend their chain with the given header.
-> The message also tells the consumer about the head point of the producer.
+> Tell the consumer to extend their chain with the given header. 
+>  The message also tells the consumer about the head point of the producer.
 
 
 From current configuration:
@@ -8056,8 +8056,8 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Recieve.Acquire
 
 
-> The client requests that the state as of a particular recent point onthe server's chain (within K of the tip) be made available to query,and waits for confirmation or failure.
-> From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
+> The client requests that the state as of a particular recent point on the server's chain (within K of the tip) be made available to query, and waits for confirmation or failure. 
+>  From 'NodeToClient_V8' onwards if the point is not specified, current tip will be acquired.  For previous versions of the protocol 'point' must be given.
 
 
 From current configuration:
@@ -8099,7 +8099,7 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Recieve.Failure
 
 
-> The server can report that it cannot obtain the state for therequested point.
+> The server can report that it cannot obtain the state for the requested point.
 
 
 From current configuration:
@@ -8127,9 +8127,9 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Recieve.ReAcquire
 
 
-> This is like 'MsgAcquire' but for when the client already has astate. By moveing to another state directly without a 'MsgRelease' itenables optimisations on the server side (e.g. moving to the state forthe immediate next block).
-> Note that failure to re-acquire is equivalent to 'MsgRelease',rather than keeping the exiting acquired state.
-> From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
+> This is like 'MsgAcquire' but for when the client already has a state. By moveing to another state directly without a 'MsgRelease' it enables optimisations on the server side (e.g. moving to the state for the immediate next block). 
+>  Note that failure to re-acquire is equivalent to 'MsgRelease', rather than keeping the exiting acquired state. 
+>  From 'NodeToClient_V8' onwards if the point is not specified, current tip will be acquired.  For previous versions of the protocol 'point' must be given.
 
 
 From current configuration:
@@ -8143,7 +8143,7 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Recieve.Release
 
 
-> The client can instruct the server to release the state. This letsthe server free resources.
+> The client can instruct the server to release the state. This lets the server free resources.
 
 
 From current configuration:
@@ -8171,8 +8171,8 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Send.Acquire
 
 
-> The client requests that the state as of a particular recent point onthe server's chain (within K of the tip) be made available to query,and waits for confirmation or failure.
-> From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
+> The client requests that the state as of a particular recent point on the server's chain (within K of the tip) be made available to query, and waits for confirmation or failure. 
+>  From 'NodeToClient_V8' onwards if the point is not specified, current tip will be acquired.  For previous versions of the protocol 'point' must be given.
 
 
 From current configuration:
@@ -8214,7 +8214,7 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Send.Failure
 
 
-> The server can report that it cannot obtain the state for therequested point.
+> The server can report that it cannot obtain the state for the requested point.
 
 
 From current configuration:
@@ -8242,9 +8242,9 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Send.ReAcquire
 
 
-> This is like 'MsgAcquire' but for when the client already has astate. By moveing to another state directly without a 'MsgRelease' itenables optimisations on the server side (e.g. moving to the state forthe immediate next block).
-> Note that failure to re-acquire is equivalent to 'MsgRelease',rather than keeping the exiting acquired state.
-> From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
+> This is like 'MsgAcquire' but for when the client already has a state. By moveing to another state directly without a 'MsgRelease' it enables optimisations on the server side (e.g. moving to the state for the immediate next block). 
+>  Note that failure to re-acquire is equivalent to 'MsgRelease', rather than keeping the exiting acquired state. 
+>  From 'NodeToClient_V8' onwards if the point is not specified, current tip will be acquired.  For previous versions of the protocol 'point' must be given.
 
 
 From current configuration:
@@ -8258,7 +8258,7 @@ Filtered  by config value: `Notice`
 ### StateQueryClient.Send.Release
 
 
-> The client can instruct the server to release the state. This letsthe server free resources.
+> The client can instruct the server to release the state. This lets the server free resources.
 
 
 From current configuration:
@@ -8356,8 +8356,8 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Recieve.Acquire
 
 
-> The client requests that the state as of a particular recent point onthe server's chain (within K of the tip) be made available to query,and waits for confirmation or failure.
-> From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
+> The client requests that the state as of a particular recent point on the server's chain (within K of the tip) be made available to query, and waits for confirmation or failure. 
+>  From 'NodeToClient_V8' onwards if the point is not specified, current tip will be acquired.  For previous versions of the protocol 'point' must be given.
 
 
 From current configuration:
@@ -8399,7 +8399,7 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Recieve.Failure
 
 
-> The server can report that it cannot obtain the state for therequested point.
+> The server can report that it cannot obtain the state for the requested point.
 
 
 From current configuration:
@@ -8427,9 +8427,9 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Recieve.ReAcquire
 
 
-> This is like 'MsgAcquire' but for when the client already has astate. By moveing to another state directly without a 'MsgRelease' itenables optimisations on the server side (e.g. moving to the state forthe immediate next block).
-> Note that failure to re-acquire is equivalent to 'MsgRelease',rather than keeping the exiting acquired state.
-> From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
+> This is like 'MsgAcquire' but for when the client already has a state. By moveing to another state directly without a 'MsgRelease' it enables optimisations on the server side (e.g. moving to the state for the immediate next block). 
+>  Note that failure to re-acquire is equivalent to 'MsgRelease', rather than keeping the exiting acquired state. 
+>  From 'NodeToClient_V8' onwards if the point is not specified, current tip will be acquired.  For previous versions of the protocol 'point' must be given.
 
 
 From current configuration:
@@ -8443,7 +8443,7 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Recieve.Release
 
 
-> The client can instruct the server to release the state. This letsthe server free resources.
+> The client can instruct the server to release the state. This lets the server free resources.
 
 
 From current configuration:
@@ -8471,8 +8471,8 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Send.Acquire
 
 
-> The client requests that the state as of a particular recent point onthe server's chain (within K of the tip) be made available to query,and waits for confirmation or failure.
-> From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
+> The client requests that the state as of a particular recent point on the server's chain (within K of the tip) be made available to query, and waits for confirmation or failure. 
+>  From 'NodeToClient_V8' onwards if the point is not specified, current tip will be acquired.  For previous versions of the protocol 'point' must be given.
 
 
 From current configuration:
@@ -8514,7 +8514,7 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Send.Failure
 
 
-> The server can report that it cannot obtain the state for therequested point.
+> The server can report that it cannot obtain the state for the requested point.
 
 
 From current configuration:
@@ -8542,9 +8542,9 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Send.ReAcquire
 
 
-> This is like 'MsgAcquire' but for when the client already has astate. By moveing to another state directly without a 'MsgRelease' itenables optimisations on the server side (e.g. moving to the state forthe immediate next block).
-> Note that failure to re-acquire is equivalent to 'MsgRelease',rather than keeping the exiting acquired state.
-> From 'NodeToClient_V8' onwards if the point is not specified, current tipwill be acquired.  For previous versions of the protocol 'point' must begiven.
+> This is like 'MsgAcquire' but for when the client already has a state. By moveing to another state directly without a 'MsgRelease' it enables optimisations on the server side (e.g. moving to the state for the immediate next block). 
+>  Note that failure to re-acquire is equivalent to 'MsgRelease', rather than keeping the exiting acquired state. 
+>  From 'NodeToClient_V8' onwards if the point is not specified, current tip will be acquired.  For previous versions of the protocol 'point' must be given.
 
 
 From current configuration:
@@ -8558,7 +8558,7 @@ Filtered  by config value: `Notice`
 ### TxMonitorClient.Send.Release
 
 
-> The client can instruct the server to release the state. This letsthe server free resources.
+> The client can instruct the server to release the state. This lets the server free resources.
 
 
 From current configuration:
@@ -8627,7 +8627,7 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Recieve.Done
 
 
-> Termination message, initiated by the client when the server ismaking a blocking call for more transaction identifiers.
+> Termination message, initiated by the client when the server is making a blocking call for more transaction identifiers.
 
 
 From current configuration:
@@ -8655,11 +8655,11 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Recieve.ReplyTxIds
 
 
-> Reply with a list of transaction identifiers for availabletransactions, along with the size of each transaction.
-> The list must not be longer than the maximum number requested.
-> In the 'StTxIds' 'StBlocking' state the list must be non-empty whilein the 'StTxIds' 'StNonBlocking' state the list may be empty.
-> These transactions are added to the notional FIFO of outstandingtransaction identifiers for the protocol.
-> The order in which these transaction identifiers are returned must bethe order in which they are submitted to the mempool, to preservedependent transactions.
+> Reply with a list of transaction identifiers for available transactions, along with the size of each transaction. 
+>  The list must not be longer than the maximum number requested. 
+>  In the 'StTxIds' 'StBlocking' state the list must be non-empty while in the 'StTxIds' 'StNonBlocking' state the list may be empty. 
+>  These transactions are added to the notional FIFO of outstanding transaction identifiers for the protocol. 
+>  The order in which these transaction identifiers are returned must be the order in which they are submitted to the mempool, to preserve dependent transactions.
 
 
 From current configuration:
@@ -8673,9 +8673,9 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Recieve.ReplyTxs
 
 
-> Reply with the requested transactions, or implicitly discard.
-> Transactions can become invalid between the time the transactionidentifier was sent and the transaction being requested. Invalid(including committed) transactions do not need to be sent.
-> Any transaction identifiers requested but not provided in this replyshould be considered as if this peer had never announced them. (Notethat this is no guarantee that the transaction is invalid, it may stillbe valid and available from another peer).
+> Reply with the requested transactions, or implicitly discard. 
+>  Transactions can become invalid between the time the transaction identifier was sent and the transaction being requested. Invalid (including committed) transactions do not need to be sent. 
+>  Any transaction identifiers requested but not provided in this reply should be considered as if this peer had never announced them. (Note that this is no guarantee that the transaction is invalid, it may still be valid and available from another peer).
 
 
 From current configuration:
@@ -8710,10 +8710,10 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Recieve.RequestTxs
 
 
-> Request one or more transactions corresponding to the given transaction identifiers. 
-> While it is the responsibility of the replying peer to keep withinpipelining in-flight limits, the sender must also cooperate by keepingthe total requested across all in-flight requests within the limits.
-> It is an error to ask for transaction identifiers that were notpreviously announced (via 'MsgReplyTxIds').
-> It is an error to ask for transaction identifiers that are notoutstanding or that were already asked for.
+> Request one or more transactions corresponding to the given  transaction identifiers.  
+>  While it is the responsibility of the replying peer to keep within pipelining in-flight limits, the sender must also cooperate by keeping the total requested across all in-flight requests within the limits. 
+>  It is an error to ask for transaction identifiers that were not previously announced (via 'MsgReplyTxIds'). 
+>  It is an error to ask for transaction identifiers that are not outstanding or that were already asked for.
 
 
 From current configuration:
@@ -8727,7 +8727,7 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Send.Done
 
 
-> Termination message, initiated by the client when the server ismaking a blocking call for more transaction identifiers.
+> Termination message, initiated by the client when the server is making a blocking call for more transaction identifiers.
 
 
 From current configuration:
@@ -8755,11 +8755,11 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Send.ReplyTxIds
 
 
-> Reply with a list of transaction identifiers for availabletransactions, along with the size of each transaction.
-> The list must not be longer than the maximum number requested.
-> In the 'StTxIds' 'StBlocking' state the list must be non-empty whilein the 'StTxIds' 'StNonBlocking' state the list may be empty.
-> These transactions are added to the notional FIFO of outstandingtransaction identifiers for the protocol.
-> The order in which these transaction identifiers are returned must bethe order in which they are submitted to the mempool, to preservedependent transactions.
+> Reply with a list of transaction identifiers for available transactions, along with the size of each transaction. 
+>  The list must not be longer than the maximum number requested. 
+>  In the 'StTxIds' 'StBlocking' state the list must be non-empty while in the 'StTxIds' 'StNonBlocking' state the list may be empty. 
+>  These transactions are added to the notional FIFO of outstanding transaction identifiers for the protocol. 
+>  The order in which these transaction identifiers are returned must be the order in which they are submitted to the mempool, to preserve dependent transactions.
 
 
 From current configuration:
@@ -8773,9 +8773,9 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Send.ReplyTxs
 
 
-> Reply with the requested transactions, or implicitly discard.
-> Transactions can become invalid between the time the transactionidentifier was sent and the transaction being requested. Invalid(including committed) transactions do not need to be sent.
-> Any transaction identifiers requested but not provided in this replyshould be considered as if this peer had never announced them. (Notethat this is no guarantee that the transaction is invalid, it may stillbe valid and available from another peer).
+> Reply with the requested transactions, or implicitly discard. 
+>  Transactions can become invalid between the time the transaction identifier was sent and the transaction being requested. Invalid (including committed) transactions do not need to be sent. 
+>  Any transaction identifiers requested but not provided in this reply should be considered as if this peer had never announced them. (Note that this is no guarantee that the transaction is invalid, it may still be valid and available from another peer).
 
 
 From current configuration:
@@ -8810,10 +8810,10 @@ Filtered  by config value: `Notice`
 ### TxSubmission2.NodeToNode.Send.RequestTxs
 
 
-> Request one or more transactions corresponding to the given transaction identifiers. 
-> While it is the responsibility of the replying peer to keep withinpipelining in-flight limits, the sender must also cooperate by keepingthe total requested across all in-flight requests within the limits.
-> It is an error to ask for transaction identifiers that were notpreviously announced (via 'MsgReplyTxIds').
-> It is an error to ask for transaction identifiers that are notoutstanding or that were already asked for.
+> Request one or more transactions corresponding to the given  transaction identifiers.  
+>  While it is the responsibility of the replying peer to keep within pipelining in-flight limits, the sender must also cooperate by keeping the total requested across all in-flight requests within the limits. 
+>  It is an error to ask for transaction identifiers that were not previously announced (via 'MsgReplyTxIds'). 
+>  It is an error to ask for transaction identifiers that are not outstanding or that were already asked for.
 
 
 From current configuration:
@@ -8827,7 +8827,7 @@ Filtered  by config value: `Notice`
 ### TxSubmissionClient.Recieve.AcceptTx
 
 
-> The server can reply to inform the client that it has accepted thetransaction.
+> The server can reply to inform the client that it has accepted the transaction.
 
 
 From current configuration:
@@ -8855,7 +8855,7 @@ Filtered  by config value: `Notice`
 ### TxSubmissionClient.Recieve.RejectTx
 
 
-> The server can reply to inform the client that it has rejected thetransaction. A reason for the rejection is included.
+> The server can reply to inform the client that it has rejected the transaction. A reason for the rejection is included.
 
 
 From current configuration:
@@ -8883,7 +8883,7 @@ Filtered  by config value: `Notice`
 ### TxSubmissionClient.Send.AcceptTx
 
 
-> The server can reply to inform the client that it has accepted thetransaction.
+> The server can reply to inform the client that it has accepted the transaction.
 
 
 From current configuration:
@@ -8911,7 +8911,7 @@ Filtered  by config value: `Notice`
 ### TxSubmissionClient.Send.RejectTx
 
 
-> The server can reply to inform the client that it has rejected thetransaction. A reason for the rejection is included.
+> The server can reply to inform the client that it has rejected the transaction. A reason for the rejection is included.
 
 
 From current configuration:
@@ -9293,56 +9293,56 @@ Mempool.RemoveTxs
 Dispatched by: 
 Mempool.ManuallyRemovedTxs
 
-### Network.Inbound-governor.Cold
+### Network.InboundGovernor.Cold
 
 
 
 Dispatched by: 
 InboundGovernor.InboundGovernorCounters
 
-### Network.Inbound-governor.Cold
+### Network.InboundGovernor.Cold
 
 
 
 Dispatched by: 
 LocalInboundGovernor.InboundGovernorCounters
 
-### Network.Inbound-governor.Hot
+### Network.InboundGovernor.Hot
 
 
 
 Dispatched by: 
 InboundGovernor.InboundGovernorCounters
 
-### Network.Inbound-governor.Hot
+### Network.InboundGovernor.Hot
 
 
 
 Dispatched by: 
 LocalInboundGovernor.InboundGovernorCounters
 
-### Network.Inbound-governor.Idle
+### Network.InboundGovernor.Idle
 
 
 
 Dispatched by: 
 InboundGovernor.InboundGovernorCounters
 
-### Network.Inbound-governor.Idle
+### Network.InboundGovernor.Idle
 
 
 
 Dispatched by: 
 LocalInboundGovernor.InboundGovernorCounters
 
-### Network.Inbound-governor.Warm
+### Network.InboundGovernor.Warm
 
 
 
 Dispatched by: 
 InboundGovernor.InboundGovernorCounters
 
-### Network.Inbound-governor.Warm
+### Network.InboundGovernor.Warm
 
 
 
@@ -9387,42 +9387,42 @@ Peers
 Dispatched by: 
 Resources
 
-### Resources.Rts.GcLiveBytes
+### Resources.RTS.GcLiveBytes
 
 
 
 Dispatched by: 
 Resources
 
-### Resources.Rts.GcMajorNum
+### Resources.RTS.GcMajorNum
 
 
 
 Dispatched by: 
 Resources
 
-### Resources.Rts.GcMinorNum
+### Resources.RTS.GcMinorNum
 
 
 
 Dispatched by: 
 Resources
 
-### Resources.Rts.Gcticks
+### Resources.RTS.Gcticks
 
 
 
 Dispatched by: 
 Resources
 
-### Resources.Rts.Mutticks
+### Resources.RTS.Mutticks
 
 
 
 Dispatched by: 
 Resources
 
-### Resources.Rts.Threads
+### Resources.RTS.Threads
 
 
 
@@ -9474,4 +9474,4 @@ TxInbound.TxSubmissionCollected
 Configuration: TraceConfig {tcOptions = fromList [([],[ConfSeverity {severity = Notice},ConfDetail {detail = DNormal},ConfBackend {backends = [Stdout MachineFormat,EKGBackend,Forwarder]}]),(["AcceptPolicy"],[ConfSeverity {severity = Info}]),(["BlockFetchClient","CompletedBlockFetch"],[ConfLimiter {maxFrequency = 2.0}]),(["ChainDB"],[ConfSeverity {severity = Info}]),(["ChainDB","AddBlockEvent","AddBlockValidation","ValidCandidate"],[ConfLimiter {maxFrequency = 2.0}]),(["ChainDB","AddBlockEvent","AddedBlockToQueue"],[ConfLimiter {maxFrequency = 2.0}]),(["ChainDB","AddBlockEvent","AddedBlockToVolatileDB"],[ConfLimiter {maxFrequency = 2.0}]),(["ChainDB","CopyToImmutableDBEvent","CopiedBlockToImmutableDB"],[ConfLimiter {maxFrequency = 2.0}]),(["DNSResolver"],[ConfSeverity {severity = Info}]),(["DNSSubscription"],[ConfSeverity {severity = Info}]),(["DiffusionInit"],[ConfSeverity {severity = Info}]),(["ErrorPolicy"],[ConfSeverity {severity = Info}]),(["Forge"],[ConfSeverity {severity = Info}]),(["IpSubscription"],[ConfSeverity {severity = Info}]),(["LocalErrorPolicy"],[ConfSeverity {severity = Info}]),(["Mempool"],[ConfSeverity {severity = Info}]),(["Resources"],[ConfSeverity {severity = Info}])], tcForwarder = TraceOptionForwarder {tofConnQueueSize = 2000, tofDisconnQueueSize = 200000, tofVerbosity = Minimum}, tcNodeName = Nothing, tcPeerFrequency = Just 2000, tcResourceFrequency = Just 5000}
 
 656 log messages.
-Generated at 2022-06-15 15:23:04.127612243 CEST.
+Generated at 2022-06-16 10:39:18.830948041 CEST.
