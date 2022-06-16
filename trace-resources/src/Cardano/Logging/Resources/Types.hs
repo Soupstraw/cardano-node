@@ -78,12 +78,12 @@ docResourceStats = Documented [
         []
         [("Resources.Stat.Cputicks", "Reports the CPU ticks, sice the process was started")
         ,("Resources.Mem.Resident", "")
-        ,("Resources.Rts.GcLiveBytes", "")
-        ,("Resources.Rts.GcMajorNum", "")
-        ,("Resources.Rts.GcMinorNum", "")
-        ,("Resources.Rts.Gcticks", "")
-        ,("Resources.Rts.Mutticks", "")
-        ,("Resources.Rts.Threads","")
+        ,("Resources.RTS.GcLiveBytes", "")
+        ,("Resources.RTS.GcMajorNum", "")
+        ,("Resources.RTS.GcMinorNum", "")
+        ,("Resources.RTS.Gcticks", "")
+        ,("Resources.RTS.Mutticks", "")
+        ,("Resources.RTS.Threads","")
         ]
         ""
     ]
@@ -120,10 +120,10 @@ instance LogFormatting ResourceStats where
     asMetrics rs =
       [ IntM "Resources.Stat.Cputicks" (fromIntegral $ rCentiCpu rs)
       , IntM "Resources.mem.Resident" (fromIntegral $ rRSS rs)
-      , IntM "Resources.Rts.GcLiveBytes" (fromIntegral $ rLive rs)
-      , IntM "Resources.Rts.GcMajorNum" (fromIntegral $ rGcsMajor rs)
-      , IntM "Resources.Rts.GcMinorNum" (fromIntegral $ rGcsMinor rs)
-      , IntM "Resources.Rts.Gcticks" (fromIntegral $ rCentiGC rs)
-      , IntM "Resources.Rts.Mutticks" (fromIntegral $ rCentiMut rs)
-      , IntM "Resources.Rts.Stat.Threads" (fromIntegral $ rThreads rs)
+      , IntM "Resources.RTS.GcLiveBytes" (fromIntegral $ rLive rs)
+      , IntM "Resources.RTS.GcMajorNum" (fromIntegral $ rGcsMajor rs)
+      , IntM "Resources.RTS.GcMinorNum" (fromIntegral $ rGcsMinor rs)
+      , IntM "Resources.RTS.Gcticks" (fromIntegral $ rCentiGC rs)
+      , IntM "Resources.RTS.Mutticks" (fromIntegral $ rCentiMut rs)
+      , IntM "Resources.RTS.Stat.Threads" (fromIntegral $ rThreads rs)
       ]
