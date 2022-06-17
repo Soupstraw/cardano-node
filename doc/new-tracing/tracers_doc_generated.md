@@ -750,13 +750,14 @@
 1. __Network__
 	1. __InboundGovernor__
 		1. [Cold](#networkinboundgovernorcold)
-		1. [Cold](#networkinboundgovernorcold)
-		1. [Hot](#networkinboundgovernorhot)
 		1. [Hot](#networkinboundgovernorhot)
 		1. [Idle](#networkinboundgovernoridle)
-		1. [Idle](#networkinboundgovernoridle)
 		1. [Warm](#networkinboundgovernorwarm)
-		1. [Warm](#networkinboundgovernorwarm)
+	1. __LocalInboundGovernor__
+		1. [Cold](#networklocalinboundgovernorcold)
+		1. [Hot](#networklocalinboundgovernorhot)
+		1. [Idle](#networklocalinboundgovernoridle)
+		1. [Warm](#networklocalinboundgovernorwarm)
 	1. __PeerSelection__
 		1. [Cold](#networkpeerselectioncold)
 		1. [Hot](#networkpeerselectionhot)
@@ -9300,28 +9301,7 @@ Mempool.ManuallyRemovedTxs
 Dispatched by: 
 InboundGovernor.InboundGovernorCounters
 
-### Network.InboundGovernor.Cold
-
-
-
-Dispatched by: 
-LocalInboundGovernor.InboundGovernorCounters
-
 ### Network.InboundGovernor.Hot
-
-
-
-Dispatched by: 
-InboundGovernor.InboundGovernorCounters
-
-### Network.InboundGovernor.Hot
-
-
-
-Dispatched by: 
-LocalInboundGovernor.InboundGovernorCounters
-
-### Network.InboundGovernor.Idle
 
 
 
@@ -9333,7 +9313,7 @@ InboundGovernor.InboundGovernorCounters
 
 
 Dispatched by: 
-LocalInboundGovernor.InboundGovernorCounters
+InboundGovernor.InboundGovernorCounters
 
 ### Network.InboundGovernor.Warm
 
@@ -9342,7 +9322,28 @@ LocalInboundGovernor.InboundGovernorCounters
 Dispatched by: 
 InboundGovernor.InboundGovernorCounters
 
-### Network.InboundGovernor.Warm
+### Network.LocalInboundGovernor.Cold
+
+
+
+Dispatched by: 
+LocalInboundGovernor.InboundGovernorCounters
+
+### Network.LocalInboundGovernor.Hot
+
+
+
+Dispatched by: 
+LocalInboundGovernor.InboundGovernorCounters
+
+### Network.LocalInboundGovernor.Idle
+
+
+
+Dispatched by: 
+LocalInboundGovernor.InboundGovernorCounters
+
+### Network.LocalInboundGovernor.Warm
 
 
 
@@ -9474,4 +9475,4 @@ TxInbound.TxSubmissionCollected
 Configuration: TraceConfig {tcOptions = fromList [([],[ConfSeverity {severity = Notice},ConfDetail {detail = DNormal},ConfBackend {backends = [Stdout MachineFormat,EKGBackend,Forwarder]}]),(["AcceptPolicy"],[ConfSeverity {severity = Info}]),(["BlockFetchClient","CompletedBlockFetch"],[ConfLimiter {maxFrequency = 2.0}]),(["ChainDB"],[ConfSeverity {severity = Info}]),(["ChainDB","AddBlockEvent","AddBlockValidation","ValidCandidate"],[ConfLimiter {maxFrequency = 2.0}]),(["ChainDB","AddBlockEvent","AddedBlockToQueue"],[ConfLimiter {maxFrequency = 2.0}]),(["ChainDB","AddBlockEvent","AddedBlockToVolatileDB"],[ConfLimiter {maxFrequency = 2.0}]),(["ChainDB","CopyToImmutableDBEvent","CopiedBlockToImmutableDB"],[ConfLimiter {maxFrequency = 2.0}]),(["DNSResolver"],[ConfSeverity {severity = Info}]),(["DNSSubscription"],[ConfSeverity {severity = Info}]),(["DiffusionInit"],[ConfSeverity {severity = Info}]),(["ErrorPolicy"],[ConfSeverity {severity = Info}]),(["Forge"],[ConfSeverity {severity = Info}]),(["IpSubscription"],[ConfSeverity {severity = Info}]),(["LocalErrorPolicy"],[ConfSeverity {severity = Info}]),(["Mempool"],[ConfSeverity {severity = Info}]),(["Resources"],[ConfSeverity {severity = Info}])], tcForwarder = TraceOptionForwarder {tofConnQueueSize = 2000, tofDisconnQueueSize = 200000, tofVerbosity = Minimum}, tcNodeName = Nothing, tcPeerFrequency = Just 2000, tcResourceFrequency = Just 5000}
 
 656 log messages.
-Generated at 2022-06-16 10:39:18.830948041 CEST.
+Generated at 2022-06-17 10:27:59.069258986 CEST.
