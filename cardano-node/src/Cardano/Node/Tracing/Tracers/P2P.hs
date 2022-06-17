@@ -1245,8 +1245,108 @@ severityInboundGovernor TrRemoteState {}                                = Debug
 severityInboundGovernor InboundGovernor.TrUnexpectedlyFalseAssertion {} = Error
 severityInboundGovernor InboundGovernor.TrInboundGovernorError {}       = Error
 
-instance (ToJSON addr, Show addr)
-      => LogFormatting (InboundGovernorTrace addr) where
+instance LogFormatting (InboundGovernorTrace LocalAddress) where
+  forMachine _dtal (TrNewConnection p connId)            =
+    mconcat [ "kind" .= String "NewConnection"
+             , "provenance" .= show p
+             , "connectionId" .= toJSON connId
+             ]
+  forMachine _dtal (TrResponderRestarted connId m)       =
+    mconcat [ "kind" .= String "ResponderStarted"
+             , "connectionId" .= toJSON connId
+             , "miniProtocolNum" .= toJSON m
+             ]
+  forMachine _dtal (TrResponderStartFailure connId m s)  =
+    mconcat [ "kind" .= String "ResponderStartFailure"
+             , "connectionId" .= toJSON connId
+             , "miniProtocolNum" .= toJSON m
+             , "reason" .= show s
+             ]
+  forMachine _dtal (TrResponderErrored connId m s)       =
+    mconcat [ "kind" .= String "ResponderErrored"
+             , "connectionId" .= toJSON connId
+             , "miniProtocolNum" .= toJSON m
+             , "reason" .= show s
+             ]
+  forMachine _dtal (TrResponderStarted connId m)         =
+    mconcat [ "kind" .= String "ResponderStarted"
+             , "connectionId" .= toJSON connId
+             , "miniProtocolNum" .= toJSON m
+             ]
+  forMachine _dtal (TrResponderTerminated connId m)      =
+    mconcat [ "kind" .= String "ResponderTerminated"
+             , "connectionId" .= toJSON connId
+             , "miniProtocolNum" .= toJSON m
+             ]
+  forMachine _dtal (TrPromotedToWarmRemote connId opRes) =
+    mconcat [ "kind" .= String "PromotedToWarmRemote"
+             , "connectionId" .= toJSON connId
+             , "result" .= toJSON opRes
+             ]
+  forMachine _dtal (TrPromotedToHotRemote connId)        =
+    mconcat [ "kind" .= String "PromotedToHotRemote"
+             , "connectionId" .= toJSON connId
+             ]
+  forMachine _dtal (TrDemotedToColdRemote connId od)     =
+    mconcat [ "kind" .= String "DemotedToColdRemote"
+             , "connectionId" .= toJSON connId
+             , "result" .= show od
+             ]
+  forMachine _dtal (TrDemotedToWarmRemote connId)     =
+    mconcat [ "kind" .= String "DemotedToWarmRemote"
+             , "connectionId" .= toJSON connId
+             ]
+  forMachine _dtal (TrWaitIdleRemote connId opRes) =
+    mconcat [ "kind" .= String "WaitIdleRemote"
+             , "connectionId" .= toJSON connId
+             , "result" .= toJSON opRes
+             ]
+  forMachine _dtal (TrMuxCleanExit connId)               =
+    mconcat [ "kind" .= String "MuxCleanExit"
+             , "connectionId" .= toJSON connId
+             ]
+  forMachine _dtal (TrMuxErrored connId s)               =
+    mconcat [ "kind" .= String "MuxErrored"
+             , "connectionId" .= toJSON connId
+             , "reason" .= show s
+             ]
+  forMachine _dtal (TrInboundGovernorCounters counters) =
+    mconcat [ "kind" .= String "InboundGovernorCounters"
+             , "idlePeers" .= idlePeersRemote counters
+             , "coldPeers" .= coldPeersRemote counters
+             , "warmPeers" .= warmPeersRemote counters
+             , "hotPeers" .= hotPeersRemote counters
+             ]
+  forMachine _dtal (TrRemoteState st) =
+    mconcat [ "kind" .= String "RemoteState"
+             , "remoteSt" .= toJSON st
+             ]
+  forMachine _dtal (InboundGovernor.TrUnexpectedlyFalseAssertion info) =
+    mconcat [ "kind" .= String "UnexpectedlyFalseAssertion"
+             , "remoteSt" .= String (pack . show $ info)
+             ]
+  forMachine _dtal (InboundGovernor.TrInboundGovernorError err) =
+    mconcat [ "kind" .= String "InboundGovernorError"
+             , "remoteSt" .= String (pack . show $ err)
+             ]
+  forHuman = pack . show
+  asMetrics (TrInboundGovernorCounters InboundGovernorCounters {..}) =
+            [ IntM
+                "Network.LocalInboundGovernor.Idle"
+                (fromIntegral idlePeersRemote)
+            , IntM
+                "Network.LocalInboundGovernor.Cold"
+                (fromIntegral coldPeersRemote)
+            , IntM
+                "Network.LocalInboundGovernor.Warm"
+                (fromIntegral warmPeersRemote)
+            , IntM
+                "Network.LocalInboundGovernor.Hot"
+                (fromIntegral hotPeersRemote)
+              ]
+  asMetrics _ = []
+
+instance LogFormatting (InboundGovernorTrace SockAddr) where
   forMachine _dtal (TrNewConnection p connId)            =
     mconcat [ "kind" .= String "NewConnection"
              , "provenance" .= show p
@@ -1347,19 +1447,18 @@ instance (ToJSON addr, Show addr)
               ]
   asMetrics _ = []
 
-
 docInboundGovernorLocal ::
    Documented (InboundGovernorTrace LocalAddress)
 docInboundGovernorLocal =
-    addDocumentedNamespace  [] docInboundGovernor
+    addDocumentedNamespace  [] (docInboundGovernor True)
 
 docInboundGovernorRemote ::
    Documented (InboundGovernorTrace SockAddr)
 docInboundGovernorRemote =
-    addDocumentedNamespace  [] docInboundGovernor
+    addDocumentedNamespace  [] (docInboundGovernor False)
 
-docInboundGovernor :: Documented (InboundGovernorTrace peerAddr)
-docInboundGovernor = Documented
+docInboundGovernor :: Bool -> Documented (InboundGovernorTrace peerAddr)
+docInboundGovernor isLocal = Documented
   [  DocMsg
       ["NewConnection"]
       []
@@ -1416,11 +1515,19 @@ docInboundGovernor = Documented
       ""
   ,  DocMsg
       ["InboundGovernorCounters"]
-      [("Network.InboundGovernor.Idle","")
-      ,("Network.InboundGovernor.Cold","")
-      ,("Network.InboundGovernor.Warm","")
-      ,("Network.InboundGovernor.Hot","")
-      ]
+      (if isLocal 
+        then
+          [("Network.LocalInboundGovernor.Idle","")
+          ,("Network.LocalInboundGovernor.Cold","")
+          ,("Network.LocalInboundGovernor.Warm","")
+          ,("Network.LocalInboundGovernor.Hot","")
+          ]          
+        else 
+          [("Network.InboundGovernor.Idle","")
+          ,("Network.InboundGovernor.Cold","")
+          ,("Network.InboundGovernor.Warm","")
+          ,("Network.InboundGovernor.Hot","")
+          ])
       ""
   ,  DocMsg
       ["RemoteState"]
