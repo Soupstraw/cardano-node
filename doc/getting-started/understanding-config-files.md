@@ -355,3 +355,19 @@ It is also possible to have more fine grained control over filtering of trace ou
 	  }
 	}
 ```
+
+#### UTxO HD
+
+The UTxO HD feature of the consensus layer allows parts of the ledger state to be stored on-disk, whereas consensus previously kept the whole ledger state in memory. The node can be configured to use any of two *backends*:
+
+* The *LMDB backend*, which is built around a Lightning Memory-Mapped Database (LMDB), stores parts of the ledger state on disk. Optionally, a configuration can be included that sets the mapsize (maximum size) of the on-disk database that is used to store parts of the ledger state. By default, the mapsize is set to 16 Gigabytes. **Warning**: if the database size exceeds the given mapsize, the node will abort. Therefore, the mapsize should be set to a value high enough to guarantee that the maximum database size will not be reached during the expected node uptime.
+  ```json
+  "LedgerDBBackend": "LMDB",
+  "LMDBMapSize": "16G",
+  ```
+* The *InMemory backend* stores parts of the ledger state in memory.
+  ```json
+  "LedgerDBBackend": "InMemory",
+  ```
+
+If no choice of backend is configured, then the node defaults to using the LMDB backend with the *default* mapsize. It is recommended not to opt for the in-memory backend if the machine that is running the node is constrained by the amount of available memory.

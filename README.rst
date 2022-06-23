@@ -98,6 +98,8 @@ The general synopsis is as follows:
                            [--host-ipv6-addr IPV6-ADDRESS]
                            [--port PORT]
                            [--config NODE-CONFIGURATION] [--validate-db]
+                           [ --in-memory-ledger-db-backend | --lmdb-ledger-db-backend [--lmdb-mapsize BIN]]
+
      Run the node.
 
 * ``--topology`` - Filepath to a topology file describing which peers the node should connect to.
@@ -127,6 +129,12 @@ The general synopsis is as follows:
 * ``--config`` - Specify the filepath to the config ``.yaml`` file. This file is responsible for all the other node's required settings. See examples in ``configuration`` (e.g. `config-0.yaml <configuration/defaults/simpleview/config-0.yaml>`_).
 
 * ``--validate-db`` - Flag to revalidate all on-disk database files
+
+* ``--in-memory-ledger-db-backend`` - Optionally use the in-memory backend of the UTxO HD feature: store the complete ledger state in memory. Incompatible with ``--lmdb-ledger-db-backend``.
+
+* ``--lmdb-ledger-db-backend`` - Optionally use the LMDB backend of the UTxO HD feature: store parts of the ledger state on disk. Incompatible with ``--in-memory-ledger-db-backend``. The node uses the LMDB backend by default if no ``--*-db-backend`` flags are set.
+
+  * ``--lmdb-mapsize`` - Optionally set the mapsize (maximum database size) for the LMDB backend. By default, the mapsize (maximum database size) of the backend is set to 16 Gigabytes. Warning: if the database size exceeds the given mapsize, the node will abort. Therefore, the mapsize should be set to a value high enough to guarantee that the maximum database size will not be reached during the expected node uptime.
 
 Configuration ``.yaml`` files
 =============================
