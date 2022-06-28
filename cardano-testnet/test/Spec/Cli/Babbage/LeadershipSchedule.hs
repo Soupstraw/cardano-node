@@ -153,4 +153,7 @@ hprop_leadershipSchedule = H.integration . H.runFinallies . H.workspace "alonzo"
 
   leaderSlots <- H.getRelevantLeaderSlots (TR.poolNodeStdout poolNode1) (minimum expectedLeadershipSlotNumbers)
 
+  H.noteShow_ expectedLeadershipSlotNumbers
+  H.noteShow_ leaderSlots
+
   H.assert $ L.length (expectedLeadershipSlotNumbers \\ leaderSlots) <= 1

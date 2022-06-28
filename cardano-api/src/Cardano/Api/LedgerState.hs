@@ -47,6 +47,8 @@ module Cardano.Api.LedgerState
   , constructGlobals
   , currentEpochEligibleLeadershipSlots
   , nextEpochEligibleLeadershipSlots
+
+  , meetsLeaderThreshold
   )
   where
 
@@ -161,7 +163,17 @@ import qualified Ouroboros.Network.Protocol.ChainSync.Client as CS
 import qualified Ouroboros.Network.Protocol.ChainSync.ClientPipelined as CSP
 import           Ouroboros.Network.Protocol.ChainSync.PipelineDecision
 import Cardano.Ledger.BaseTypes (Nonce)
-import Ouroboros.Consensus.Protocol.Abstract (ChainDepState)
+import Ouroboros.Consensus.Protocol.Abstract (ChainDepState, ConsensusProtocol (..))
+
+import qualified Cardano.Crypto.VRF.Class as VRF
+import qualified Cardano.Ledger.Keys as SL
+import qualified Cardano.Ledger.PoolDistr as SL
+import Cardano.Ledger.Crypto (VRF)
+import Ouroboros.Consensus.Protocol.Praos.VRF (InputVRF, mkInputVRF, vrfLeaderValue)
+import Cardano.Protocol.TPraos.BHeader (checkLeaderNatValue)
+import qualified Cardano.Ledger.Era
+import Data.Map.Strict (Map)
+import Ouroboros.Consensus.Protocol.Praos (PraosState (praosStateEpochNonce))
 
 data InitialLedgerStateError
   = ILSEConfigFile Text
@@ -1312,7 +1324,7 @@ nextEpochEligibleLeadershipSlots
   :: forall era.
      HasField "_d" (Core.PParams (ShelleyLedgerEra era)) UnitInterval
   => Ledger.Era (ShelleyLedgerEra era)
-  => Share (Core.TxOut (ShelleyLedgerEra era)) ~ Interns (Shelley.Spec.Credential 'Shelley.Spec.Staking (Ledger.Crypto (ShelleyLedgerEra era)))
+  => Share (Core.TxOut (ShelleyLedgerEra era)) ~ Interns (Shelley.Spec.Credential 'Shelley.Spec.Staking (Cardano.Ledger.Era.Crypto (ShelleyLedgerEra era)))
   => FromCBOR (Consensus.ChainDepState (Api.ConsensusProtocol era))
   => Consensus.PraosProtocolSupportsNode (Api.ConsensusProtocol era)
   => ShelleyBasedEra era
@@ -1336,7 +1348,7 @@ nextEpochEligibleLeadershipSlots sbe sGen serCurrEpochState ptclState
   (_, currentEpochLastSlot) <- first LeaderErrSlotRangeCalculationFailure
                                  $ Slot.epochInfoRange eInfo currentEpoch
 
-  rOfInterest <- first LeaderErrSlotRangeCalculationFailure
+  (firstSlotOfEpoch, lastSlotofEpoch) <- first LeaderErrSlotRangeCalculationFailure
                   $ Slot.epochInfoRange eInfo (currentEpoch + 1)
 
 
@@ -1382,14 +1394,37 @@ nextEpochEligibleLeadershipSlots sbe sGen serCurrEpochState ptclState
                                  $ obtainDecodeEpochStateConstraints sbe
                                  $ decodeCurrentEpochState serCurrEpochState
 
-  let markSnapshotPoolDistr = ShelleyAPI.unPoolDistr . ShelleyAPI.calculatePoolDistr . ShelleyAPI._pstakeMark
+  let markSnapshotPoolDistr :: Map (SL.KeyHash 'SL.StakePool Shelley.StandardCrypto) (SL.IndividualPoolStake Shelley.StandardCrypto)
+      markSnapshotPoolDistr = ShelleyAPI.unPoolDistr . ShelleyAPI.calculatePoolDistr . ShelleyAPI._pstakeMark
                                 $ obtainIsStandardCrypto sbe $ ShelleyAPI.esSnapshots cEstate
 
 
-  relativeStake <- maybe (Left $ LeaderErrStakePoolHasNoStake poolid)
+  relativeStake :: Rational
+    <- maybe (Left $ LeaderErrStakePoolHasNoStake poolid)
                          (Right . ShelleyAPI.individualPoolStake) $ Map.lookup poolHash markSnapshotPoolDistr
 
-  return $ isLeadingSlots sbe rOfInterest nextEpochsNonce pParams vrfSkey relativeStake f
+  let slotRangeOfInterest = Set.filter
+        (not . Ledger.isOverlaySlot firstSlotOfEpoch (getField @"_d" (toLedgerPParams sbe pParams)))
+        $ Set.fromList [firstSlotOfEpoch .. lastSlotofEpoch] 
+
+  case sbe of
+    ShelleyBasedEraShelley -> return $ isLeadingSlots slotRangeOfInterest nextEpochsNonce vrfSkey relativeStake f
+    ShelleyBasedEraAllegra -> return $ isLeadingSlots slotRangeOfInterest nextEpochsNonce vrfSkey relativeStake f
+    ShelleyBasedEraMary -> return $ isLeadingSlots slotRangeOfInterest nextEpochsNonce vrfSkey relativeStake f
+    ShelleyBasedEraAlonzo -> return $ isLeadingSlots slotRangeOfInterest nextEpochsNonce vrfSkey relativeStake f
+    ShelleyBasedEraBabbage -> do
+      let praosCanBeLeaderSignKeyVRF :: SL.SignKeyVRF Shelley.StandardCrypto
+          praosCanBeLeaderSignKeyVRF = vrfSkey
+
+          eta0 :: Nonce
+          eta0 = praosStateEpochNonce chainDepState
+
+      let isLeader :: SlotNo -> Bool
+          isLeader slotNo = meetsLeaderThreshold f markSnapshotPoolDistr poolHash
+            $ VRF.evalCertified () (mkInputVRF slotNo eta0) praosCanBeLeaderSignKeyVRF
+
+      Right $ Set.filter isLeader slotRangeOfInterest
+
  where
   globals = constructGlobals sGen eInfo pParams
 
@@ -1413,49 +1448,43 @@ nextEpochEligibleLeadershipSlots sbe sGen serCurrEpochState ptclState
 -- See Leader Value Calculation in the Shelley ledger specification.
 -- We need the certified natural value from the VRF, active slot coefficient
 -- and the stake proportion of the stake pool.
-isLeadingSlots :: forall v era. ()
+isLeadingSlots :: forall v. ()
   => Crypto.Signable v Shelley.Spec.Seed
   => Crypto.VRFAlgorithm v
   => Crypto.ContextVRF v ~ ()
-  => HasField "_d" (Core.PParams (ShelleyLedgerEra era)) UnitInterval
-  => ShelleyBasedEra era
-  -> (SlotNo, SlotNo) -- ^ Slot range of interest
+  => Set SlotNo
   -> Consensus.Nonce
-  -> ProtocolParameters
   -> Crypto.SignKeyVRF v
   -> Rational -- ^ Stake pool relative stake
   -> Shelley.Spec.ActiveSlotCoeff
   -> Set SlotNo
-isLeadingSlots sbe (firstSlotOfEpoch, lastSlotofEpoch) eNonce pParams vrfSkey
+isLeadingSlots slotRangeOfInterest eNonce vrfSkey
              stakePoolStake activeSlotCoeff' =
-  let certified :: SlotNo -> Crypto.OutputVRF v
-      certified s = certifiedNaturalValue s eNonce vrfSkey
-
-      pp :: Core.PParams (ShelleyLedgerEra era)
-      pp = toLedgerPParams sbe pParams
-
-      slotRangeOfInterest :: Set SlotNo
-      slotRangeOfInterest = Set.fromList [firstSlotOfEpoch .. lastSlotofEpoch]
+  let certifiedVrf :: SlotNo -> Crypto.CertifiedVRF v Shelley.Spec.Seed
+      certifiedVrf s = Crypto.evalCertified () (TPraos.mkSeed TPraos.seedL s eNonce) vrfSkey
 
       isLeader :: SlotNo -> Bool
-      isLeader s = not (Ledger.isOverlaySlot firstSlotOfEpoch (getField @"_d" pp) s)
-                 && TPraos.checkLeaderValue (certified s)
-                                            stakePoolStake activeSlotCoeff'
+      isLeader s = TPraos.checkLeaderValue
+          (Crypto.certifiedOutput (certifiedVrf s))
+          stakePoolStake -- r
+          activeSlotCoeff'
   in Set.filter isLeader slotRangeOfInterest
- where
-  certifiedNaturalValue
-    :: SlotNo
-    -> Consensus.Nonce
-    -> Crypto.SignKeyVRF v
-    -> Crypto.OutputVRF v
-  certifiedNaturalValue slot epochNonce vrfSkey' =
-   Crypto.certifiedOutput
-   $ Crypto.evalCertified () (TPraos.mkSeed TPraos.seedL slot epochNonce) vrfSkey'
+
+-- | Check whether this node meets the leader threshold to issue a block.
+meetsLeaderThreshold :: forall c.
+     Shelley.StandardCrypto ~ c
+  => Shelley.Spec.ActiveSlotCoeff
+  -> Map (SL.KeyHash 'SL.StakePool c) (SL.IndividualPoolStake c)
+  -> SL.KeyHash 'SL.StakePool c
+  -> VRF.CertifiedVRF (VRF c) InputVRF
+  -> Bool
+meetsLeaderThreshold activeSlotCoeff poolDistr keyHash rho = checkLeaderNatValue (vrfLeaderValue (Proxy @c) rho) r activeSlotCoeff
+  where r = maybe 0 SL.individualPoolStake $ Map.lookup keyHash poolDistr
 
 obtainIsStandardCrypto
   :: ShelleyLedgerEra era ~ ledgerera
   => ShelleyBasedEra era
-  -> (Ledger.Crypto ledgerera ~ Shelley.StandardCrypto => a)
+  -> (Cardano.Ledger.Era.Crypto ledgerera ~ Shelley.StandardCrypto => a)
   -> a
 obtainIsStandardCrypto ShelleyBasedEraShelley f = f
 obtainIsStandardCrypto ShelleyBasedEraAllegra f = f
@@ -1486,7 +1515,7 @@ currentEpochEligibleLeadershipSlots :: forall era ledgerera. ()
   => Consensus.PraosProtocolSupportsNode (Api.ConsensusProtocol era)
   => HasField "_d" (Core.PParams ledgerera) UnitInterval
   -- => Crypto.Signable (Crypto.VRF (Ledger.Crypto ledgerera)) Shelley.Spec.Seed
-  => Share (Core.TxOut (ShelleyLedgerEra era)) ~ Interns (Shelley.Spec.Credential 'Shelley.Spec.Staking (Ledger.Crypto (ShelleyLedgerEra era)))
+  => Share (Core.TxOut (ShelleyLedgerEra era)) ~ Interns (Shelley.Spec.Credential 'Shelley.Spec.Staking (Cardano.Ledger.Era.Crypto (ShelleyLedgerEra era)))
  -- => Ledger.Crypto ledgerera ~ Shelley.StandardCrypto
   => FromCBOR (Consensus.ChainDepState (Api.ConsensusProtocol era))
   -- => Consensus.ChainDepState (ConsensusProtocol era) ~ Consensus.ChainDepState (ConsensusProtocol era)
@@ -1512,7 +1541,7 @@ currentEpochEligibleLeadershipSlots sbe sGen eInfo pParams ptclState
   -- at the start of the epoch.
   let epochNonce :: Nonce = Consensus.epochNonce (Consensus.getPraosNonces (Proxy @(Api.ConsensusProtocol era)) chainDepState)
 
-  currentEpochRange :: (SlotNo, SlotNo) <- first LeaderErrSlotRangeCalculationFailure
+  (firstSlotOfEpoch, lastSlotofEpoch) :: (SlotNo, SlotNo) <- first LeaderErrSlotRangeCalculationFailure
     $ Slot.epochInfoRange eInfo currentEpoch
 
   CurrentEpochState (cEstate :: ShelleyAPI.EpochState (ShelleyLedgerEra era)) <-
@@ -1531,8 +1560,28 @@ currentEpochEligibleLeadershipSlots sbe sGen eInfo pParams ptclState
                          (Right . ShelleyAPI.individualPoolStake)
                          (Map.lookup poolHash setSnapshotPoolDistr)
 
-  Right $ isLeadingSlots sbe currentEpochRange epochNonce pParams vrkSkey relativeStake f
+  let slotRangeOfInterest = Set.filter
+        (not . Ledger.isOverlaySlot firstSlotOfEpoch (getField @"_d" (toLedgerPParams sbe pParams)))
+        $ Set.fromList [firstSlotOfEpoch .. lastSlotofEpoch] 
 
+
+  case sbe of
+    ShelleyBasedEraShelley -> Right $ isLeadingSlots slotRangeOfInterest epochNonce vrkSkey relativeStake f
+    ShelleyBasedEraAllegra -> Right $ isLeadingSlots slotRangeOfInterest epochNonce vrkSkey relativeStake f
+    ShelleyBasedEraMary -> Right $ isLeadingSlots slotRangeOfInterest epochNonce vrkSkey relativeStake f
+    ShelleyBasedEraAlonzo -> Right $ isLeadingSlots slotRangeOfInterest epochNonce vrkSkey relativeStake f
+    ShelleyBasedEraBabbage -> do
+      let praosCanBeLeaderSignKeyVRF :: SL.SignKeyVRF Shelley.StandardCrypto
+          praosCanBeLeaderSignKeyVRF = vrkSkey
+
+          eta0 :: Nonce
+          eta0 = praosStateEpochNonce chainDepState
+
+      let isLeader :: SlotNo -> Bool
+          isLeader slotNo = meetsLeaderThreshold f setSnapshotPoolDistr poolHash
+            $ VRF.evalCertified () (mkInputVRF slotNo eta0) praosCanBeLeaderSignKeyVRF
+
+      Right $ Set.filter isLeader slotRangeOfInterest
  where
   globals = constructGlobals sGen eInfo pParams
 
