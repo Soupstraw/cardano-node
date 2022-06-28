@@ -1,6 +1,6 @@
 # Cardano RTView
 
-RTView is a part of `cardano-tracer` service. It is a real-time monitoring tool for Cardano nodes (RTView is an abbreviation for "Real Time View"). It provides an interactive web page where you can see different kinds of information about connected nodes.
+RTView is a part of `cardano-tracer` [service](https://github.com/input-output-hk/cardano-node/blob/master/cardano-tracer/docs/cardano-tracer.md). It is a real-time monitoring tool for Cardano nodes (RTView is an abbreviation for "Real Time View"). It provides an interactive web page where you can see different kinds of information about connected nodes.
 
 # Contents
 
