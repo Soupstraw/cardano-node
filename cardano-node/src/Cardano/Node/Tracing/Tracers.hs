@@ -101,7 +101,7 @@ mkDispatchTracers nodeKernel trBase trForward mbTrEKG trDataPoint trConfig enabl
     -- State tracer
     stateTr   <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "State"
+                ["State"]
                 SR.namesNodeState
                 SR.severityNodeState
                 allPublic
@@ -114,7 +114,7 @@ mkDispatchTracers nodeKernel trBase trForward mbTrEKG trDataPoint trConfig enabl
     -- Peers tracer
     peersTr   <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "Peers"
+                ["Peers"]
                 namesForPeers
                 severityPeers
                 allPublic
@@ -123,7 +123,7 @@ mkDispatchTracers nodeKernel trBase trForward mbTrEKG trDataPoint trConfig enabl
     -- Resource tracer
     resourcesTr <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "Resources"
+                ["Resources"]
                 (const [])
                 (const Info)
                 allPublic
@@ -132,7 +132,7 @@ mkDispatchTracers nodeKernel trBase trForward mbTrEKG trDataPoint trConfig enabl
     -- BasicInfo tracer
     startupTr <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "Startup"
+                ["Startup"]
                 namesStartupInfo
                 (const Notice)
                 allPublic
@@ -140,7 +140,7 @@ mkDispatchTracers nodeKernel trBase trForward mbTrEKG trDataPoint trConfig enabl
 
     shutdownTr <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "Shutdown"
+                ["Shutdown"]
                 namesForShutdown
                 severityShutdown
                 allPublic
@@ -148,7 +148,7 @@ mkDispatchTracers nodeKernel trBase trForward mbTrEKG trDataPoint trConfig enabl
 
     chainDBTr <- mkCardanoTracer'
                 trBase trForward mbTrEKG
-                "ChainDB"
+                ["ChainDB"]
                 namesForChainDBTraceEvents
                 severityChainDB
                 allPublic
@@ -157,7 +157,7 @@ mkDispatchTracers nodeKernel trBase trForward mbTrEKG trDataPoint trConfig enabl
 
     replayBlockTr <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "ReplayBlock"
+                ["ReplayBlock"]
                 namesForReplayBlockStats
                 severityReplayBlockStats
                 allPublic
@@ -240,14 +240,14 @@ mkConsensusTracers :: forall blk.
 mkConsensusTracers trBase trForward mbTrEKG _trDataPoint trConfig nodeKernel = do
     chainSyncClientTr  <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "ChainSyncClient"
+                ["ChainSyncClient"]
                 namesForChainSyncClientEvent
                 severityChainSyncClientEvent
                 allPublic
     configureTracers trConfig docChainSyncClientEvent [chainSyncClientTr]
     chainSyncServerHeaderTr <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "ChainSyncServerHeader"
+                ["ChainSyncServerHeader"]
                 namesForChainSyncServerEvent
                 severityChainSyncServerEvent
                 allPublic
@@ -264,21 +264,21 @@ mkConsensusTracers trBase trForward mbTrEKG _trDataPoint trConfig nodeKernel = d
 
     chainSyncServerBlockTr <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "ChainSyncServerBlock"
+                ["ChainSyncServerBlock"]
                 namesForChainSyncServerEvent
                 severityChainSyncServerEvent
                 allPublic
     configureTracers trConfig docChainSyncServerEventBlock [chainSyncServerBlockTr]
     blockFetchDecisionTr  <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "BlockFetchDecision"
+                ["BlockFetchDecision"]
                 namesForBlockFetchDecision
                 severityBlockFetchDecision
                 allConfidential
     configureTracers trConfig docBlockFetchDecision [blockFetchDecisionTr]
     blockFetchClientTr  <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "BlockFetchClient"
+                ["BlockFetchClient"]
                 namesForBlockFetchClient
                 severityBlockFetchClient
                 allPublic
@@ -296,56 +296,56 @@ mkConsensusTracers trBase trForward mbTrEKG _trDataPoint trConfig nodeKernel = d
 
     blockFetchServerTr  <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "BlockFetchServer"
+                ["BlockFetchServer"]
                 namesForBlockFetchServer
                 severityBlockFetchServer
                 allPublic
     configureTracers trConfig docBlockFetchServer [blockFetchServerTr]
     forgeKESInfoTr  <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "ForgeStateInfo"
+                ["ForgeStateInfo"]
                 namesForKESInfo
                 severityKESInfo
                 allPublic
     configureTracers trConfig docForgeKESInfo [forgeKESInfoTr]
     txInboundTr  <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "TxInbound"
+                ["TxInbound"]
                 namesForTxInbound
                 severityTxInbound
                 allPublic
     configureTracers trConfig docTxInbound [txInboundTr]
     txOutboundTr  <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "TxOutbound"
+                ["TxOutbound"]
                 namesForTxOutbound
                 severityTxOutbound
                 allPublic
     configureTracers trConfig docTxOutbound [txOutboundTr]
     localTxSubmissionServerTr <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "LocalTxSubmissionServer"
+                ["LocalTxSubmissionServer"]
                 namesForLocalTxSubmissionServer
                 severityLocalTxSubmissionServer
                 allPublic
     configureTracers trConfig docLocalTxSubmissionServer [localTxSubmissionServerTr]
     mempoolTr   <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "Mempool"
+                ["Mempool"]
                 namesForMempool
                 severityMempool
                 allPublic
     configureTracers trConfig docMempool [mempoolTr]
     forgeTr    <- mkCardanoTracer'
                 trBase trForward mbTrEKG
-                "Forge"
+                ["Forge"]
                 namesForForge
                 severityForge
                 allPublic
                 (forgeTracerTransform nodeKernel)
     forgeThreadStatsTr <- mkCardanoTracer'
                 trBase trForward mbTrEKG
-                "ForgeStats"
+                ["ForgeStats"]
                 namesForForge
                 severityForge
                 allPublic
@@ -353,14 +353,14 @@ mkConsensusTracers trBase trForward mbTrEKG _trDataPoint trConfig nodeKernel = d
     configureTracers trConfig docForge [forgeTr, forgeThreadStatsTr]
     blockchainTimeTr   <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "BlockchainTime"
+                ["BlockchainTime"]
                 namesForBlockchainTime
                 severityBlockchainTime
                 allPublic
     configureTracers trConfig docBlockchainTime [blockchainTimeTr]
     keepAliveClientTr  <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "KeepAliveClient"
+                ["KeepAliveClient"]
                 namesForKeepAliveClient
                 severityKeepAliveClient
                 allPublic
@@ -412,7 +412,7 @@ mkNodeToClientTracers trBase trForward mbTrEKG _trDataPoint trConfig = do
     chainSyncTr <-
       mkCardanoTracer
         trBase trForward mbTrEKG
-        "ChainSync"
+        ["ChainSync"]
         namesForTChainSync
         severityTChainSync
         allPublic
@@ -420,7 +420,7 @@ mkNodeToClientTracers trBase trForward mbTrEKG _trDataPoint trConfig = do
     txMonitorTr <-
       mkCardanoTracer
         trBase trForward mbTrEKG
-        "TxMonitorClient"
+        ["TxMonitorClient"]
         namesForTTxMonitor
         severityTTxMonitor
         allPublic
@@ -428,7 +428,7 @@ mkNodeToClientTracers trBase trForward mbTrEKG _trDataPoint trConfig = do
     txSubmissionTr <-
       mkCardanoTracer
         trBase trForward mbTrEKG
-        "TxSubmissionClient"
+        ["TxSubmissionClient"]
         namesForTTxSubmission
         severityTTxSubmission
         allPublic
@@ -436,7 +436,7 @@ mkNodeToClientTracers trBase trForward mbTrEKG _trDataPoint trConfig = do
     stateQueryTr <-
       mkCardanoTracer
         trBase trForward mbTrEKG
-        "StateQueryClient"
+        ["StateQueryClient"]
         namesForTStateQuery
         severityTStateQuery
         allPublic
@@ -464,35 +464,35 @@ mkNodeToNodeTracers :: forall blk.
 mkNodeToNodeTracers trBase trForward mbTrEKG _trDataPoint trConfig = do
     chainSyncTracer <-  mkCardanoTracer
                 trBase trForward mbTrEKG
-                "ChainSyncNode"
+                ["ChainSyncNode"]
                 namesForTChainSyncNode
                 severityTChainSyncNode
                 allPublic
     configureTracers trConfig docTChainSyncNodeToNode [chainSyncTracer]
     chainSyncSerialisedTr <-  mkCardanoTracer
                 trBase trForward mbTrEKG
-                "ChainSyncSerialised"
+                ["ChainSyncSerialised"]
                 namesForTChainSyncSerialised
                 severityTChainSyncSerialised
                 allPublic
     configureTracers trConfig docTChainSyncNodeToNodeSerisalised [chainSyncSerialisedTr]
     blockFetchTr  <-  mkCardanoTracer
                 trBase trForward mbTrEKG
-                "BlockFetch"
+                ["BlockFetch"]
                 namesForTBlockFetch
                 severityTBlockFetch
                 allPublic
     configureTracers trConfig docTBlockFetch [blockFetchTr]
     blockFetchSerialisedTr <-  mkCardanoTracer
                 trBase trForward mbTrEKG
-                "BlockFetchSerialised"
+                ["BlockFetchSerialised"]
                 namesForTBlockFetchSerialised
                 severityTBlockFetchSerialised
                 allPublic
     configureTracers trConfig docTBlockFetch [blockFetchSerialisedTr]
     txSubmission2Tracer  <-  mkCardanoTracer
                 trBase trForward mbTrEKG
-                "TxSubmission2"
+                ["TxSubmission2"]
                 namesForTxSubmission2Node
                 severityTxSubmission2Node
                 allPublic
@@ -521,42 +521,42 @@ mkDiffusionTracers
 mkDiffusionTracers  trBase trForward mbTrEKG _trDataPoint trConfig = do
     dtMuxTr   <-  mkCardanoTracer
                 trBase trForward mbTrEKG
-                "Mux"
+                ["Mux"]
                 namesForMux
                 severityMux
                 allPublic
     configureTracers trConfig docMuxRemote [dtMuxTr]
     dtLocalMuxTr   <-  mkCardanoTracer
                 trBase trForward mbTrEKG
-                "MuxLocal"
+                ["MuxLocal"]
                 namesForMux
                 severityMux
                 allPublic
     configureTracers trConfig docMuxLocal [dtLocalMuxTr]
     dtHandshakeTr   <-  mkCardanoTracer
                 trBase trForward mbTrEKG
-                "Handshake"
+                ["Handshake"]
                 namesForHandshake
                 severityHandshake
                 allPublic
     configureTracers trConfig docHandshake [dtHandshakeTr]
     dtLocalHandshakeTr  <-  mkCardanoTracer
                 trBase trForward mbTrEKG
-                "LocalHandshake"
+                ["LocalHandshake"]
                 namesForLocalHandshake
                 severityLocalHandshake
                 allPublic
     configureTracers trConfig docLocalHandshake [dtLocalHandshakeTr]
     dtDiffusionInitializationTr   <-  mkCardanoTracer
                 trBase trForward mbTrEKG
-                "DiffusionInit"
+                ["DiffusionInit"]
                 namesForDiffusionInit
                 severityDiffusionInit
                 allPublic
     configureTracers trConfig docDiffusionInit [dtDiffusionInitializationTr]
     dtLedgerPeersTr   <- mkCardanoTracer
                 trBase trForward mbTrEKG
-                "LedgerPeers"
+                ["LedgerPeers"]
                 namesForLedgerPeers
                 severityLedgerPeers
                 allPublic
@@ -587,105 +587,105 @@ mkDiffusionTracersExtra  :: forall p2p.
 mkDiffusionTracersExtra trBase trForward mbTrEKG _trDataPoint trConfig EnabledP2PMode = do
     localRootPeersTr  <-  mkCardanoTracer
       trBase trForward mbTrEKG
-      "LocalRootPeers"
+      ["LocalRootPeers"]
       namesForLocalRootPeers
       severityLocalRootPeers
       allPublic
     configureTracers trConfig docLocalRootPeers [localRootPeersTr]
     publicRootPeersTr  <-  mkCardanoTracer
       trBase trForward mbTrEKG
-      "PublicRootPeers"
+      ["PublicRootPeers"]
       namesForPublicRootPeers
       severityPublicRootPeers
       allPublic
     configureTracers trConfig docPublicRootPeers [publicRootPeersTr]
     peerSelectionTr  <-  mkCardanoTracer
       trBase trForward mbTrEKG
-      "PeerSelection"
+      ["PeerSelection"]
       namesForPeerSelection
       severityPeerSelection
       allPublic
     configureTracers trConfig docPeerSelection [peerSelectionTr]
     debugPeerSelectionTr  <-  mkCardanoTracer
       trBase trForward mbTrEKG
-      "DebugPeerSelection"
+      ["DebugPeerSelection"]
       namesForDebugPeerSelection
       severityDebugPeerSelection
       allPublic
     configureTracers trConfig docDebugPeerSelection [debugPeerSelectionTr]
     debugPeerSelectionResponderTr  <-  mkCardanoTracer
       trBase trForward mbTrEKG
-      "DebugPeerSelectionResponder"
+      ["DebugPeerSelectionResponder"]
       namesForDebugPeerSelection
       severityDebugPeerSelection
       allPublic
     configureTracers trConfig docDebugPeerSelection [debugPeerSelectionResponderTr]
     peerSelectionCountersTr  <-  mkCardanoTracer
       trBase trForward mbTrEKG
-      "PeerSelectionCounters"
+      ["PeerSelectionCounters"]
       namesForPeerSelectionCounters
       severityPeerSelectionCounters
       allPublic
     configureTracers trConfig docPeerSelectionCounters [peerSelectionCountersTr]
     peerSelectionActionsTr  <-  mkCardanoTracer
       trBase trForward mbTrEKG
-      "PeerSelectionActions"
+      ["PeerSelectionActions"]
       namesForPeerSelectionActions
       severityPeerSelectionActions
       allPublic
     configureTracers trConfig docPeerSelectionActions [peerSelectionActionsTr]
     connectionManagerTr  <-  mkCardanoTracer
       trBase trForward mbTrEKG
-      "ConnectionManager"
+      ["ConnectionManager"]
       namesForConnectionManager
       severityConnectionManager
       allPublic
     configureTracers trConfig docConnectionManager [connectionManagerTr]
     connectionManagerTransitionsTr  <-  mkCardanoTracer
       trBase trForward mbTrEKG
-      "ConnectionManagerTransition"
+      ["ConnectionManagerTransition"]
       (namesForConnectionManagerTransition @RemoteAddress)
       severityConnectionManagerTransition
       allPublic
     configureTracers trConfig docConnectionManagerTransition [connectionManagerTransitionsTr]
     serverTr  <-  mkCardanoTracer
       trBase trForward mbTrEKG
-      "Server"
+      ["Server"]
       namesForServer
       severityServer
       allPublic
     configureTracers trConfig docServer [serverTr]
     inboundGovernorTr  <-  mkCardanoTracer
       trBase trForward mbTrEKG
-      "InboundGovernor"
+      ["InboundGovernor"]
       namesForInboundGovernor
       severityInboundGovernor
       allPublic
     configureTracers trConfig docInboundGovernorRemote [inboundGovernorTr]
     inboundGovernorTransitionsTr  <-  mkCardanoTracer
       trBase trForward mbTrEKG
-      "InboundGovernorTransition"
+      ["InboundGovernorTransition"]
       namesForInboundGovernorTransition
       severityInboundGovernorTransition
       allPublic
     configureTracers trConfig docInboundGovernorTransition [inboundGovernorTransitionsTr]
     localConnectionManagerTr  <-  mkCardanoTracer
       trBase trForward mbTrEKG
-      "LocalConnectionManager"
+      ["LocalConnectionManager"]
       namesForConnectionManager
       severityConnectionManager
       allPublic
     configureTracers trConfig docConnectionManager [localConnectionManagerTr]
     localServerTr  <-  mkCardanoTracer
       trBase trForward mbTrEKG
-      "LocalServer"
+      ["LocalServer"]
       namesForServer
       severityServer
       allPublic
     configureTracers trConfig docServer [localServerTr]
     localInboundGovernorTr  <-  mkCardanoTracer
       trBase trForward mbTrEKG
-      "LocalInboundGovernor"
+      ["LocalInboundGovernor"]
       namesForInboundGovernor
       severityInboundGovernor
       allPublic
@@ -726,42 +726,42 @@ mkDiffusionTracersExtra trBase trForward mbTrEKG _trDataPoint trConfig EnabledP2
 mkDiffusionTracersExtra trBase trForward mbTrEKG _trDataPoint trConfig DisabledP2PMode = do
     dtIpSubscriptionTr   <-  mkCardanoTracer
                 trBase trForward mbTrEKG
-                "IpSubscription"
+                ["IpSubscription"]
                 namesForIPSubscription
                 severityIPSubscription
                 allPublic
     configureTracers trConfig docIPSubscription [dtIpSubscriptionTr]
     dtDnsSubscriptionTr  <-  mkCardanoTracer
                 trBase trForward mbTrEKG
-                "DNSSubscription"
+                ["DNSSubscription"]
                 namesForDNSSubscription
                 severityDNSSubscription
                 allPublic
     configureTracers trConfig docDNSSubscription [dtDnsSubscriptionTr]
     dtDnsResolverTr  <-  mkCardanoTracer
                 trBase trForward mbTrEKG
-                "DNSResolver"
+                ["DNSResolver"]
                 namesForDNSResolver
                 severityDNSResolver
                 allPublic
     configureTracers trConfig docDNSResolver [dtDnsResolverTr]
     dtErrorPolicyTr  <-  mkCardanoTracer
                 trBase trForward mbTrEKG
-                "ErrorPolicy"
+                ["ErrorPolicy"]
                 namesForErrorPolicy
                 severityErrorPolicy
                 allPublic
     configureTracers trConfig docErrorPolicy [dtErrorPolicyTr]
     dtLocalErrorPolicyTr <-  mkCardanoTracer
                 trBase trForward mbTrEKG
-                "LocalErrorPolicy"
+                ["LocalErrorPolicy"]
                 namesForLocalErrorPolicy
                 severityLocalErrorPolicy
                 allPublic
     configureTracers trConfig docLocalErrorPolicy [dtLocalErrorPolicyTr]
     dtAcceptPolicyTr    <-  mkCardanoTracer
                 trBase trForward mbTrEKG
-                "AcceptPolicy"
+                ["AcceptPolicy"]
                 namesForAcceptPolicy
                 severityAcceptPolicy
                 allPublic
